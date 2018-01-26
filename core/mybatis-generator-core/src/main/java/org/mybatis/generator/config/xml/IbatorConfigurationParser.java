@@ -107,6 +107,8 @@ public class IbatorConfigurationParser extends MyBatisGeneratorConfigurationPars
                 parseJdbcConnection(context, childNode);
             } else if ("javaModelGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaModelGenerator(context, childNode);
+            } else if ("javaDtoGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaDtoGenerator(context, childNode);
             } else if ("javaTypeResolver".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaTypeResolver(context, childNode);
             } else if ("sqlMapGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$

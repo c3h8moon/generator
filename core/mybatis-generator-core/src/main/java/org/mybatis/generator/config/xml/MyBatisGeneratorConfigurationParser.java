@@ -37,26 +37,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import org.mybatis.generator.config.ColumnOverride;
-import org.mybatis.generator.config.ColumnRenamingRule;
-import org.mybatis.generator.config.CommentGeneratorConfiguration;
-import org.mybatis.generator.config.Configuration;
-import org.mybatis.generator.config.ConnectionFactoryConfiguration;
-import org.mybatis.generator.config.Context;
-import org.mybatis.generator.config.DomainObjectRenamingRule;
-import org.mybatis.generator.config.GeneratedKey;
-import org.mybatis.generator.config.IgnoredColumn;
-import org.mybatis.generator.config.IgnoredColumnException;
-import org.mybatis.generator.config.IgnoredColumnPattern;
-import org.mybatis.generator.config.JDBCConnectionConfiguration;
-import org.mybatis.generator.config.JavaClientGeneratorConfiguration;
-import org.mybatis.generator.config.JavaModelGeneratorConfiguration;
-import org.mybatis.generator.config.JavaTypeResolverConfiguration;
-import org.mybatis.generator.config.ModelType;
-import org.mybatis.generator.config.PluginConfiguration;
-import org.mybatis.generator.config.PropertyHolder;
-import org.mybatis.generator.config.SqlMapGeneratorConfiguration;
-import org.mybatis.generator.config.TableConfiguration;
+import org.mybatis.generator.config.*;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.w3c.dom.Element;
@@ -196,6 +177,22 @@ public class MyBatisGeneratorConfigurationParser {
                 parseConnectionFactory(context, childNode);
             } else if ("javaModelGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaModelGenerator(context, childNode);
+            } else if ("javaServiceGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaServiceGenerator(context, childNode);
+            } else if ("javaBoGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaBoGenerator(context, childNode);
+            } else if ("javaDtoGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaDtoGenerator(context, childNode);
+            } else if ("javaFacadeGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaFacadeGenerator(context, childNode);
+            } else if ("javaConvertGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaConvertGenerator(context, childNode);
+            } else if ("javaFacadeImplGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaFacadeImplGenerator(context, childNode);
+            } else if ("javaFacadeImplTestGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaFacadeImplTestGenerator(context, childNode);
+            } else if ("javaServiceTestGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseJavaServiceTestGenerator(context, childNode);
             } else if ("javaTypeResolver".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaTypeResolver(context, childNode);
             } else if ("sqlMapGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
@@ -644,6 +641,246 @@ public class MyBatisGeneratorConfigurationParser {
 
             if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseProperty(javaClientGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    private void parseJavaServiceGenerator(Context context, Node node) {
+        JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration = new JavaServiceGeneratorConfiguration();
+
+        context.setJavaServiceGeneratorConfiguration(javaServiceGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+//        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+//        javaClientGeneratorConfiguration.setConfigurationType(type);
+        javaServiceGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaServiceGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaServiceGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    private void parseJavaBoGenerator(Context context, Node node) {
+        JavaBoGeneratorConfiguration javaBoGeneratorConfiguration = new JavaBoGeneratorConfiguration();
+
+        context.setJavaBoGeneratorConfiguration(javaBoGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+        javaBoGeneratorConfiguration.setConfigurationType(type);
+        javaBoGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaBoGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaBoGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void parseJavaDtoGenerator(Context context, Node node) {
+        JavaDtoGeneratorConfiguration javaDtoGeneratorConfiguration = new JavaDtoGeneratorConfiguration();
+
+        context.setJavaDtoGeneratorConfiguration(javaDtoGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+        javaDtoGeneratorConfiguration.setConfigurationType(type);
+        javaDtoGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaDtoGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaDtoGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void parseJavaFacadeGenerator(Context context, Node node) {
+        JavaFacadeGeneratorConfiguration javaFacadeGeneratorConfiguration = new JavaFacadeGeneratorConfiguration();
+
+        context.setJavaFacadeGeneratorConfiguration(javaFacadeGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+        javaFacadeGeneratorConfiguration.setConfigurationType(type);
+        javaFacadeGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaFacadeGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaFacadeGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void parseJavaConvertGenerator(Context context, Node node) {
+        JavaConvertGeneratorConfiguration javaConvertGeneratorConfiguration = new JavaConvertGeneratorConfiguration();
+
+        context.setJavaConvertGeneratorConfiguration(javaConvertGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+        javaConvertGeneratorConfiguration.setConfigurationType(type);
+        javaConvertGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaConvertGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaConvertGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void parseJavaFacadeImplGenerator(Context context, Node node) {
+        JavaFacadeImplGeneratorConfiguration javaFacadeImplGeneratorConfiguration = new JavaFacadeImplGeneratorConfiguration();
+
+        context.setJavaFacadeImplGeneratorConfiguration(javaFacadeImplGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+        javaFacadeImplGeneratorConfiguration.setConfigurationType(type);
+        javaFacadeImplGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaFacadeImplGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaFacadeImplGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void parseJavaFacadeImplTestGenerator(Context context, Node node) {
+        JavaFacadeImplTestGeneratorConfiguration javaFacadeImplTestGeneratorConfiguration = new JavaFacadeImplTestGeneratorConfiguration();
+
+        context.setJavaFacadeImplTestGeneratorConfiguration(javaFacadeImplTestGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+        javaFacadeImplTestGeneratorConfiguration.setConfigurationType(type);
+        javaFacadeImplTestGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaFacadeImplTestGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaFacadeImplTestGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void parseJavaServiceTestGenerator(Context context, Node node) {
+        JavaServiceTestGeneratorConfiguration javaServiceTestGeneratorConfiguration = new JavaServiceTestGeneratorConfiguration();
+
+        context.setJavaServiceTestGeneratorConfiguration(javaServiceTestGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+//        javaFacadeImplGeneratorConfiguration.setConfigurationType(type);
+        javaServiceTestGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaServiceTestGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaServiceTestGeneratorConfiguration, childNode);
             }
         }
     }

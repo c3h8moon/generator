@@ -15,6 +15,9 @@
  */
 package org.mybatis.generator.api.dom.java;
 
+import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.config.Configuration;
+
 import static org.mybatis.generator.api.dom.OutputUtilities.calculateImports;
 import static org.mybatis.generator.api.dom.OutputUtilities.newLine;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
@@ -71,6 +74,8 @@ public class Interface extends InnerInterface implements CompilationUnit {
     public String getFormattedContent(int indentLevel, CompilationUnit compilationUnit) {
         StringBuilder sb = new StringBuilder();
 
+//        System.out.println("123");
+
         for (String commentLine : fileCommentLines) {
             sb.append(commentLine);
             newLine(sb);
@@ -95,19 +100,47 @@ public class Interface extends InnerInterface implements CompilationUnit {
             newLine(sb);
         }
 
+        sb.append("import com.ayhuli.plugin.database.mysql.announce.MyBatisDao;");
+
+        newLine(sb);
+        String key = this.getType().getShortName();
+
+//        "com.ayhuli.service.comment.dao";
+//        "com.ayhuli.service.comment.api.dto.commentannounce.CommentAnnounceDto"
+        String dtoPackage = this.getType().getPackageName();
+//        String packageName = key.replace("Dao", "").toLowerCase();
+        dtoPackage = dtoPackage.replace("dao", "api.dto."+key.replace("Dao", "")+"Dto");
+
+
+        String val = MyBatisGenerator.dtoPackage.get(key);
+        System.out.println("key:" + key + "value : " + val);
         Set<String> importStrings = calculateImports(importedTypes);
         for (String importString : importStrings) {
             sb.append(importString);
             newLine(sb);
         }
-
+        sb.append("import " + dtoPackage + ";");
+        newLine(sb);
+        newLine(sb);
         if (importStrings.size() > 0) {
             newLine(sb);
         }
 
-        sb.append(super.getFormattedContent(0, this));
+        sb.append("@MyBatisDao");
+        newLine(sb);
+        String call = super.getFormattedContent(0, this);
+//        String regix = "com.ayhuli.service.*.api.dto.";
+        String regex = compilationUnit.getType().getPackageName();
+        regex = regex.replace("dao","api.dto.");
+        if (call.contains("com.ayhuli.service.base.persistence.")) {
+            call = call.replace("com.ayhuli.service.base.persistence.","");
+            call = call.replace(regex,"");
+        }
 
-        return sb.toString();
+
+
+
+        return sb.toString() + call;
     }
 
     @Override

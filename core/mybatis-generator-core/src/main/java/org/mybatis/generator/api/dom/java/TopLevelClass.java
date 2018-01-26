@@ -77,6 +77,7 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
             newLine(sb);
         }
 
+        FullyQualifiedJavaType fullyQualifiedJavaType = getType();
         if (stringHasValue(getType().getPackageName())) {
             sb.append("package "); //$NON-NLS-1$
             sb.append(getType().getPackageName());
@@ -102,11 +103,23 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
             newLine(sb);
         }
 
+        String packagePath = fullyQualifiedJavaType.getPackageName().replace("entity","api.dto." + fullyQualifiedJavaType.getShortName() + "Dto");
+
+        sb.append("import "+packagePath+";");
+        newLine(sb);
+
+        sb.append("import lombok.Getter;");
+        newLine(sb);
+        sb.append("import lombok.Setter;");
+        newLine(sb);
+
         if (importStrings.size() > 0) {
             newLine(sb);
         }
 
-        sb.append(super.getFormattedContent(0, this));
+        sb.append(super.getFormattedContent_entity(0, this));
+
+//        System.out.println("222:0" + sb.toString());
 
         return sb.toString();
     }

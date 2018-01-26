@@ -51,7 +51,7 @@
   tables.
 -->
 <!ELEMENT context (property*, plugin*, commentGenerator?, (connectionFactory | jdbcConnection), javaTypeResolver?,
-                         javaModelGenerator, sqlMapGenerator?, javaClientGenerator?, table+)>
+                         javaModelGenerator, sqlMapGenerator?, javaClientGenerator?, javaServiceGenerator?, javaServiceTestGenerator?, javaBoGenerator?, javaDtoGenerator?, javaFacadeGenerator?, javaConvertGenerator?, javaFacadeImplGenerator?, javaFacadeImplTestGenerator?, table+)>
 <!ATTLIST context id ID #REQUIRED
   defaultModelType CDATA #IMPLIED
   targetRuntime CDATA #IMPLIED
@@ -147,9 +147,67 @@
   implementationPackage CDATA #IMPLIED>
 
 <!--
-  The table element is used to specify a database table that will be the source information
-  for a set of generated objects.
+  The javaServiceGenerator element is used to define properties of the SQL Map Generator.
+  The SQL Map Generator builds an XML file for each table that conforms to iBATIS'
+  SqlMap DTD.
 -->
+<!ELEMENT javaServiceGenerator (property*)>
+<!ATTLIST javaServiceGenerator
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+<!ELEMENT javaBoGenerator (property*)>
+<!ATTLIST javaBoGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+
+<!ELEMENT javaDtoGenerator (property*)>
+<!ATTLIST javaDtoGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+
+<!ELEMENT javaFacadeGenerator (property*)>
+<!ATTLIST javaFacadeGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+<!ELEMENT javaConvertGenerator (property*)>
+<!ATTLIST javaConvertGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+
+<!ELEMENT javaFacadeImplGenerator (property*)>
+<!ATTLIST javaFacadeImplGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+<!ELEMENT javaFacadeImplTestGenerator (property*)>
+<!ATTLIST javaFacadeImplTestGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+
+<!ELEMENT javaServiceTestGenerator (property*)>
+<!ATTLIST javaServiceTestGenerator
+        type CDATA #REQUIRED
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+
+
+        <!--
+          The table element is used to specify a database table that will be the source information
+          for a set of generated objects.
+        -->
 <!ELEMENT table (property*, generatedKey?, domainObjectRenamingRule?, columnRenamingRule?, (columnOverride | ignoreColumn | ignoreColumnsByRegex)*) >
 <!ATTLIST table
   catalog CDATA #IMPLIED

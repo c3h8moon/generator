@@ -105,4 +105,12 @@ public class GeneratedXmlFile extends GeneratedFile {
     public void setMergeable(boolean isMergeable) {
         this.isMergeable = isMergeable;
     }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
 }

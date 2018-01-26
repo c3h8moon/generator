@@ -48,12 +48,36 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
     protected List<AbstractJavaGenerator> clientGenerators;
 
+    protected List<AbstractJavaGenerator> serviceGenerators;
+
+    protected List<AbstractJavaGenerator> boGenerators;
+
+    protected List<AbstractJavaGenerator> dtoGenerators;
+
+    protected List<AbstractJavaGenerator> facadeGenerators;
+
+    protected List<AbstractJavaGenerator> convertGenerators;
+
+    protected List<AbstractJavaGenerator> facadeImplGenerators;
+
+    protected List<AbstractJavaGenerator> facadeImplTestGenerators;
+
+    protected List<AbstractJavaGenerator> serviceTestGenerators;
+
     protected AbstractXmlGenerator xmlMapperGenerator;
 
     public IntrospectedTableMyBatis3Impl() {
         super(TargetRuntime.MYBATIS3);
         javaModelGenerators = new ArrayList<AbstractJavaGenerator>();
         clientGenerators = new ArrayList<AbstractJavaGenerator>();
+        serviceGenerators = new ArrayList<AbstractJavaGenerator>();
+        boGenerators = new ArrayList<AbstractJavaGenerator>();
+        dtoGenerators = new ArrayList<AbstractJavaGenerator>();
+        facadeGenerators = new ArrayList<AbstractJavaGenerator>();
+        convertGenerators = new ArrayList<AbstractJavaGenerator>();
+        facadeImplGenerators = new ArrayList<AbstractJavaGenerator>();
+        facadeImplTestGenerators = new ArrayList<AbstractJavaGenerator>();
+        serviceTestGenerators = new ArrayList<AbstractJavaGenerator>();
     }
 
     @Override
@@ -89,6 +113,23 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
         }
         
         AbstractJavaClientGenerator javaGenerator = createJavaClientGenerator();
+        if (javaGenerator == null) {
+            return null;
+        }
+
+        initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+        clientGenerators.add(javaGenerator);
+
+        return javaGenerator;
+    }
+
+    protected AbstractJavaGenerator calculateServiceGenerators(List<String> warnings,
+                                                                    ProgressCallback progressCallback) {
+        if (!rules.generateJavaClient()) {
+            return null;
+        }
+
+        AbstractJavaGenerator javaGenerator = new ExampleGenerator();
         if (javaGenerator == null) {
             return null;
         }
@@ -194,6 +235,102 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
                                 .getTargetProject(),
                                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                                 context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : serviceGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaServiceGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : boGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaBoGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : dtoGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaDtoGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : facadeGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaFacadeGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : convertGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaConvertGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : facadeImplGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaFacadeImplGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : facadeImplTestGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaFacadeImplTestGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
+                answer.add(gjf);
+            }
+        }
+
+        for (AbstractJavaGenerator javaGenerator : serviceTestGenerators) {
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
+            for (CompilationUnit compilationUnit : compilationUnits) {
+                GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
+                        context.getJavaServiceTestGeneratorConfiguration()
+                                .getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
+                        context.getJavaFormatter());
                 answer.add(gjf);
             }
         }

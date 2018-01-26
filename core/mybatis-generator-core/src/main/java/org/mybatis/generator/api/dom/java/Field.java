@@ -106,6 +106,27 @@ public class Field extends JavaElement {
         return sb.toString();
     }
 
+    public String getFormattedContent_init(int indentLevel, CompilationUnit compilationUnit) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("        ");
+        addFormattedJavadoc(sb, indentLevel);
+        addFormattedAnnotations(sb, indentLevel);
+        sb.append("        ");
+        OutputUtilities.javaIndent(sb, indentLevel);
+        sb.append("this." + name + " = " + "dto.get" + captureName(name) + "()");
+
+
+        sb.append(";");
+
+        return sb.toString();
+    }
+
+    public static String captureName(String name) {
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        return  name;
+
+    }
+
     public boolean isTransient() {
         return isTransient;
     }

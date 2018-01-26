@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry location="D:\repos\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+    <!-- 一个数据库一个context -->
+    <context id="mysql" targetRuntime="MyBatis3">
+        <!-- 注释 -->
+        <commentGenerator >
+            <property name="suppressAllComments" value="false"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ayhuli?characterEncoding=UTF-8" userId="root"
+                        password="123456" />
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDECIMAL， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--<plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">-->
+        <!--<property name="mapperFiles" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        <!--</plugin>-->
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.ayhuli.service.sys.entity"
+                            targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-dao\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity"/>-->
+        </javaModelGenerator>
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="mybatis"
+                         targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-dao\src\main\resources" >
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ayhuli.service.sys.dao"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-dao\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaClientGenerator>
+
+        <!--service model-->
+        <javaServiceGenerator targetPackage="com.ayhuli.service.sys.service"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-service\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaServiceGenerator>
+        <javaServiceTestGenerator type="sys" targetPackage="com.ayhuli.sys.test.service"
+                                   targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-facade\src\test\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaServiceTestGenerator>
+
+        <!--facade-->
+        <javaBoGenerator type="sys" targetPackage="com.ayhuli.service.sys.api.bo"
+                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-api\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaBoGenerator>
+        <javaDtoGenerator type="sys" targetPackage="com.ayhuli.service.sys.api.dto"
+                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-api\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaDtoGenerator>
+        <javaFacadeGenerator type="sys" targetPackage="com.ayhuli.service.sys.api.facade"
+                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-api\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaFacadeGenerator>
+
+        <!--facade impl-->
+        <javaConvertGenerator type="sys" targetPackage="com.ayhuli.service.sys.facade.convert"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-facade\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaConvertGenerator>
+        <javaFacadeImplGenerator type="sys" targetPackage="com.ayhuli.service.sys.facade.facade.impl"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-facade\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaFacadeImplGenerator>
+        <javaFacadeImplTestGenerator type="sys" targetPackage="com.ayhuli.sys.test.facade"
+                                 targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-sys\service-sys-facade\src\test\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaFacadeImplTestGenerator>
+
+
+
+        <!-- 配置表信息，这里没生成一张表，这里需要改变一次对应表名 -->
+        <table tableName="sys_area"
+               domainObjectName="SysArea" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysArea&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysArea&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="cash" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="sys_dict"
+               domainObjectName="SysDict" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysDict&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysDict&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+            <!--<columnOverride column="abnormal_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="sys_log"
+               domainObjectName="SysLog" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysLog&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysLog&gt;"/>
+            <columnOverride column="params" javaType="java.lang.String" jdbcType="TEXT" />
+            <columnOverride column="exception" javaType="java.lang.String" jdbcType="TEXT" />
+        </table>
+        <table tableName="sys_menu"
+               domainObjectName="SysMenu" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysMenu&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysMenu&gt;"/>
+        </table>
+        <table tableName="sys_office"
+               domainObjectName="SysOffice" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysOffice&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysOffice&gt;"/>
+        </table>
+        <table tableName="sys_role"
+               domainObjectName="SysRole" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysRole&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysRole&gt;"/>
+        </table>
+        <table tableName="sys_role_menu"
+               domainObjectName="SysRoleMenu" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysRoleMenu&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysRoleMenu&gt;"/>
+        </table>
+        <table tableName="sys_role_office"
+               domainObjectName="SysRoleOffice" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysRoleOffice&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysRoleOffice&gt;"/>
+        </table>
+        <table tableName="sys_user"
+               domainObjectName="SysUser" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysUser&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysUser&gt;"/>
+        </table>
+        <table tableName="sys_user_role"
+               domainObjectName="SysUserRole" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;SysUserRole&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;SysUserRole&gt;"/>
+        </table>
+    </context>
+</generatorConfiguration>

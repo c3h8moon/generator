@@ -176,6 +176,7 @@ public class Method extends JavaElement {
         OutputUtilities.javaIndent(sb, indentLevel);
 
         if (interfaceMethod) {
+            sb.append(getVisibility().getValue());
             if (isStatic()) {
                 sb.append("static "); //$NON-NLS-1$
             } else if (isDefault()) {

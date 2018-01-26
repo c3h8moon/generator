@@ -15,12 +15,9 @@
  */
 package org.mybatis.generator.api.dom.java;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.dom.OutputUtilities;
 
 /**
@@ -285,6 +282,7 @@ public class InnerClass extends JavaElement {
         while (fldIter.hasNext()) {
             OutputUtilities.newLine(sb);
             Field field = fldIter.next();
+//            System.out.println("fild:" + field.getName());
             sb.append(field.getFormattedContent(indentLevel, compilationUnit));
             if (fldIter.hasNext()) {
                 OutputUtilities.newLine(sb);
@@ -349,6 +347,171 @@ public class InnerClass extends JavaElement {
         indentLevel--;
         OutputUtilities.newLine(sb);
         OutputUtilities.javaIndent(sb, indentLevel);
+        sb.append('}');
+
+        return sb.toString();
+    }
+
+    public String getFormattedContent_entity(int indentLevel, CompilationUnit compilationUnit) {
+        StringBuilder sb = new StringBuilder();
+
+        addFormattedJavadoc(sb, indentLevel);
+        addFormattedAnnotations(sb, indentLevel);
+
+        OutputUtilities.javaIndent(sb, indentLevel);
+        sb.append("@Setter");
+        OutputUtilities.newLine(sb);
+        sb.append("@Getter");
+        OutputUtilities.newLine(sb);
+
+        sb.append(getVisibility().getValue());
+
+        if (isAbstract()) {
+            sb.append("abstract "); //$NON-NLS-1$
+        }
+
+        if (isStatic()) {
+            sb.append("static "); //$NON-NLS-1$
+        }
+
+        if (isFinal()) {
+            sb.append("final "); //$NON-NLS-1$
+        }
+
+        sb.append("class "); //$NON-NLS-1$
+        sb.append(getType().getShortName());
+        System.out.println("---------" + getType().getShortName());
+        if (!this.getTypeParameters().isEmpty()) {
+            boolean comma = false;
+            sb.append("<"); //$NON-NLS-1$
+            for (TypeParameter typeParameter : typeParameters) {
+                if (comma) {
+                    sb.append(", "); //$NON-NLS-1$
+                }
+                sb.append(typeParameter.getFormattedContent(compilationUnit));
+                comma = true;
+            }
+            sb.append("> "); //$NON-NLS-1$
+        }
+
+        if (superClass != null) {
+            sb.append(" extends "); //$NON-NLS-1$
+            String call = JavaDomUtils.calculateTypeName(compilationUnit, superClass);
+            if (call.contains("com.ayhuli.parent.base.entity.")) {
+                call = call.replace("com.ayhuli.parent.base.entity.","");
+            }
+            sb.append(call);
+        }
+
+        if (superInterfaceTypes.size() > 0) {
+            sb.append(" implements "); //$NON-NLS-1$
+
+            boolean comma = false;
+            for (FullyQualifiedJavaType fqjt : superInterfaceTypes) {
+                if (comma) {
+                    sb.append(", "); //$NON-NLS-1$
+                } else {
+                    comma = true;
+                }
+
+                sb.append(JavaDomUtils.calculateTypeName(compilationUnit, fqjt));
+            }
+        }
+
+        sb.append(" {"); //$NON-NLS-1$
+        indentLevel++;
+
+        Iterator<Field> fldIter = fields.iterator();
+//        Map<String,String> maps = new HashMap<>();
+        StringBuilder shh = new StringBuilder();
+        while (fldIter.hasNext()) {
+            OutputUtilities.newLine(sb);
+            Field field = fldIter.next();
+            String lean = field.getFormattedContent(indentLevel, compilationUnit);
+            shh.append(lean);
+            sb.append(lean);
+            if (fldIter.hasNext()) {
+                OutputUtilities.newLine(sb);
+                OutputUtilities.newLine(shh);
+            }
+        }
+        MyBatisGenerator.lean.put(compilationUnit.getType().getShortName(), shh.toString());
+
+        if (initializationBlocks.size() > 0) {
+            OutputUtilities.newLine(sb);
+        }
+
+        Iterator<InitializationBlock> blkIter = initializationBlocks.iterator();
+        while (blkIter.hasNext()) {
+            OutputUtilities.newLine(sb);
+            InitializationBlock initializationBlock = blkIter.next();
+            sb.append(initializationBlock.getFormattedContent(indentLevel));
+            if (blkIter.hasNext()) {
+                OutputUtilities.newLine(sb);
+            }
+        }
+
+        if (methods.size() > 0) {
+            OutputUtilities.newLine(sb);
+        }
+
+//        Iterator<Method> mtdIter = methods.iterator();
+//        while (mtdIter.hasNext()) {
+//            OutputUtilities.newLine(sb);
+//            Method method = mtdIter.next();
+//            sb.append(method.getFormattedContent(indentLevel, false, compilationUnit));
+//            if (mtdIter.hasNext()) {
+//                OutputUtilities.newLine(sb);
+//            }
+//        }
+
+        if (innerClasses.size() > 0) {
+            OutputUtilities.newLine(sb);
+        }
+        Iterator<InnerClass> icIter = innerClasses.iterator();
+        while (icIter.hasNext()) {
+            OutputUtilities.newLine(sb);
+            InnerClass innerClass = icIter.next();
+            sb.append(innerClass.getFormattedContent(indentLevel, compilationUnit));
+            if (icIter.hasNext()) {
+                OutputUtilities.newLine(sb);
+            }
+        }
+
+        if (innerEnums.size() > 0) {
+            OutputUtilities.newLine(sb);
+        }
+
+        Iterator<InnerEnum> ieIter = innerEnums.iterator();
+        while (ieIter.hasNext()) {
+            OutputUtilities.newLine(sb);
+            InnerEnum innerEnum = ieIter.next();
+            sb.append(innerEnum.getFormattedContent(indentLevel, compilationUnit));
+            if (ieIter.hasNext()) {
+                OutputUtilities.newLine(sb);
+            }
+        }
+
+        indentLevel--;
+        OutputUtilities.newLine(sb);
+        OutputUtilities.javaIndent(sb, indentLevel);
+        sb.append("    public void init("+getType().getShortName()+"Dto dto) {");
+        Iterator<Field> fldIter2 = fields.iterator();
+        while (fldIter2.hasNext()) {
+            OutputUtilities.newLine(sb);
+            Field field = fldIter2.next();
+            String lean = field.getFormattedContent_init(indentLevel, compilationUnit);
+            sb.append(lean);
+            if (fldIter2.hasNext()) {
+                OutputUtilities.newLine(sb);
+            }
+        }
+//        MyBatisGenerator.lean.put(compilationUnit.getType().getShortName(), shh2.toString());
+
+        OutputUtilities.newLine(sb);
+        OutputUtilities.newLine(sb);
+        sb.append("    }");
+        OutputUtilities.newLine(sb);
         sb.append('}');
 
         return sb.toString();

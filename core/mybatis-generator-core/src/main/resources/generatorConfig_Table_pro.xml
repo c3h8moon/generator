@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry location="D:\repos\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+    <!-- 一个数据库一个context -->
+    <context id="mysql" targetRuntime="MyBatis3">
+        <!-- 注释 -->
+        <commentGenerator >
+            <property name="suppressAllComments" value="false"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ayhuli?characterEncoding=UTF-8" userId="root"
+                        password="123456" />
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDECIMAL， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--<plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">-->
+        <!--<property name="mapperFiles" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        <!--</plugin>-->
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.ayhuli.service.pro.entity"
+                            targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-dao\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity"/>-->
+        </javaModelGenerator>
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="mybatis"
+                         targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-dao\src\main\resources" >
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ayhuli.service.pro.dao"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-dao\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaClientGenerator>
+
+        <!--service model-->
+        <javaServiceGenerator targetPackage="com.ayhuli.service.pro.service"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-service\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaServiceGenerator>
+        <javaServiceTestGenerator type="sys" targetPackage="com.ayhuli.pro.test.service"
+                                   targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-facade\src\test\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaServiceTestGenerator>
+
+        <!--facade-->
+        <javaBoGenerator type="sys" targetPackage="com.ayhuli.service.pro.api.bo"
+                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-api\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaBoGenerator>
+        <javaDtoGenerator type="sys" targetPackage="com.ayhuli.service.pro.api.dto"
+                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-api\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaDtoGenerator>
+        <javaFacadeGenerator type="sys" targetPackage="com.ayhuli.service.pro.api.facade"
+                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-api\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaFacadeGenerator>
+
+        <!--facade impl-->
+        <javaConvertGenerator type="sys" targetPackage="com.ayhuli.service.pro.facade.convert"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-facade\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaConvertGenerator>
+        <javaFacadeImplGenerator type="sys" targetPackage="com.ayhuli.service.pro.facade.facade.impl"
+                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-facade\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaFacadeImplGenerator>
+        <javaFacadeImplTestGenerator type="sys" targetPackage="com.ayhuli.pro.test.facade"
+                                 targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-pro\service-pro-facade\src\test\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaFacadeImplTestGenerator>
+
+
+
+        <!-- 配置表信息，这里没生成一张表，这里需要改变一次对应表名 -->
+        <table tableName="pro_activity_info"
+               domainObjectName="ProActivityInfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProActivityInfo&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProActivityInfo&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />
+        </table>
+        <table tableName="pro_activity_publish"
+               domainObjectName="ProActivityPublish" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProActivityPublish&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProActivityPublish&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />
+            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <columnOverride column="money" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+        <table tableName="pro_activity_tactics"
+               domainObjectName="ProActivityTactics" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProActivityTactics&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProActivityTactics&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+        <table tableName="pro_coupon"
+               domainObjectName="ProCoupon" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProCoupon&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProCoupon&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        </table>
+        <table tableName="pro_coupon_info"
+               domainObjectName="ProCouponInfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProCouponInfo&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProCouponInfo&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="money" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+        <table tableName="pro_info"
+               domainObjectName="ProInfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProInfo&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProInfo&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        </table>
+        <table tableName="pro_inquiry"
+               domainObjectName="ProInquiry" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProInquiry&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProInquiry&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="innum" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+        <table tableName="pro_inquiry_log"
+               domainObjectName="ProInquiryLog" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProInquiryLog&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProInquiryLog&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="inamount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <columnOverride column="innum" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <columnOverride column="sellnum" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+        <table tableName="pro_inquiry_prop"
+               domainObjectName="ProInquiryProp" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProInquiryProp&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProInquiryProp&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        </table>
+        <table tableName="pro_presell"
+               domainObjectName="ProPresell" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProPresell&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProPresell&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+        <table tableName="pro_prop"
+               domainObjectName="ProProp" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProProp&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProProp&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="pro_prop_info"
+               domainObjectName="ProPropInfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProPropInfo&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProPropInfo&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="pro_prop_type"
+               domainObjectName="ProPropType" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProPropType&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProPropType&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="pro_publish"
+               domainObjectName="ProPublish" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProPublish&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProPublish&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="pro_sale"
+               domainObjectName="ProSale" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProSale&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProSale&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="price" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <!--<columnOverride column="price" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        </table>
+        <table tableName="pro_sale_prop"
+               domainObjectName="ProSaleProp" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;ProSaleProp&gt;"/>
+            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;ProSaleProp&gt;"/>
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <columnOverride column="hintamount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <columnOverride column="saleamount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <columnOverride column="inquirynum" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        </table>
+    </context>
+</generatorConfiguration>

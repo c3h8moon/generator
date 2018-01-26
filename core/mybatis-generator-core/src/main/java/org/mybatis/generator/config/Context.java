@@ -64,6 +64,22 @@ public class Context extends PropertyHolder {
 
     private JavaClientGeneratorConfiguration javaClientGeneratorConfiguration;
 
+    private JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration;
+
+    private JavaBoGeneratorConfiguration javaBoGeneratorConfiguration;
+
+    private JavaDtoGeneratorConfiguration javaDtoGeneratorConfiguration;
+
+    private JavaFacadeGeneratorConfiguration javaFacadeGeneratorConfiguration;
+
+    private JavaConvertGeneratorConfiguration javaConvertGeneratorConfiguration;
+
+    private JavaFacadeImplGeneratorConfiguration javaFacadeImplGeneratorConfiguration;
+
+    private JavaFacadeImplTestGeneratorConfiguration javaFacadeImplTestGeneratorConfiguration;
+
+    private JavaServiceTestGeneratorConfiguration javaServiceTestGeneratorConfiguration;
+
     private ArrayList<TableConfiguration> tableConfigurations;
 
     private ModelType defaultModelType;
@@ -115,8 +131,72 @@ public class Context extends PropertyHolder {
         return javaClientGeneratorConfiguration;
     }
 
+    public JavaServiceGeneratorConfiguration getJavaServiceGeneratorConfiguration() {
+        return javaServiceGeneratorConfiguration;
+    }
+
+    public void setJavaServiceGeneratorConfiguration(JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration) {
+        this.javaServiceGeneratorConfiguration = javaServiceGeneratorConfiguration;
+    }
+
+    public JavaBoGeneratorConfiguration getJavaBoGeneratorConfiguration() {
+        return javaBoGeneratorConfiguration;
+    }
+
+    public void setJavaBoGeneratorConfiguration(JavaBoGeneratorConfiguration javaBoGeneratorConfiguration) {
+        this.javaBoGeneratorConfiguration = javaBoGeneratorConfiguration;
+    }
+
+    public JavaConvertGeneratorConfiguration getJavaConvertGeneratorConfiguration() {
+        return javaConvertGeneratorConfiguration;
+    }
+
+    public JavaFacadeImplTestGeneratorConfiguration getJavaFacadeImplTestGeneratorConfiguration() {
+        return javaFacadeImplTestGeneratorConfiguration;
+    }
+
+    public void setJavaFacadeImplTestGeneratorConfiguration(JavaFacadeImplTestGeneratorConfiguration javaFacadeImplTestGeneratorConfiguration) {
+        this.javaFacadeImplTestGeneratorConfiguration = javaFacadeImplTestGeneratorConfiguration;
+    }
+
+    public JavaServiceTestGeneratorConfiguration getJavaServiceTestGeneratorConfiguration() {
+        return javaServiceTestGeneratorConfiguration;
+    }
+
+    public void setJavaServiceTestGeneratorConfiguration(JavaServiceTestGeneratorConfiguration javaServiceTestGeneratorConfiguration) {
+        this.javaServiceTestGeneratorConfiguration = javaServiceTestGeneratorConfiguration;
+    }
+
+    public void setJavaConvertGeneratorConfiguration(JavaConvertGeneratorConfiguration javaConvertGeneratorConfiguration) {
+        this.javaConvertGeneratorConfiguration = javaConvertGeneratorConfiguration;
+    }
+
+    public JavaDtoGeneratorConfiguration getJavaDtoGeneratorConfiguration() {
+        return javaDtoGeneratorConfiguration;
+    }
+
+    public void setJavaDtoGeneratorConfiguration(JavaDtoGeneratorConfiguration javaDtoGeneratorConfiguration) {
+        this.javaDtoGeneratorConfiguration = javaDtoGeneratorConfiguration;
+    }
+
+    public JavaFacadeGeneratorConfiguration getJavaFacadeGeneratorConfiguration() {
+        return javaFacadeGeneratorConfiguration;
+    }
+
+    public void setJavaFacadeGeneratorConfiguration(JavaFacadeGeneratorConfiguration javaFacadeGeneratorConfiguration) {
+        this.javaFacadeGeneratorConfiguration = javaFacadeGeneratorConfiguration;
+    }
+
     public JavaModelGeneratorConfiguration getJavaModelGeneratorConfiguration() {
         return javaModelGeneratorConfiguration;
+    }
+
+    public JavaFacadeImplGeneratorConfiguration getJavaFacadeImplGeneratorConfiguration() {
+        return javaFacadeImplGeneratorConfiguration;
+    }
+
+    public void setJavaFacadeImplGeneratorConfiguration(JavaFacadeImplGeneratorConfiguration javaFacadeImplGeneratorConfiguration) {
+        this.javaFacadeImplGeneratorConfiguration = javaFacadeImplGeneratorConfiguration;
     }
 
     public JavaTypeResolverConfiguration getJavaTypeResolverConfiguration() {
@@ -293,6 +373,10 @@ public class Context extends PropertyHolder {
 
         if (javaClientGeneratorConfiguration != null) {
             xmlElement.addElement(javaClientGeneratorConfiguration.toXmlElement());
+        }
+
+        if (javaServiceGeneratorConfiguration != null) {
+            xmlElement.addElement(javaServiceGeneratorConfiguration.toXmlElement());
         }
 
         for (TableConfiguration tableConfiguration : tableConfigurations) {

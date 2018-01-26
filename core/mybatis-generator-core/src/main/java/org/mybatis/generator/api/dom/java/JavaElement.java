@@ -31,7 +31,7 @@ public abstract class JavaElement {
     private List<String> javaDocLines;
 
     /** The visibility. */
-    private JavaVisibility visibility = JavaVisibility.DEFAULT;
+    private JavaVisibility visibility = JavaVisibility.PUBLIC;
 
     /** The is static. */
     private boolean isStatic;
