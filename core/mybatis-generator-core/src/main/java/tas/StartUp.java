@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class StartUp {
 
-    public static final boolean isFlag = false; //是否单条s
+    public static final boolean isFlag = true; //是否单条s
 
     public static void main(String[] args) throws Exception {
         if (isFlag) {

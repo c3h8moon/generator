@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2016 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@ import org.mybatis.generator.codegen.ibatis2.Ibatis2FormattingUtilities;
  * @author Jeff Butler
  * 
  */
-public class DeleteByPrimaryKeyElementGenerator extends
-        AbstractXmlElementGenerator {
+public class DeleteByPrimaryKeyElementGenerator extends AbstractXmlElementGenerator {
 
     public DeleteByPrimaryKeyElementGenerator() {
         super();
@@ -37,8 +36,7 @@ public class DeleteByPrimaryKeyElementGenerator extends
     public void addElements(XmlElement parentElement) {
         XmlElement answer = new XmlElement("delete"); //$NON-NLS-1$
 
-        answer.addAttribute(new Attribute(
-                "id", introspectedTable.getDeleteByPrimaryKeyStatementId())); //$NON-NLS-1$
+        answer.addAttribute(new Attribute("id", introspectedTable.getDeleteByPrimaryKeyStatementId())); //$NON-NLS-1$
         String parameterClass;
         if (introspectedTable.getRules().generatePrimaryKeyClass()) {
             parameterClass = introspectedTable.getPrimaryKeyType();
@@ -56,8 +54,7 @@ public class DeleteByPrimaryKeyElementGenerator extends
         answer.addElement(new TextElement(sb.toString()));
 
         boolean and = false;
-        for (IntrospectedColumn introspectedColumn : introspectedTable
-                .getPrimaryKeyColumns()) {
+        for (IntrospectedColumn introspectedColumn : introspectedTable.getPrimaryKeyColumns()) {
             sb.setLength(0);
             if (and) {
                 sb.append("  and "); //$NON-NLS-1$
@@ -66,17 +63,13 @@ public class DeleteByPrimaryKeyElementGenerator extends
                 and = true;
             }
 
-            sb.append(Ibatis2FormattingUtilities
-                    .getEscapedColumnName(introspectedColumn));
+            sb.append(Ibatis2FormattingUtilities.getEscapedColumnName(introspectedColumn));
             sb.append(" = "); //$NON-NLS-1$
-            sb.append(Ibatis2FormattingUtilities
-                    .getParameterClause(introspectedColumn));
+            sb.append(Ibatis2FormattingUtilities.getParameterClause(introspectedColumn));
             answer.addElement(new TextElement(sb.toString()));
         }
 
-        if (context.getPlugins()
-                .sqlMapDeleteByPrimaryKeyElementGenerated(answer,
-                        introspectedTable)) {
+        if (context.getPlugins().sqlMapDeleteByPrimaryKeyElementGenerated(answer, introspectedTable)) {
             parentElement.addElement(answer);
         }
     }

@@ -137,18 +137,18 @@ public class InnerInterface extends JavaElement {
             OutputUtilities.newLine(sb);
         }
 
-//        Iterator<Method> mtdIter = getMethods().iterator();
-//        while (mtdIter.hasNext()) {
-//            newLine(sb);
-//            Method method = mtdIter.next();
-//            sb.append(method.getFormattedContent(indentLevel, true, compilationUnit));
-//            if (mtdIter.hasNext()) {
-//                newLine(sb);
-//            }
-//        }
-//        newLine(sb);
-//        newLine(sb);
-//        sb.append("    public List<T> getQueryCriteria(@Param(\"queryCriteria\") String queryCriteria);");
+        //        Iterator<Method> mtdIter = getMethods().iterator();
+        //        while (mtdIter.hasNext()) {
+        //            newLine(sb);
+        //            Method method = mtdIter.next();
+        //            sb.append(method.getFormattedContent(indentLevel, true, compilationUnit));
+        //            if (mtdIter.hasNext()) {
+        //                newLine(sb);
+        //            }
+        //        }
+        //        newLine(sb);
+        //        newLine(sb);
+        //        sb.append("    public List<T> getQueryCriteria(@Param(\"queryCriteria\") String queryCriteria);");
         newLine(sb);
         newLine(sb);
         String key = getType().getShortName();
@@ -164,7 +164,7 @@ public class InnerInterface extends JavaElement {
         newLine(sb);
         sb.append("     */");
         newLine(sb);
-        sb.append("    public List<"+key+"Dto> findList("+key+"Dto entity);");
+        sb.append("    public List<" + key + "Dto> findList(" + key + "Dto entity);");
 
         newLine(sb);
         newLine(sb);
@@ -179,7 +179,7 @@ public class InnerInterface extends JavaElement {
         newLine(sb);
         sb.append("     */");
         newLine(sb);
-        sb.append("    public "+key+"Dto getByDto(Long id);");
+        sb.append("    public " + key + "Dto getByDto(Long id);");
 
         if (innerInterfaces.size() > 0) {
             newLine(sb);

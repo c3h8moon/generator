@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@ package org.mybatis.generator.codegen.ibatis2;
  * @author Jeff Butler
  * 
  */
-public class IntrospectedTableIbatis2Java5Impl extends
-        IntrospectedTableIbatis2Java2Impl {
+public class IntrospectedTableIbatis2Java5Impl extends IntrospectedTableIbatis2Java2Impl {
     @Override
     public boolean isJava5Targeted() {
         return true;

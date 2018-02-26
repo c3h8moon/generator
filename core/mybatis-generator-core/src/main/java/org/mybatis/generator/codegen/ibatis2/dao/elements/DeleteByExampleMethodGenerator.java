@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -50,14 +50,12 @@ public class DeleteByExampleMethodGenerator extends AbstractDAOElementGenerator 
 
         StringBuilder sb = new StringBuilder();
         sb.append("int rows = "); //$NON-NLS-1$
-        sb.append(daoTemplate.getDeleteMethod(introspectedTable
-                .getIbatis2SqlMapNamespace(), introspectedTable
-                .getDeleteByExampleStatementId(), "example")); //$NON-NLS-1$
+        sb.append(daoTemplate.getDeleteMethod(introspectedTable.getIbatis2SqlMapNamespace(),
+                introspectedTable.getDeleteByExampleStatementId(), "example")); //$NON-NLS-1$
         method.addBodyLine(sb.toString());
         method.addBodyLine("return rows;"); //$NON-NLS-1$
 
-        if (context.getPlugins().clientDeleteByExampleMethodGenerated(
-                method, topLevelClass, introspectedTable)) {
+        if (context.getPlugins().clientDeleteByExampleMethodGenerated(method, topLevelClass, introspectedTable)) {
             topLevelClass.addImportedTypes(importedTypes);
             topLevelClass.addMethod(method);
         }
@@ -69,8 +67,7 @@ public class DeleteByExampleMethodGenerator extends AbstractDAOElementGenerator 
             Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
             Method method = getMethodShell(importedTypes);
 
-            if (context.getPlugins().clientDeleteByExampleMethodGenerated(
-                    method, interfaze, introspectedTable)) {
+            if (context.getPlugins().clientDeleteByExampleMethodGenerated(method, interfaze, introspectedTable)) {
                 interfaze.addImportedTypes(importedTypes);
                 interfaze.addMethod(method);
             }
@@ -78,15 +75,13 @@ public class DeleteByExampleMethodGenerator extends AbstractDAOElementGenerator 
     }
 
     private Method getMethodShell(Set<FullyQualifiedJavaType> importedTypes) {
-        FullyQualifiedJavaType type = new FullyQualifiedJavaType(
-                introspectedTable.getExampleType());
+        FullyQualifiedJavaType type = new FullyQualifiedJavaType(introspectedTable.getExampleType());
         importedTypes.add(type);
 
         Method method = new Method();
         method.setVisibility(getExampleMethodVisibility());
         method.setReturnType(FullyQualifiedJavaType.getIntInstance());
-        method.setName(getDAOMethodNameCalculator()
-                .getDeleteByExampleMethodName(introspectedTable));
+        method.setName(getDAOMethodNameCalculator().getDeleteByExampleMethodName(introspectedTable));
         method.addParameter(new Parameter(type, "example")); //$NON-NLS-1$
 
         for (FullyQualifiedJavaType fqjt : daoTemplate.getCheckedExceptions()) {
@@ -94,8 +89,7 @@ public class DeleteByExampleMethodGenerator extends AbstractDAOElementGenerator 
             importedTypes.add(fqjt);
         }
 
-        context.getCommentGenerator().addGeneralMethodComment(method,
-                introspectedTable);
+        context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
 
         return method;
     }

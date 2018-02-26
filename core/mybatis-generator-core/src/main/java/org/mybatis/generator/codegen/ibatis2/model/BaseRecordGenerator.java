@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -51,13 +51,11 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
     @Override
     public List<CompilationUnit> getCompilationUnits() {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
-        progressCallback.startTask(getString(
-                "Progress.8", table.toString())); //$NON-NLS-1$
+        progressCallback.startTask(getString("Progress.8", table.toString())); //$NON-NLS-1$
         Plugin plugins = context.getPlugins();
         CommentGenerator commentGenerator = context.getCommentGenerator();
 
-        TopLevelClass topLevelClass = new TopLevelClass(introspectedTable
-                .getBaseRecordType());
+        TopLevelClass topLevelClass = new TopLevelClass(introspectedTable.getBaseRecordType());
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
 
@@ -76,8 +74,7 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
             }
         } else {
             if (includeBLOBColumns()) {
-                introspectedColumns = introspectedTable
-                        .getNonPrimaryKeyColumns();
+                introspectedColumns = introspectedTable.getNonPrimaryKeyColumns();
             } else {
                 introspectedColumns = introspectedTable.getBaseColumns();
             }
@@ -85,37 +82,32 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
 
         String rootClass = getRootClass();
         for (IntrospectedColumn introspectedColumn : introspectedColumns) {
-            if (RootClassInfo.getInstance(rootClass, warnings)
-                    .containsProperty(introspectedColumn)) {
+            if (RootClassInfo.getInstance(rootClass, warnings).containsProperty(introspectedColumn)) {
                 continue;
             }
 
             Field field = getJavaBeansField(introspectedColumn, context, introspectedTable);
-            if (plugins.modelFieldGenerated(field, topLevelClass,
-                    introspectedColumn, introspectedTable,
+            if (plugins.modelFieldGenerated(field, topLevelClass, introspectedColumn, introspectedTable,
                     Plugin.ModelClassType.BASE_RECORD)) {
                 topLevelClass.addField(field);
                 topLevelClass.addImportedType(field.getType());
             }
 
             Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
-            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
-                    introspectedColumn, introspectedTable,
+            if (plugins.modelGetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable,
                     Plugin.ModelClassType.BASE_RECORD)) {
                 topLevelClass.addMethod(method);
             }
 
             method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
-            if (plugins.modelSetterMethodGenerated(method, topLevelClass,
-                    introspectedColumn, introspectedTable,
+            if (plugins.modelSetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable,
                     Plugin.ModelClassType.BASE_RECORD)) {
                 topLevelClass.addMethod(method);
             }
         }
 
         List<CompilationUnit> answer = new ArrayList<CompilationUnit>();
-        if (context.getPlugins().modelBaseRecordClassGenerated(
-                topLevelClass, introspectedTable)) {
+        if (context.getPlugins().modelBaseRecordClassGenerated(topLevelClass, introspectedTable)) {
             answer.add(topLevelClass);
         }
         return answer;
@@ -124,8 +116,7 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
     private FullyQualifiedJavaType getSuperClass() {
         FullyQualifiedJavaType superClass;
         if (introspectedTable.getRules().generatePrimaryKeyClass()) {
-            superClass = new FullyQualifiedJavaType(introspectedTable
-                    .getPrimaryKeyType());
+            superClass = new FullyQualifiedJavaType(introspectedTable.getPrimaryKeyType());
         } else {
             String rootClass = getRootClass();
             if (rootClass != null) {
@@ -139,12 +130,10 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
     }
 
     private boolean includePrimaryKeyColumns() {
-        return !introspectedTable.getRules().generatePrimaryKeyClass()
-                && introspectedTable.hasPrimaryKeyColumns();
+        return !introspectedTable.getRules().generatePrimaryKeyClass() && introspectedTable.hasPrimaryKeyColumns();
     }
 
     private boolean includeBLOBColumns() {
-        return !introspectedTable.getRules().generateRecordWithBLOBsClass()
-                && introspectedTable.hasBLOBColumns();
+        return !introspectedTable.getRules().generateRecordWithBLOBsClass() && introspectedTable.hasBLOBColumns();
     }
 }

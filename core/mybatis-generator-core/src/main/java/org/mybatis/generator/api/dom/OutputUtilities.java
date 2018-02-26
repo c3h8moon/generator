@@ -92,8 +92,7 @@ public class OutputUtilities {
      *            the imported types
      * @return the sets the
      */
-    public static Set<String> calculateImports(
-            Set<FullyQualifiedJavaType> importedTypes) {
+    public static Set<String> calculateImports(Set<FullyQualifiedJavaType> importedTypes) {
         StringBuilder sb = new StringBuilder();
         Set<String> importStrings = new TreeSet<String>();
         for (FullyQualifiedJavaType fqjt : importedTypes) {

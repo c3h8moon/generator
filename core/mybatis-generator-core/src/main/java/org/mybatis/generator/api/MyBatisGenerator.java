@@ -52,7 +52,7 @@ import template.*;
  */
 public class MyBatisGenerator {
 
-    public static Map<String, String> lean = new HashMap<>();
+    public static Map<String, String> lean = new HashMap<String, String>();
 
     /**
      * The configuration.
@@ -99,8 +99,8 @@ public class MyBatisGenerator {
      *                      you do not want warnings returned.
      * @throws InvalidConfigurationException if the specified configuration is invalid
      */
-    public MyBatisGenerator(Configuration configuration, ShellCallback shellCallback,
-                            List<String> warnings) throws InvalidConfigurationException {
+    public MyBatisGenerator(Configuration configuration, ShellCallback shellCallback, List<String> warnings)
+            throws InvalidConfigurationException {
         super();
         if (configuration == null) {
             throw new IllegalArgumentException(getString("RuntimeError.2")); //$NON-NLS-1$
@@ -137,8 +137,7 @@ public class MyBatisGenerator {
      * @throws IOException          Signals that an I/O exception has occurred.
      * @throws InterruptedException if the method is canceled through the ProgressCallback
      */
-    public void generate(ProgressCallback callback) throws SQLException,
-            IOException, InterruptedException {
+    public void generate(ProgressCallback callback) throws SQLException, IOException, InterruptedException {
         generate(callback, null, null, true);
     }
 
@@ -175,9 +174,8 @@ public class MyBatisGenerator {
      * @throws IOException          Signals that an I/O exception has occurred.
      * @throws InterruptedException if the method is canceled through the ProgressCallback
      */
-    public void generate(ProgressCallback callback, Set<String> contextIds,
-                         Set<String> fullyQualifiedTableNames) throws SQLException,
-            IOException, InterruptedException {
+    public void generate(ProgressCallback callback, Set<String> contextIds, Set<String> fullyQualifiedTableNames)
+            throws SQLException, IOException, InterruptedException {
         generate(callback, contextIds, fullyQualifiedTableNames, true);
     }
 
@@ -199,9 +197,8 @@ public class MyBatisGenerator {
      * @throws IOException          Signals that an I/O exception has occurred.
      * @throws InterruptedException if the method is canceled through the ProgressCallback
      */
-    public void generate(ProgressCallback callback, Set<String> contextIds,
-                         Set<String> fullyQualifiedTableNames, boolean writeFiles) throws SQLException,
-            IOException, InterruptedException {
+    public void generate(ProgressCallback callback, Set<String> contextIds, Set<String> fullyQualifiedTableNames,
+            boolean writeFiles) throws SQLException, IOException, InterruptedException {
 
         if (callback == null) {
             callback = new NullProgressCallback();
@@ -239,8 +236,7 @@ public class MyBatisGenerator {
         callback.introspectionStarted(totalSteps);
 
         for (Context context : contextsToRun) {
-            context.introspectTables(callback, warnings,
-                    fullyQualifiedTableNames);
+            context.introspectTables(callback, warnings, fullyQualifiedTableNames);
         }
 
         // now run the generates
@@ -251,24 +247,22 @@ public class MyBatisGenerator {
         callback.generationStarted(totalSteps);
 
         for (Context context : contextsToRun) {
-            context.generateFiles(callback, generatedJavaFiles,
-                    generatedXmlFiles, warnings);
+            context.generateFiles(callback, generatedJavaFiles, generatedXmlFiles, warnings);
         }
 
         // now save the files
         if (writeFiles) {
-            callback.saveStarted(generatedXmlFiles.size()
-                    + generatedJavaFiles.size());
+            callback.saveStarted(generatedXmlFiles.size() + generatedJavaFiles.size());
 
             for (GeneratedXmlFile gxf : generatedXmlFiles) {
-//                gxf.getDocument().getRootElement();
+                //                gxf.getDocument().getRootElement();
                 projects.add(gxf.getTargetProject());
                 writeGeneratedXmlFile(gxf, callback);
             }
 
             for (GeneratedJavaFile gjf : generatedJavaFiles) {
-//                System.out.println("gjf" + gjf.getFileName());
-//                System.out.println("gjf content" + gjf.getFormattedContent());
+                //                System.out.println("gjf" + gjf.getFileName());
+                //                System.out.println("gjf content" + gjf.getFormattedContent());
                 projects.add(gjf.getTargetProject());
                 writeGeneratedJavaFile(gjf, callback);
             }
@@ -278,7 +272,7 @@ public class MyBatisGenerator {
             }
         }
         JavaServiceGenerator.addJavaServiceGenerator(assignmentServiceTemplateEntity());
-//        JavaServiceGenerator.addJavaBoGenerator(assignmentBoTemplateEntity());
+        //        JavaServiceGenerator.addJavaBoGenerator(assignmentBoTemplateEntity());
         JavaServiceGenerator.addJavaDtoGenerator(assignmentDtoTemplateEntity());
         JavaServiceGenerator.addJavaFacadeGenerator(assignmentFacadeTemplateEntity());
         JavaServiceGenerator.addJavaConvertGenerator(assignmentConvertTemplateEntity());
@@ -295,33 +289,27 @@ public class MyBatisGenerator {
         File targetFile;
         String source;
         try {
-            File directory = shellCallback.getDirectory(gjf
-                    .getTargetProject(), gjf.getTargetPackage());
+            File directory = shellCallback.getDirectory(gjf.getTargetProject(), gjf.getTargetPackage());
             targetFile = new File(directory, gjf.getFileName());
             if (targetFile.exists()) {
                 if (shellCallback.isMergeSupported()) {
-                    source = shellCallback.mergeJavaFile(gjf
-                                    .getFormattedContent(), targetFile,
-                            MergeConstants.OLD_ELEMENT_TAGS,
-                            gjf.getFileEncoding());
+                    source = shellCallback.mergeJavaFile(gjf.getFormattedContent(), targetFile,
+                            MergeConstants.OLD_ELEMENT_TAGS, gjf.getFileEncoding());
                 } else if (shellCallback.isOverwriteEnabled()) {
                     source = gjf.getFormattedContent();
                     warnings.add(getString("Warning.11", //$NON-NLS-1$
                             targetFile.getAbsolutePath()));
                 } else {
                     source = gjf.getFormattedContent();
-                    targetFile = getUniqueFileName(directory, gjf
-                            .getFileName());
-                    warnings.add(getString(
-                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
+                    targetFile = getUniqueFileName(directory, gjf.getFileName());
+                    warnings.add(getString("Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
                 }
             } else {
                 source = gjf.getFormattedContent();
             }
 
             callback.checkCancel();
-            callback.startTask(getString(
-                    "Progress.15", targetFile.getName())); //$NON-NLS-1$
+            callback.startTask(getString("Progress.15", targetFile.getName())); //$NON-NLS-1$
             writeFile(targetFile, source, gjf.getFileEncoding());
         } catch (ShellException e) {
             warnings.add(e.getMessage());
@@ -333,31 +321,26 @@ public class MyBatisGenerator {
         File targetFile;
         String source;
         try {
-            File directory = shellCallback.getDirectory(gxf
-                    .getTargetProject(), gxf.getTargetPackage());
+            File directory = shellCallback.getDirectory(gxf.getTargetProject(), gxf.getTargetPackage());
             targetFile = new File(directory, gxf.getFileName());
             if (targetFile.exists()) {
                 if (gxf.isMergeable()) {
-                    source = XmlFileMergerJaxp.getMergedSource(gxf,
-                            targetFile);
+                    source = XmlFileMergerJaxp.getMergedSource(gxf, targetFile);
                 } else if (shellCallback.isOverwriteEnabled()) {
                     source = gxf.getFormattedContent();
                     warnings.add(getString("Warning.11", //$NON-NLS-1$
                             targetFile.getAbsolutePath()));
                 } else {
                     source = gxf.getFormattedContent();
-                    targetFile = getUniqueFileName(directory, gxf
-                            .getFileName());
-                    warnings.add(getString(
-                            "Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
+                    targetFile = getUniqueFileName(directory, gxf.getFileName());
+                    warnings.add(getString("Warning.2", targetFile.getAbsolutePath())); //$NON-NLS-1$
                 }
             } else {
                 source = gxf.getFormattedContent();
             }
 
             callback.checkCancel();
-            callback.startTask(getString(
-                    "Progress.15", targetFile.getName())); //$NON-NLS-1$
+            callback.startTask(getString("Progress.15", targetFile.getName())); //$NON-NLS-1$
             writeFile(targetFile, source, "UTF-8"); //$NON-NLS-1$
         } catch (ShellException e) {
             warnings.add(e.getMessage());
@@ -412,8 +395,7 @@ public class MyBatisGenerator {
         }
 
         if (answer == null) {
-            throw new RuntimeException(getString(
-                    "RuntimeError.3", directory.getAbsolutePath())); //$NON-NLS-1$
+            throw new RuntimeException(getString("RuntimeError.3", directory.getAbsolutePath())); //$NON-NLS-1$
         }
 
         return answer;
@@ -446,25 +428,30 @@ public class MyBatisGenerator {
         List<ServiceTemplateEntity> serviceTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaServiceGeneratorConfiguration jgc = c.getJavaServiceGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 ServiceTemplateEntity serviceTemplateEntity = new ServiceTemplateEntity();
                 serviceTemplateEntity.setClassName(t.getDomainObjectName() + "Service");
                 serviceTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Service");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 serviceTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 serviceTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                 serviceTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                 serviceTemplateEntity.setMapperName("dao");
                 serviceTemplateEntity.setBoClazz(t.getDomainObjectName());
                 serviceTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                serviceTemplateEntity.setMapperPackage(c.getJavaClientGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dao");
-                serviceTemplateEntity.setBoPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                serviceTemplateEntity.setMapperPackage(c.getJavaClientGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dao");
+                serviceTemplateEntity.setBoPackage(
+                        c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
 
                 serviceTemplateEntity.setDtoClassName(t.getDomainObjectName() + "Dto");
                 serviceTemplateEntity.setLessDtoClassName(captureName(t.getDomainObjectName()) + "Dto");
-                serviceTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+                serviceTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
 
                 serviceTemplateEntities.add(serviceTemplateEntity);
             }
@@ -477,23 +464,27 @@ public class MyBatisGenerator {
         List<DtoTemplateEntity> dtoTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaBoGeneratorConfiguration jgc = c.getJavaBoGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
-                for ( int i = 1; i < 7; i++) {
+                for (int i = 1; i < 7; i++) {
                     DtoTemplateEntity dtoTemplateEntity = new DtoTemplateEntity();
-                    dtoTemplateEntity.setClassName(t.getDomainObjectName() + i+ "00"+"Dto");
+                    dtoTemplateEntity.setClassName(t.getDomainObjectName() + i + "00" + "Dto");
                     dtoTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
-                    dtoTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + i+ "00Dto");
-                    String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                    dtoTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + i + "00Dto");
+                    String projectTargetPackage = jgc.getTargetProject() + "/"
+                            + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                     dtoTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                     dtoTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                     dtoTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                     dtoTemplateEntity.setMapperName("dao");
                     dtoTemplateEntity.setBoClazz(t.getDomainObjectName());
                     dtoTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                    dtoTemplateEntity.setMapperPackage(c.getJavaClientGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dao");
-                    dtoTemplateEntity.setBoPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                    dtoTemplateEntity.setMapperPackage(c.getJavaClientGeneratorConfiguration().getTargetPackage() + "."
+                            + t.getDomainObjectName() + "Dao");
+                    dtoTemplateEntity.setBoPackage(
+                            c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
                     dtoTemplateEntity.setFields(lean.get(t.getDomainObjectName()));
                     dtoTemplateEntities.add(dtoTemplateEntity);
                 }
@@ -510,27 +501,31 @@ public class MyBatisGenerator {
         List<DtoTemplateEntity> dtoTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaDtoGeneratorConfiguration jgc = c.getJavaDtoGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
-                    DtoTemplateEntity dtoTemplateEntity = new DtoTemplateEntity();
-                    dtoTemplateEntity.setClassName(t.getDomainObjectName() + "Dto");
-                    dtoTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Dto");
-                    dtoTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
-                    String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
-                    dtoTemplateEntity.setProjectTargetPackage(projectTargetPackage);
-                    dtoTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
-                    dtoTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
-                    dtoTemplateEntity.setMapperName("dao");
-                    dtoTemplateEntity.setBoClazz(t.getDomainObjectName());
-                    dtoTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-//                dtoTemplateEntity.setMapperPackage(c.getJavaClientGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dao");
-                    dtoTemplateEntity.setBoPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
-                    dtoTemplateEntity.setFields(lean.get(t.getDomainObjectName()));
-                    dtoTemplateEntities.add(dtoTemplateEntity);
-//                    System.out.println("put key : " + t.getDomainObjectName() + "Dao");
-//                    System.out.println("put value : " + jgc.getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
-                    dtoPackage.put(t.getDomainObjectName() + "Dao", jgc.getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+                DtoTemplateEntity dtoTemplateEntity = new DtoTemplateEntity();
+                dtoTemplateEntity.setClassName(t.getDomainObjectName() + "Dto");
+                dtoTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Dto");
+                dtoTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                dtoTemplateEntity.setProjectTargetPackage(projectTargetPackage);
+                dtoTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
+                dtoTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
+                dtoTemplateEntity.setMapperName("dao");
+                dtoTemplateEntity.setBoClazz(t.getDomainObjectName());
+                dtoTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
+                //                dtoTemplateEntity.setMapperPackage(c.getJavaClientGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dao");
+                dtoTemplateEntity.setBoPackage(
+                        c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                dtoTemplateEntity.setFields(lean.get(t.getDomainObjectName()));
+                dtoTemplateEntities.add(dtoTemplateEntity);
+                //                    System.out.println("put key : " + t.getDomainObjectName() + "Dao");
+                //                    System.out.println("put value : " + jgc.getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+                dtoPackage.put(t.getDomainObjectName() + "Dao",
+                        jgc.getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
             }
         }
         return dtoTemplateEntities;
@@ -541,24 +536,28 @@ public class MyBatisGenerator {
         List<FacadeTemplateEntity> facadeTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaFacadeGeneratorConfiguration jgc = c.getJavaFacadeGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 FacadeTemplateEntity facadeTemplateEntity = new FacadeTemplateEntity();
                 facadeTemplateEntity.setClassName(t.getDomainObjectName() + "Facade");
                 facadeTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 facadeTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Facade");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 facadeTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 facadeTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                 facadeTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                 facadeTemplateEntity.setMapperName("dao");
                 facadeTemplateEntity.setBoClazz(t.getDomainObjectName());
                 facadeTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                facadeTemplateEntity.setMapperPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+                facadeTemplateEntity.setMapperPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
 
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName().toLowerCase());
 
                 facadeTemplateEntities.add(facadeTemplateEntity);
 
@@ -572,26 +571,31 @@ public class MyBatisGenerator {
         List<ConvertTemplateEntity> facadeTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaConvertGeneratorConfiguration jgc = c.getJavaConvertGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 ConvertTemplateEntity facadeTemplateEntity = new ConvertTemplateEntity();
                 facadeTemplateEntity.setClassName(t.getDomainObjectName() + "Convert");
                 facadeTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 facadeTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Facade");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 facadeTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 facadeTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                 facadeTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                 facadeTemplateEntity.setMapperName("dao");
                 facadeTemplateEntity.setBoClazz(t.getDomainObjectName());
                 facadeTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                facadeTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                facadeTemplateEntity.setMapperPackage(
+                        c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
 
-                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
 
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName().toLowerCase());
 
                 facadeTemplateEntities.add(facadeTemplateEntity);
 
@@ -605,29 +609,36 @@ public class MyBatisGenerator {
         List<FacadeImplTemplateEntity> facadeTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaFacadeImplGeneratorConfiguration jgc = c.getJavaFacadeImplGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 FacadeImplTemplateEntity facadeTemplateEntity = new FacadeImplTemplateEntity();
                 facadeTemplateEntity.setClassName(t.getDomainObjectName() + "FacadeImpl");
                 facadeTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 facadeTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Facade");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 facadeTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 facadeTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                 facadeTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                 facadeTemplateEntity.setMapperName("dao");
                 facadeTemplateEntity.setBoClazz(t.getDomainObjectName());
                 facadeTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                facadeTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
-                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
-                facadeTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
-                facadeTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
-                facadeTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+                facadeTemplateEntity.setMapperPackage(
+                        c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
+                facadeTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Service");
+                facadeTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Facade");
+                facadeTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Convert");
                 facadeTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
                 facadeTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-//                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                //                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
 
                 facadeTemplateEntities.add(facadeTemplateEntity);
 
@@ -641,29 +652,37 @@ public class MyBatisGenerator {
         List<FacadeImplTestTemplateEntity> facadeTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaFacadeImplTestGeneratorConfiguration jgc = c.getJavaFacadeImplTestGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 FacadeImplTestTemplateEntity facadeTemplateEntity = new FacadeImplTestTemplateEntity();
                 facadeTemplateEntity.setClassName(t.getDomainObjectName() + "FacadeTest");
                 facadeTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 facadeTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "FacadeTest");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 facadeTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 facadeTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                 facadeTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                 facadeTemplateEntity.setMapperName("dao");
                 facadeTemplateEntity.setBoClazz(t.getDomainObjectName());
                 facadeTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                facadeTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
-                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
-                facadeTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
-                facadeTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
-                facadeTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+                facadeTemplateEntity.setMapperPackage(
+                        c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
+                facadeTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Service");
+                facadeTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Facade");
+                facadeTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Convert");
                 facadeTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
                 facadeTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                facadeTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName().toLowerCase());
 
                 facadeTemplateEntity.setFacadeClassName(t.getDomainObjectName() + "Facade");
                 facadeTemplateEntity.setFacadeLessClassName(captureName(t.getDomainObjectName()) + "Facade");
@@ -680,30 +699,38 @@ public class MyBatisGenerator {
         List<ServiceTestTemplateEntity> serviceTestTemplateEntities = new ArrayList<>();
         for (Context c : contexts) {
             JavaServiceTestGeneratorConfiguration jgc = c.getJavaServiceTestGeneratorConfiguration();
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 ServiceTestTemplateEntity serviceTestTemplateEntity = new ServiceTestTemplateEntity();
                 serviceTestTemplateEntity.setClassName(t.getDomainObjectName() + "ServiceTest");
                 serviceTestTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 serviceTestTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "ServiceTest");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 serviceTestTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 serviceTestTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
                 serviceTestTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
                 serviceTestTemplateEntity.setMapperName("dao");
                 serviceTestTemplateEntity.setBoClazz(t.getDomainObjectName());
                 serviceTestTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-                serviceTestTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
-                serviceTestTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
-                serviceTestTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
-                serviceTestTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
-                serviceTestTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+                serviceTestTemplateEntity.setMapperPackage(
+                        c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                serviceTestTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
+                serviceTestTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage()
+                        + "." + t.getDomainObjectName() + "Service");
+                serviceTestTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage()
+                        + "." + t.getDomainObjectName() + "Facade");
+                serviceTestTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage()
+                        + "." + t.getDomainObjectName() + "Convert");
                 serviceTestTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
                 serviceTestTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-                serviceTestTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
-//                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                serviceTestTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
 
                 serviceTestTemplateEntities.add(serviceTestTemplateEntity);
 
@@ -720,30 +747,34 @@ public class MyBatisGenerator {
 
             JavaWebServiceGeneratorConfiguration service = c.getJavaWebServiceGeneratorConfiguration();
 
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 WebControllerTemplateEntity webControllerTemplateEntity = new WebControllerTemplateEntity();
                 webControllerTemplateEntity.setClassName(t.getDomainObjectName() + "Controller");
                 webControllerTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 webControllerTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Controller");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 webControllerTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 webControllerTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
-//                webControllerTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
-//                webControllerTemplateEntity.setMapperName("dao");
+                //                webControllerTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
+                //                webControllerTemplateEntity.setMapperName("dao");
                 webControllerTemplateEntity.setBoClazz(t.getDomainObjectName());
                 webControllerTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-//                webControllerTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
-                webControllerTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
-//                webControllerTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
-//                webControllerTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
-//                webControllerTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
-//                webControllerTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
-//                webControllerTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-                webControllerTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
-//                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
+                //                webControllerTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                webControllerTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
+                //                webControllerTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
+                //                webControllerTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
+                //                webControllerTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+                //                webControllerTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
+                //                webControllerTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                webControllerTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
                 webControllerTemplateEntity.setServicePackage(service.getTargetPackage());
                 String[] modelNames = jgc.getTargetPackage().split("\\.");
 
@@ -773,30 +804,34 @@ public class MyBatisGenerator {
 
             JavaFacadeGeneratorConfiguration facade = c.getJavaFacadeGeneratorConfiguration();
 
-            if (jgc == null) break;
+            if (jgc == null)
+                break;
             List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
             for (TableConfiguration t : tableConfigurations) {
                 WebServiceTemplateEntity webServiceTemplateEntity = new WebServiceTemplateEntity();
                 webServiceTemplateEntity.setClassName(t.getDomainObjectName() + "Service");
                 webServiceTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
                 webServiceTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Service");
-                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                String projectTargetPackage = jgc.getTargetProject() + "/"
+                        + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
                 webServiceTemplateEntity.setProjectTargetPackage(projectTargetPackage);
                 webServiceTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
-//                webControllerTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
-//                webControllerTemplateEntity.setMapperName("dao");
+                //                webControllerTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
+                //                webControllerTemplateEntity.setMapperName("dao");
                 webServiceTemplateEntity.setBoClazz(t.getDomainObjectName());
                 webServiceTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
-//                webControllerTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
-                webServiceTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
-//                webControllerTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
-//                webControllerTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
-//                webControllerTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
-//                webControllerTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
-//                webControllerTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
-//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
-                webServiceTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
-//                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
+                //                webControllerTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                webServiceTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName() + "Dto");
+                //                webControllerTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
+                //                webControllerTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
+                //                webControllerTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+                //                webControllerTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
+                //                webControllerTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
+                //                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                webServiceTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "."
+                        + t.getDomainObjectName().toLowerCase());
+                //                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
                 webServiceTemplateEntity.setFacadePackage(facade.getTargetPackage());
 
                 String[] modelNames = jgc.getTargetPackage().split("\\.");
@@ -821,7 +856,7 @@ public class MyBatisGenerator {
 
     public static String captureName(String name) {
         name = name.substring(0, 1).toLowerCase() + name.substring(1);
-        return  name;
+        return name;
 
     }
 }

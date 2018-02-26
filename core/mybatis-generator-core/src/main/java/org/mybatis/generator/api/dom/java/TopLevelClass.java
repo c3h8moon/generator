@@ -59,10 +59,8 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
 
     @Override
     public void addImportedType(FullyQualifiedJavaType importedType) {
-        if (importedType != null
-                && importedType.isExplicitlyImported()
-                && !importedType.getPackageName().equals(
-                        getType().getPackageName())
+        if (importedType != null && importedType.isExplicitlyImported()
+                && !importedType.getPackageName().equals(getType().getPackageName())
                 && !importedType.getShortName().equals(getType().getShortName())) {
             importedTypes.add(importedType);
         }
@@ -103,9 +101,10 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
             newLine(sb);
         }
 
-        String packagePath = fullyQualifiedJavaType.getPackageName().replace("entity","api.dto." + fullyQualifiedJavaType.getShortName() + "Dto");
+        String packagePath = fullyQualifiedJavaType.getPackageName().replace("entity",
+                "api.dto." + fullyQualifiedJavaType.getShortName() + "Dto");
 
-        sb.append("import "+packagePath+";");
+        sb.append("import " + packagePath + ";");
         newLine(sb);
 
         sb.append("import lombok.Getter;");
@@ -119,7 +118,7 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
 
         sb.append(super.getFormattedContent_entity(0, this));
 
-//        System.out.println("222:0" + sb.toString());
+        //        System.out.println("222:0" + sb.toString());
 
         return sb.toString();
     }

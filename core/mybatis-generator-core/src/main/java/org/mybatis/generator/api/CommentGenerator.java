@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -58,9 +58,7 @@ public interface CommentGenerator {
      * @param introspectedColumn
      *            the introspected column
      */
-    void addFieldComment(Field field,
-            IntrospectedTable introspectedTable,
-            IntrospectedColumn introspectedColumn);
+    void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn);
 
     /**
      * Adds the field comment.
@@ -87,8 +85,7 @@ public interface CommentGenerator {
      * @param introspectedTable
      *            the introspected table
      */
-    void addModelClassComment(TopLevelClass topLevelClass,
-            IntrospectedTable introspectedTable);
+    void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable);
 
     /**
      * Adds the inner class comment.
@@ -98,8 +95,7 @@ public interface CommentGenerator {
      * @param introspectedTable
      *            the introspected table
      */
-    void addClassComment(InnerClass innerClass,
-            IntrospectedTable introspectedTable);
+    void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable);
 
     /**
      * Adds the inner class comment.
@@ -111,8 +107,7 @@ public interface CommentGenerator {
      * @param markAsDoNotDelete
      *            the mark as do not delete
      */
-    void addClassComment(InnerClass innerClass,
-            IntrospectedTable introspectedTable, boolean markAsDoNotDelete);
+    void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete);
 
     /**
      * Adds the enum comment.
@@ -122,8 +117,7 @@ public interface CommentGenerator {
      * @param introspectedTable
      *            the introspected table
      */
-    void addEnumComment(InnerEnum innerEnum,
-            IntrospectedTable introspectedTable);
+    void addEnumComment(InnerEnum innerEnum, IntrospectedTable introspectedTable);
 
     /**
      * Adds the getter comment.
@@ -135,9 +129,7 @@ public interface CommentGenerator {
      * @param introspectedColumn
      *            the introspected column
      */
-    void addGetterComment(Method method,
-            IntrospectedTable introspectedTable,
-            IntrospectedColumn introspectedColumn);
+    void addGetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn);
 
     /**
      * Adds the setter comment.
@@ -149,9 +141,7 @@ public interface CommentGenerator {
      * @param introspectedColumn
      *            the introspected column
      */
-    void addSetterComment(Method method,
-            IntrospectedTable introspectedTable,
-            IntrospectedColumn introspectedColumn);
+    void addSetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn);
 
     /**
      * Adds the general method comment.
@@ -161,8 +151,7 @@ public interface CommentGenerator {
      * @param introspectedTable
      *            the introspected table
      */
-    void addGeneralMethodComment(Method method,
-            IntrospectedTable introspectedTable);
+    void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable);
 
     /**
      * This method is called to add a file level comment to a generated java file. This method

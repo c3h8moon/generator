@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2016 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class PropertyRegistry {
     public static final String CONTEXT_XML_FORMATTER = "xmlFormatter"; //$NON-NLS-1$
 
     public static final String CLIENT_USE_LEGACY_BUILDER = "useLegacyBuilder"; //$NON-NLS-1$
-    
+
     public static final String DAO_EXAMPLE_METHOD_VISIBILITY = "exampleMethodVisibility"; //$NON-NLS-1$
     public static final String DAO_METHOD_NAME_CALCULATOR = "methodNameCalculator"; //$NON-NLS-1$
 

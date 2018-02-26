@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -58,84 +58,68 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
     }
 
     @Override
-    public void calculateGenerators(List<String> warnings,
-            ProgressCallback progressCallback) {
+    public void calculateGenerators(List<String> warnings, ProgressCallback progressCallback) {
         calculateJavaModelGenerators(warnings, progressCallback);
         calculateDAOGenerators(warnings, progressCallback);
         calculateSqlMapGenerator(warnings, progressCallback);
     }
 
-    protected void calculateSqlMapGenerator(List<String> warnings,
-            ProgressCallback progressCallback) {
+    protected void calculateSqlMapGenerator(List<String> warnings, ProgressCallback progressCallback) {
         sqlMapGenerator = new SqlMapGenerator();
         initializeAbstractGenerator(sqlMapGenerator, warnings, progressCallback);
     }
 
-    protected void calculateDAOGenerators(List<String> warnings,
-            ProgressCallback progressCallback) {
+    protected void calculateDAOGenerators(List<String> warnings, ProgressCallback progressCallback) {
         if (context.getJavaClientGeneratorConfiguration() == null) {
             return;
         }
 
-        String type = context.getJavaClientGeneratorConfiguration()
-                .getConfigurationType();
+        String type = context.getJavaClientGeneratorConfiguration().getConfigurationType();
 
         AbstractJavaGenerator javaGenerator;
         if ("IBATIS".equalsIgnoreCase(type)) { //$NON-NLS-1$
-            javaGenerator = new DAOGenerator(new IbatisDAOTemplate(),
-                    isJava5Targeted());
+            javaGenerator = new DAOGenerator(new IbatisDAOTemplate(), isJava5Targeted());
         } else if ("SPRING".equalsIgnoreCase(type)) { //$NON-NLS-1$
-            javaGenerator = new DAOGenerator(new SpringDAOTemplate(),
-                    isJava5Targeted());
+            javaGenerator = new DAOGenerator(new SpringDAOTemplate(), isJava5Targeted());
         } else if ("GENERIC-CI".equalsIgnoreCase(type)) { //$NON-NLS-1$
-            javaGenerator = new DAOGenerator(new GenericCIDAOTemplate(),
-                    isJava5Targeted());
+            javaGenerator = new DAOGenerator(new GenericCIDAOTemplate(), isJava5Targeted());
         } else if ("GENERIC-SI".equalsIgnoreCase(type)) { //$NON-NLS-1$
-            javaGenerator = new DAOGenerator(new GenericSIDAOTemplate(),
-                    isJava5Targeted());
+            javaGenerator = new DAOGenerator(new GenericSIDAOTemplate(), isJava5Targeted());
         } else {
-            javaGenerator = (AbstractJavaGenerator) ObjectFactory
-                    .createInternalObject(type);
+            javaGenerator = (AbstractJavaGenerator) ObjectFactory.createInternalObject(type);
         }
 
         initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
         daoGenerators.add(javaGenerator);
     }
 
-    protected void calculateJavaModelGenerators(List<String> warnings,
-            ProgressCallback progressCallback) {
+    protected void calculateJavaModelGenerators(List<String> warnings, ProgressCallback progressCallback) {
         if (getRules().generateExampleClass()) {
-            AbstractJavaGenerator javaGenerator = new ExampleGenerator(
-                    isJava5Targeted());
-            initializeAbstractGenerator(javaGenerator, warnings,
-                    progressCallback);
+            AbstractJavaGenerator javaGenerator = new ExampleGenerator(isJava5Targeted());
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
             javaModelGenerators.add(javaGenerator);
         }
 
         if (getRules().generatePrimaryKeyClass()) {
             AbstractJavaGenerator javaGenerator = new PrimaryKeyGenerator();
-            initializeAbstractGenerator(javaGenerator, warnings,
-                    progressCallback);
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
             javaModelGenerators.add(javaGenerator);
         }
 
         if (getRules().generateBaseRecordClass()) {
             AbstractJavaGenerator javaGenerator = new BaseRecordGenerator();
-            initializeAbstractGenerator(javaGenerator, warnings,
-                    progressCallback);
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
             javaModelGenerators.add(javaGenerator);
         }
 
         if (getRules().generateRecordWithBLOBsClass()) {
             AbstractJavaGenerator javaGenerator = new RecordWithBLOBsGenerator();
-            initializeAbstractGenerator(javaGenerator, warnings,
-                    progressCallback);
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
             javaModelGenerators.add(javaGenerator);
         }
     }
 
-    protected void initializeAbstractGenerator(
-            AbstractGenerator abstractGenerator, List<String> warnings,
+    protected void initializeAbstractGenerator(AbstractGenerator abstractGenerator, List<String> warnings,
             ProgressCallback progressCallback) {
         abstractGenerator.setContext(context);
         abstractGenerator.setIntrospectedTable(this);
@@ -148,27 +132,21 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
         List<GeneratedJavaFile> answer = new ArrayList<GeneratedJavaFile>();
 
         for (AbstractJavaGenerator javaGenerator : javaModelGenerators) {
-            List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits();
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                        context.getJavaModelGeneratorConfiguration()
-                                .getTargetProject(),
-                                context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
-                                context.getJavaFormatter());
+                        context.getJavaModelGeneratorConfiguration().getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING), context.getJavaFormatter());
                 answer.add(gjf);
             }
         }
 
         for (AbstractJavaGenerator javaGenerator : daoGenerators) {
-            List<CompilationUnit> compilationUnits = javaGenerator
-                    .getCompilationUnits();
+            List<CompilationUnit> compilationUnits = javaGenerator.getCompilationUnits();
             for (CompilationUnit compilationUnit : compilationUnits) {
                 GeneratedJavaFile gjf = new GeneratedJavaFile(compilationUnit,
-                        context.getJavaClientGeneratorConfiguration()
-                                .getTargetProject(),
-                                context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
-                                context.getJavaFormatter());
+                        context.getJavaClientGeneratorConfiguration().getTargetProject(),
+                        context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING), context.getJavaFormatter());
                 answer.add(gjf);
             }
         }
@@ -181,10 +159,8 @@ public class IntrospectedTableIbatis2Java2Impl extends IntrospectedTable {
         List<GeneratedXmlFile> answer = new ArrayList<GeneratedXmlFile>();
 
         Document document = sqlMapGenerator.getDocument();
-        GeneratedXmlFile gxf = new GeneratedXmlFile(document,
-                getIbatis2SqlMapFileName(), getIbatis2SqlMapPackage(), context
-                        .getSqlMapGeneratorConfiguration().getTargetProject(),
-                true, context.getXmlFormatter());
+        GeneratedXmlFile gxf = new GeneratedXmlFile(document, getIbatis2SqlMapFileName(), getIbatis2SqlMapPackage(),
+                context.getSqlMapGeneratorConfiguration().getTargetProject(), true, context.getXmlFormatter());
         if (context.getPlugins().sqlMapGenerated(gxf, this)) {
             answer.add(gxf);
         }

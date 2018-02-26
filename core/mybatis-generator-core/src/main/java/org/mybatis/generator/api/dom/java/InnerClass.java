@@ -282,7 +282,7 @@ public class InnerClass extends JavaElement {
         while (fldIter.hasNext()) {
             OutputUtilities.newLine(sb);
             Field field = fldIter.next();
-//            System.out.println("fild:" + field.getName());
+            //            System.out.println("fild:" + field.getName());
             sb.append(field.getFormattedContent(indentLevel, compilationUnit));
             if (fldIter.hasNext()) {
                 OutputUtilities.newLine(sb);
@@ -398,7 +398,7 @@ public class InnerClass extends JavaElement {
             sb.append(" extends "); //$NON-NLS-1$
             String call = JavaDomUtils.calculateTypeName(compilationUnit, superClass);
             if (call.contains("com.ayhuli.parent.base.entity.")) {
-                call = call.replace("com.ayhuli.parent.base.entity.","");
+                call = call.replace("com.ayhuli.parent.base.entity.", "");
             }
             sb.append(call);
         }
@@ -422,7 +422,7 @@ public class InnerClass extends JavaElement {
         indentLevel++;
 
         Iterator<Field> fldIter = fields.iterator();
-//        Map<String,String> maps = new HashMap<>();
+        //        Map<String,String> maps = new HashMap<>();
         StringBuilder shh = new StringBuilder();
         while (fldIter.hasNext()) {
             OutputUtilities.newLine(sb);
@@ -455,15 +455,15 @@ public class InnerClass extends JavaElement {
             OutputUtilities.newLine(sb);
         }
 
-//        Iterator<Method> mtdIter = methods.iterator();
-//        while (mtdIter.hasNext()) {
-//            OutputUtilities.newLine(sb);
-//            Method method = mtdIter.next();
-//            sb.append(method.getFormattedContent(indentLevel, false, compilationUnit));
-//            if (mtdIter.hasNext()) {
-//                OutputUtilities.newLine(sb);
-//            }
-//        }
+        //        Iterator<Method> mtdIter = methods.iterator();
+        //        while (mtdIter.hasNext()) {
+        //            OutputUtilities.newLine(sb);
+        //            Method method = mtdIter.next();
+        //            sb.append(method.getFormattedContent(indentLevel, false, compilationUnit));
+        //            if (mtdIter.hasNext()) {
+        //                OutputUtilities.newLine(sb);
+        //            }
+        //        }
 
         if (innerClasses.size() > 0) {
             OutputUtilities.newLine(sb);
@@ -495,7 +495,7 @@ public class InnerClass extends JavaElement {
         indentLevel--;
         OutputUtilities.newLine(sb);
         OutputUtilities.javaIndent(sb, indentLevel);
-        sb.append("    public void init("+getType().getShortName()+"Dto dto) {");
+        sb.append("    public void init(" + getType().getShortName() + "Dto dto) {");
         OutputUtilities.newLine(sb);
         sb.append("        /** 基础字段初始化 **/");
         OutputUtilities.newLine(sb);
@@ -521,7 +521,7 @@ public class InnerClass extends JavaElement {
                 OutputUtilities.newLine(sb);
             }
         }
-//        MyBatisGenerator.lean.put(compilationUnit.getType().getShortName(), shh2.toString());
+        //        MyBatisGenerator.lean.put(compilationUnit.getType().getShortName(), shh2.toString());
 
         OutputUtilities.newLine(sb);
         OutputUtilities.newLine(sb);

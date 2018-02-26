@@ -43,8 +43,7 @@ public class SelectByCdtMethodGenerator extends AbstractJavaMapperMethodGenerato
         Method method = new Method();
         method.setVisibility(JavaVisibility.PUBLIC);
 
-        FullyQualifiedJavaType parameterType = introspectedTable.getRules()
-                .calculateAllFieldsClass();
+        FullyQualifiedJavaType parameterType = introspectedTable.getRules().calculateAllFieldsClass();
         FullyQualifiedJavaType returnType = FullyQualifiedJavaType.getNewListInstance().getNewListInstance();
         returnType.addTypeArgument(parameterType);
         method.setReturnType(FullyQualifiedJavaType.getNewListInstance());
@@ -57,11 +56,9 @@ public class SelectByCdtMethodGenerator extends AbstractJavaMapperMethodGenerato
 
         addMapperAnnotations(interfaze, method);
 
-        context.getCommentGenerator().addGeneralMethodComment(method,
-                introspectedTable);
+        context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
 
-        if (context.getPlugins().clientSelectByPrimaryKeyMethodGenerated(
-                method, interfaze, introspectedTable)) {
+        if (context.getPlugins().clientSelectByPrimaryKeyMethodGenerated(method, interfaze, introspectedTable)) {
             interfaze.addImportedTypes(importedTypes);
             interfaze.addMethod(method);
         }

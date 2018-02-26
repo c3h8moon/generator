@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2016 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -57,8 +57,7 @@ public class SqlMapGenerator extends AbstractXmlGenerator {
 
     protected XmlElement getSqlMapElement() {
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
-        progressCallback.startTask(getString(
-                "Progress.12", table.toString())); //$NON-NLS-1$
+        progressCallback.startTask(getString("Progress.12", table.toString())); //$NON-NLS-1$
         XmlElement answer = new XmlElement("sqlMap"); //$NON-NLS-1$
         answer.addAttribute(new Attribute("namespace", //$NON-NLS-1$
                 introspectedTable.getIbatis2SqlMapNamespace()));
@@ -123,8 +122,7 @@ public class SqlMapGenerator extends AbstractXmlGenerator {
         }
     }
 
-    protected void addSelectByExampleWithoutBLOBsElement(
-            XmlElement parentElement) {
+    protected void addSelectByExampleWithoutBLOBsElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateSelectByExampleWithoutBLOBs()) {
             AbstractXmlElementGenerator elementGenerator = new SelectByExampleWithoutBLOBsElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
@@ -194,41 +192,35 @@ public class SqlMapGenerator extends AbstractXmlGenerator {
         }
     }
 
-    protected void addUpdateByExampleWithoutBLOBsElement(
-            XmlElement parentElement) {
+    protected void addUpdateByExampleWithoutBLOBsElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateUpdateByExampleWithoutBLOBs()) {
             AbstractXmlElementGenerator elementGenerator = new UpdateByExampleWithoutBLOBsElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }
 
-    protected void addUpdateByPrimaryKeySelectiveElement(
-            XmlElement parentElement) {
+    protected void addUpdateByPrimaryKeySelectiveElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateUpdateByPrimaryKeySelective()) {
             AbstractXmlElementGenerator elementGenerator = new UpdateByPrimaryKeySelectiveElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }
 
-    protected void addUpdateByPrimaryKeyWithBLOBsElement(
-            XmlElement parentElement) {
+    protected void addUpdateByPrimaryKeyWithBLOBsElement(XmlElement parentElement) {
         if (introspectedTable.getRules().generateUpdateByPrimaryKeyWithBLOBs()) {
             AbstractXmlElementGenerator elementGenerator = new UpdateByPrimaryKeyWithBLOBsElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }
 
-    protected void addUpdateByPrimaryKeyWithoutBLOBsElement(
-            XmlElement parentElement) {
-        if (introspectedTable.getRules()
-                .generateUpdateByPrimaryKeyWithoutBLOBs()) {
+    protected void addUpdateByPrimaryKeyWithoutBLOBsElement(XmlElement parentElement) {
+        if (introspectedTable.getRules().generateUpdateByPrimaryKeyWithoutBLOBs()) {
             AbstractXmlElementGenerator elementGenerator = new UpdateByPrimaryKeyWithoutBLOBsElementGenerator();
             initializeAndExecuteGenerator(elementGenerator, parentElement);
         }
     }
 
-    protected void initializeAndExecuteGenerator(
-            AbstractXmlElementGenerator elementGenerator,
+    protected void initializeAndExecuteGenerator(AbstractXmlElementGenerator elementGenerator,
             XmlElement parentElement) {
         elementGenerator.setContext(context);
         elementGenerator.setIntrospectedTable(introspectedTable);
@@ -239,13 +231,11 @@ public class SqlMapGenerator extends AbstractXmlGenerator {
 
     @Override
     public Document getDocument() {
-        Document document = new Document(
-                XmlConstants.IBATIS2_SQL_MAP_PUBLIC_ID,
+        Document document = new Document(XmlConstants.IBATIS2_SQL_MAP_PUBLIC_ID,
                 XmlConstants.IBATIS2_SQL_MAP_SYSTEM_ID);
         document.setRootElement(getSqlMapElement());
 
-        if (!context.getPlugins().sqlMapDocumentGenerated(document,
-                introspectedTable)) {
+        if (!context.getPlugins().sqlMapDocumentGenerated(document, introspectedTable)) {
             document = null;
         }
 

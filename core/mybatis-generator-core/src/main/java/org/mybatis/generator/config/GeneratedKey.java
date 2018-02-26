@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,16 +42,14 @@ public class GeneratedKey {
 
     private String type;
 
-    public GeneratedKey(String column, String configuredSqlStatement,
-            boolean isIdentity, String type) {
+    public GeneratedKey(String column, String configuredSqlStatement, boolean isIdentity, String type) {
         super();
         this.column = column;
         this.type = type;
         this.isIdentity = isIdentity;
         this.configuredSqlStatement = configuredSqlStatement;
 
-        DatabaseDialects dialect = DatabaseDialects
-                .getDatabaseDialect(configuredSqlStatement);
+        DatabaseDialects dialect = DatabaseDialects.getDatabaseDialect(configuredSqlStatement);
         if (dialect == null) {
             this.runtimeSqlStatement = configuredSqlStatement;
         } else {
@@ -100,8 +98,7 @@ public class GeneratedKey {
     public XmlElement toXmlElement() {
         XmlElement xmlElement = new XmlElement("generatedKey"); //$NON-NLS-1$
         xmlElement.addAttribute(new Attribute("column", column)); //$NON-NLS-1$
-        xmlElement.addAttribute(new Attribute(
-                "sqlStatement", configuredSqlStatement)); //$NON-NLS-1$
+        xmlElement.addAttribute(new Attribute("sqlStatement", configuredSqlStatement)); //$NON-NLS-1$
         if (stringHasValue(type)) {
             xmlElement.addAttribute(new Attribute("type", type)); //$NON-NLS-1$
         }
@@ -117,9 +114,7 @@ public class GeneratedKey {
                     tableName));
         }
 
-        if (stringHasValue(type)
-                && !"pre".equals(type)
-                && !"post".equals(type)) { //$NON-NLS-1$ //$NON-NLS-2$
+        if (stringHasValue(type) && !"pre".equals(type) && !"post".equals(type)) { //$NON-NLS-2$ //$NON-NLS-2$
             errors.add(getString("ValidationError.15", tableName)); //$NON-NLS-1$
         }
 

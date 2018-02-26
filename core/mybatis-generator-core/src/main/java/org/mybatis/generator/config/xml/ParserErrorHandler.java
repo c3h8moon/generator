@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -58,8 +58,7 @@ public class ParserErrorHandler implements ErrorHandler {
     @Override
     public void warning(SAXParseException exception) throws SAXException {
         warnings.add(getString("Warning.7", //$NON-NLS-1$
-                Integer.toString(exception.getLineNumber()), exception
-                        .getMessage()));
+                Integer.toString(exception.getLineNumber()), exception.getMessage()));
     }
 
     /*
@@ -70,8 +69,7 @@ public class ParserErrorHandler implements ErrorHandler {
     @Override
     public void error(SAXParseException exception) throws SAXException {
         errors.add(getString("RuntimeError.4", //$NON-NLS-1$
-                Integer.toString(exception.getLineNumber()), exception
-                        .getMessage()));
+                Integer.toString(exception.getLineNumber()), exception.getMessage()));
     }
 
     /*
@@ -82,7 +80,6 @@ public class ParserErrorHandler implements ErrorHandler {
     @Override
     public void fatalError(SAXParseException exception) throws SAXException {
         errors.add(getString("RuntimeError.4", //$NON-NLS-1$
-                Integer.toString(exception.getLineNumber()), exception
-                        .getMessage()));
+                Integer.toString(exception.getLineNumber()), exception.getMessage()));
     }
 }

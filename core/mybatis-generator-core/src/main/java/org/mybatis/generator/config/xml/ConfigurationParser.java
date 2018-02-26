@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,17 +14,11 @@
  *    limitations under the License.
  */
 /*
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package org.mybatis.generator.config.xml;
 
@@ -97,32 +91,28 @@ public class ConfigurationParser {
         parseErrors = new ArrayList<String>();
     }
 
-    public Configuration parseConfiguration(File inputFile) throws IOException,
-            XMLParserException {
+    public Configuration parseConfiguration(File inputFile) throws IOException, XMLParserException {
 
         FileReader fr = new FileReader(inputFile);
 
         return parseConfiguration(fr);
     }
 
-    public Configuration parseConfiguration(Reader reader) throws IOException,
-            XMLParserException {
+    public Configuration parseConfiguration(Reader reader) throws IOException, XMLParserException {
 
         InputSource is = new InputSource(reader);
 
         return parseConfiguration(is);
     }
 
-    public Configuration parseConfiguration(InputStream inputStream)
-            throws IOException, XMLParserException {
+    public Configuration parseConfiguration(InputStream inputStream) throws IOException, XMLParserException {
 
         InputSource is = new InputSource(inputStream);
 
         return parseConfiguration(is);
     }
 
-    private Configuration parseConfiguration(InputSource inputSource)
-            throws IOException, XMLParserException {
+    private Configuration parseConfiguration(InputSource inputSource) throws IOException, XMLParserException {
         parseErrors.clear();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(true);
@@ -131,8 +121,7 @@ public class ConfigurationParser {
             DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setEntityResolver(new ParserEntityResolver());
 
-            ParserErrorHandler handler = new ParserErrorHandler(warnings,
-                    parseErrors);
+            ParserErrorHandler handler = new ParserErrorHandler(warnings, parseErrors);
             builder.setErrorHandler(handler);
 
             Document document = null;
@@ -156,12 +145,10 @@ public class ConfigurationParser {
             Element rootNode = document.getDocumentElement();
             DocumentType docType = document.getDoctype();
             if (rootNode.getNodeType() == Node.ELEMENT_NODE
-                    && docType.getPublicId().equals(
-                            XmlConstants.IBATOR_CONFIG_PUBLIC_ID)) {
+                    && docType.getPublicId().equals(XmlConstants.IBATOR_CONFIG_PUBLIC_ID)) {
                 config = parseIbatorConfiguration(rootNode);
             } else if (rootNode.getNodeType() == Node.ELEMENT_NODE
-                    && docType.getPublicId().equals(
-                            XmlConstants.MYBATIS_GENERATOR_CONFIG_PUBLIC_ID)) {
+                    && docType.getPublicId().equals(XmlConstants.MYBATIS_GENERATOR_CONFIG_PUBLIC_ID)) {
                 config = parseMyBatisGeneratorConfiguration(rootNode);
             } else {
                 throw new XMLParserException(getString("RuntimeError.5")); //$NON-NLS-1$
@@ -178,17 +165,13 @@ public class ConfigurationParser {
         }
     }
 
-    private Configuration parseIbatorConfiguration(Element rootNode)
-            throws XMLParserException {
-        IbatorConfigurationParser parser = new IbatorConfigurationParser(
-                extraProperties);
+    private Configuration parseIbatorConfiguration(Element rootNode) throws XMLParserException {
+        IbatorConfigurationParser parser = new IbatorConfigurationParser(extraProperties);
         return parser.parseIbatorConfiguration(rootNode);
     }
 
-    private Configuration parseMyBatisGeneratorConfiguration(Element rootNode)
-            throws XMLParserException {
-        MyBatisGeneratorConfigurationParser parser = new MyBatisGeneratorConfigurationParser(
-                extraProperties);
+    private Configuration parseMyBatisGeneratorConfiguration(Element rootNode) throws XMLParserException {
+        MyBatisGeneratorConfigurationParser parser = new MyBatisGeneratorConfigurationParser(extraProperties);
         return parser.parseConfiguration(rootNode);
     }
 }

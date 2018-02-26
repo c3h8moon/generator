@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,12 +39,10 @@ public class RootClassInfo {
     private static Map<String, RootClassInfo> rootClassInfoMap;
 
     static {
-        rootClassInfoMap = Collections
-                .synchronizedMap(new HashMap<String, RootClassInfo>());
+        rootClassInfoMap = Collections.synchronizedMap(new HashMap<String, RootClassInfo>());
     }
 
-    public static RootClassInfo getInstance(String className,
-            List<String> warnings) {
+    public static RootClassInfo getInstance(String className, List<String> warnings) {
         RootClassInfo classInfo = rootClassInfoMap.get(className);
         if (classInfo == null) {
             classInfo = new RootClassInfo(className, warnings);
@@ -102,8 +100,7 @@ public class RootClassInfo {
 
         boolean found = false;
         String propertyName = introspectedColumn.getJavaProperty();
-        String propertyType = introspectedColumn.getFullyQualifiedJavaType()
-                .getFullyQualifiedName();
+        String propertyType = introspectedColumn.getFullyQualifiedJavaType().getFullyQualifiedName();
 
         // get method names from class and check against this column definition.
         // better yet, have a map of method Names. check against it.

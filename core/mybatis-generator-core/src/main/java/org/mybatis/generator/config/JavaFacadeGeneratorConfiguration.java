@@ -28,7 +28,7 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
  */
 public class JavaFacadeGeneratorConfiguration extends TypedPropertyHolder {
     private String targetPackage;
-//    private String implementationPackage;
+    //    private String implementationPackage;
     private String targetProject;
 
     /**
@@ -68,23 +68,23 @@ public class JavaFacadeGeneratorConfiguration extends TypedPropertyHolder {
             answer.addAttribute(new Attribute("targetProject", targetProject)); //$NON-NLS-1$
         }
 
-//        if (implementationPackage != null) {
-//            answer.addAttribute(new Attribute(
-//                    "implementationPackage", targetProject)); //$NON-NLS-1$
-//        }
+        //        if (implementationPackage != null) {
+        //            answer.addAttribute(new Attribute(
+        //                    "implementationPackage", targetProject)); //$NON-NLS-1$
+        //        }
 
         addPropertyXmlElements(answer);
 
         return answer;
     }
 
-//    public String getImplementationPackage() {
-//        return implementationPackage;
-//    }
-//
-//    public void setImplementationPackage(String implementationPackage) {
-//        this.implementationPackage = implementationPackage;
-//    }
+    //    public String getImplementationPackage() {
+    //        return implementationPackage;
+    //    }
+    //
+    //    public void setImplementationPackage(String implementationPackage) {
+    //        this.implementationPackage = implementationPackage;
+    //    }
 
     public void validate(List<String> errors, String contextId) {
         if (!stringHasValue(targetProject)) {

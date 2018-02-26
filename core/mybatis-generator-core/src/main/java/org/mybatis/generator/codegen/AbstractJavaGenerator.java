@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ public abstract class AbstractJavaGenerator extends AbstractGenerator {
 
     public static Method getGetter(Field field) {
         Method method = new Method();
-        method.setName(getGetterMethodName(field.getName(), field
-                .getType()));
+        method.setName(getGetterMethodName(field.getName(), field.getType()));
         method.setReturnType(field.getType());
         method.setVisibility(JavaVisibility.PUBLIC);
         StringBuilder sb = new StringBuilder();
@@ -45,11 +44,9 @@ public abstract class AbstractJavaGenerator extends AbstractGenerator {
     }
 
     public String getRootClass() {
-        String rootClass = introspectedTable
-                .getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_CLASS);
+        String rootClass = introspectedTable.getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_CLASS);
         if (rootClass == null) {
-            Properties properties = context
-                    .getJavaModelGeneratorConfiguration().getProperties();
+            Properties properties = context.getJavaModelGeneratorConfiguration().getProperties();
             rootClass = properties.getProperty(PropertyRegistry.ANY_ROOT_CLASS);
         }
 

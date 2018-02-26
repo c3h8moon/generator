@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -45,9 +45,7 @@ public class GeneratedJavaFile extends GeneratedFile {
      * @param javaFormatter
      *            the java formatter
      */
-    public GeneratedJavaFile(CompilationUnit compilationUnit,
-            String targetProject,
-            String fileEncoding,
+    public GeneratedJavaFile(CompilationUnit compilationUnit, String targetProject, String fileEncoding,
             JavaFormatter javaFormatter) {
         super(targetProject);
         this.compilationUnit = compilationUnit;
@@ -65,9 +63,7 @@ public class GeneratedJavaFile extends GeneratedFile {
      * @param javaFormatter
      *            the java formatter
      */
-    public GeneratedJavaFile(CompilationUnit compilationUnit,
-            String targetProject,
-            JavaFormatter javaFormatter) {
+    public GeneratedJavaFile(CompilationUnit compilationUnit, String targetProject, JavaFormatter javaFormatter) {
         this(compilationUnit, targetProject, null, javaFormatter);
     }
 

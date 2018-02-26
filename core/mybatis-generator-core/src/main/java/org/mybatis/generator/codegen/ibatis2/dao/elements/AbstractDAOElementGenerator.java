@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -66,12 +66,10 @@ public abstract class AbstractDAOElementGenerator extends AbstractGenerator {
             }
 
             try {
-                daoMethodNameCalculator = (DAOMethodNameCalculator) ObjectFactory
-                        .createInternalObject(type);
+                daoMethodNameCalculator = (DAOMethodNameCalculator) ObjectFactory.createInternalObject(type);
             } catch (Exception e) {
                 daoMethodNameCalculator = new DefaultDAOMethodNameCalculator();
-                warnings.add(getString(
-                        "Warning.17", type, e.getMessage())); //$NON-NLS-1$
+                warnings.add(getString("Warning.17", type, e.getMessage())); //$NON-NLS-1$
             }
         }
 
@@ -80,8 +78,7 @@ public abstract class AbstractDAOElementGenerator extends AbstractGenerator {
 
     public JavaVisibility getExampleMethodVisibility() {
         if (exampleMethodVisibility == null) {
-            String type = context
-                    .getJavaClientGeneratorConfiguration()
+            String type = context.getJavaClientGeneratorConfiguration()
                     .getProperty(PropertyRegistry.DAO_EXAMPLE_METHOD_VISIBILITY);
             if (stringHasValue(type)) {
                 if ("public".equalsIgnoreCase(type)) { //$NON-NLS-1$

@@ -33,7 +33,7 @@ import java.util.TreeSet;
  * @author Jeff Butler
  */
 public class Interface extends InnerInterface implements CompilationUnit {
-    
+
     private Set<FullyQualifiedJavaType> importedTypes;
 
     private Set<String> staticImports;
@@ -58,8 +58,7 @@ public class Interface extends InnerInterface implements CompilationUnit {
 
     @Override
     public void addImportedType(FullyQualifiedJavaType importedType) {
-        if (importedType.isExplicitlyImported()
-                && !importedType.getPackageName().equals(getType().getPackageName())) {
+        if (importedType.isExplicitlyImported() && !importedType.getPackageName().equals(getType().getPackageName())) {
             importedTypes.add(importedType);
         }
     }
@@ -74,7 +73,7 @@ public class Interface extends InnerInterface implements CompilationUnit {
     public String getFormattedContent(int indentLevel, CompilationUnit compilationUnit) {
         StringBuilder sb = new StringBuilder();
 
-//        System.out.println("123");
+        //        System.out.println("123");
 
         for (String commentLine : fileCommentLines) {
             sb.append(commentLine);
@@ -105,12 +104,11 @@ public class Interface extends InnerInterface implements CompilationUnit {
         newLine(sb);
         String key = this.getType().getShortName();
 
-//        "com.ayhuli.service.comment.dao";
-//        "com.ayhuli.service.comment.api.dto.commentannounce.CommentAnnounceDto"
+        //        "com.ayhuli.service.comment.dao";
+        //        "com.ayhuli.service.comment.api.dto.commentannounce.CommentAnnounceDto"
         String dtoPackage = this.getType().getPackageName();
-//        String packageName = key.replace("Dao", "").toLowerCase();
-        dtoPackage = dtoPackage.replace("dao", "api.dto."+key.replace("Dao", "")+"Dto");
-
+        //        String packageName = key.replace("Dao", "").toLowerCase();
+        dtoPackage = dtoPackage.replace("dao", "api.dto." + key.replace("Dao", "") + "Dto");
 
         String val = MyBatisGenerator.dtoPackage.get(key);
         System.out.println("key:" + key + "value : " + val);
@@ -129,16 +127,13 @@ public class Interface extends InnerInterface implements CompilationUnit {
         sb.append("@MyBatisDao");
         newLine(sb);
         String call = super.getFormattedContent(0, this);
-//        String regix = "com.ayhuli.service.*.api.dto.";
+        //        String regix = "com.ayhuli.service.*.api.dto.";
         String regex = compilationUnit.getType().getPackageName();
-        regex = regex.replace("dao","api.dto.");
+        regex = regex.replace("dao", "api.dto.");
         if (call.contains("com.ayhuli.service.base.persistence.")) {
-            call = call.replace("com.ayhuli.service.base.persistence.","");
-            call = call.replace(regex,"");
+            call = call.replace("com.ayhuli.service.base.persistence.", "");
+            call = call.replace(regex, "");
         }
-
-
-
 
         return sb.toString() + call;
     }

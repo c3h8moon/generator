@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -24,8 +24,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  * @author Jeff Butler
  * 
  */
-public class DeleteByExampleElementGenerator extends
-        AbstractXmlElementGenerator {
+public class DeleteByExampleElementGenerator extends AbstractXmlElementGenerator {
 
     public DeleteByExampleElementGenerator() {
         super();
@@ -35,17 +34,14 @@ public class DeleteByExampleElementGenerator extends
     public void addElements(XmlElement parentElement) {
         XmlElement answer = new XmlElement("delete"); //$NON-NLS-1$
 
-        answer.addAttribute(new Attribute(
-                "id", introspectedTable.getDeleteByExampleStatementId())); //$NON-NLS-1$
-        answer.addAttribute(new Attribute(
-                "parameterClass", introspectedTable.getExampleType())); //$NON-NLS-1$
+        answer.addAttribute(new Attribute("id", introspectedTable.getDeleteByExampleStatementId())); //$NON-NLS-1$
+        answer.addAttribute(new Attribute("parameterClass", introspectedTable.getExampleType())); //$NON-NLS-1$
 
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
         sb.append("delete from "); //$NON-NLS-1$
-        sb.append(introspectedTable
-                .getAliasedFullyQualifiedTableNameAtRuntime());
+        sb.append(introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
 
         sb.setLength(0);
@@ -58,8 +54,7 @@ public class DeleteByExampleElementGenerator extends
 
         answer.addElement(includeElement);
 
-        if (context.getPlugins().sqlMapDeleteByExampleElementGenerated(
-                answer, introspectedTable)) {
+        if (context.getPlugins().sqlMapDeleteByExampleElementGenerated(answer, introspectedTable)) {
             parentElement.addElement(answer);
         }
     }

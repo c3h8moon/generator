@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -71,8 +71,8 @@ public abstract class AbstractDAOTemplate {
         configured = false;
     }
 
-    public final Method getConstructorClone(CommentGenerator commentGenerator,
-            FullyQualifiedJavaType type, IntrospectedTable introspectedTable) {
+    public final Method getConstructorClone(CommentGenerator commentGenerator, FullyQualifiedJavaType type,
+            IntrospectedTable introspectedTable) {
         configure();
         Method answer = new Method();
         answer.setConstructor(true);
@@ -95,8 +95,7 @@ public abstract class AbstractDAOTemplate {
         return answer;
     }
 
-    public final String getDeleteMethod(String sqlMapNamespace,
-            String statementId, String parameter) {
+    public final String getDeleteMethod(String sqlMapNamespace, String statementId, String parameter) {
         configure();
         String answer = MessageFormat.format(deleteMethodTemplate,
                 new Object[] { sqlMapNamespace, statementId, parameter });
@@ -114,8 +113,7 @@ public abstract class AbstractDAOTemplate {
         return implementationImports;
     }
 
-    public final String getInsertMethod(String sqlMapNamespace,
-            String statementId, String parameter) {
+    public final String getInsertMethod(String sqlMapNamespace, String statementId, String parameter) {
         configure();
         String answer = MessageFormat.format(insertMethodTemplate,
                 new Object[] { sqlMapNamespace, statementId, parameter });
@@ -123,8 +121,7 @@ public abstract class AbstractDAOTemplate {
         return answer;
     }
 
-    public final String getQueryForListMethod(String sqlMapNamespace,
-            String statementId, String parameter) {
+    public final String getQueryForListMethod(String sqlMapNamespace, String statementId, String parameter) {
         configure();
         String answer = MessageFormat.format(queryForListMethodTemplate,
                 new Object[] { sqlMapNamespace, statementId, parameter });
@@ -132,8 +129,7 @@ public abstract class AbstractDAOTemplate {
         return answer;
     }
 
-    public final String getQueryForObjectMethod(String sqlMapNamespace,
-            String statementId, String parameter) {
+    public final String getQueryForObjectMethod(String sqlMapNamespace, String statementId, String parameter) {
         configure();
         String answer = MessageFormat.format(queryForObjectMethodTemplate,
                 new Object[] { sqlMapNamespace, statementId, parameter });
@@ -146,8 +142,7 @@ public abstract class AbstractDAOTemplate {
         return superClass;
     }
 
-    public final String getUpdateMethod(String sqlMapNamespace,
-            String statementId, String parameter) {
+    public final String getUpdateMethod(String sqlMapNamespace, String statementId, String parameter) {
         configure();
         String answer = MessageFormat.format(updateMethodTemplate,
                 new Object[] { sqlMapNamespace, statementId, parameter });
@@ -160,8 +155,7 @@ public abstract class AbstractDAOTemplate {
         return checkedExceptions;
     }
 
-    public final List<Field> getFieldClones(CommentGenerator commentGenerator,
-            IntrospectedTable introspectedTable) {
+    public final List<Field> getFieldClones(CommentGenerator commentGenerator, IntrospectedTable introspectedTable) {
         configure();
         List<Field> answer = new ArrayList<Field>();
         for (Field oldField : fields) {
@@ -180,9 +174,7 @@ public abstract class AbstractDAOTemplate {
         return answer;
     }
 
-    public final List<Method> getMethodClones(
-            CommentGenerator commentGenerator,
-            IntrospectedTable introspectedTable) {
+    public final List<Method> getMethodClones(CommentGenerator commentGenerator, IntrospectedTable introspectedTable) {
         configure();
         List<Method> answer = new ArrayList<Method>();
         for (Method oldMethod : methods) {
@@ -235,13 +227,11 @@ public abstract class AbstractDAOTemplate {
         methods.add(method);
     }
 
-    protected void setQueryForListMethodTemplate(
-            String queryForListMethodTemplate) {
+    protected void setQueryForListMethodTemplate(String queryForListMethodTemplate) {
         this.queryForListMethodTemplate = queryForListMethodTemplate;
     }
 
-    protected void setQueryForObjectMethodTemplate(
-            String queryForObjectMethodTemplate) {
+    protected void setQueryForObjectMethodTemplate(String queryForObjectMethodTemplate) {
         this.queryForObjectMethodTemplate = queryForObjectMethodTemplate;
     }
 

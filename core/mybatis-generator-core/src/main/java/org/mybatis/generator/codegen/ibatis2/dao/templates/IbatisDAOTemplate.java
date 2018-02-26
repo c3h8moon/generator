@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ import org.mybatis.generator.api.dom.java.Parameter;
  */
 public class IbatisDAOTemplate extends AbstractDAOTemplate {
 
-    private FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(
-            "com.ibatis.dao.client.DaoManager"); //$NON-NLS-1$
+    private FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("com.ibatis.dao.client.DaoManager"); //$NON-NLS-1$
 
     public IbatisDAOTemplate() {
         super();
@@ -71,8 +70,7 @@ public class IbatisDAOTemplate extends AbstractDAOTemplate {
 
     @Override
     protected void configureSuperClass() {
-        setSuperClass(new FullyQualifiedJavaType(
-                "com.ibatis.dao.client.template.SqlMapDaoTemplate")); //$NON-NLS-1$
+        setSuperClass(new FullyQualifiedJavaType("com.ibatis.dao.client.template.SqlMapDaoTemplate")); //$NON-NLS-1$
     }
 
     @Override

@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -93,13 +93,10 @@ public class FullyQualifiedTable {
      * @param context
      *            the context
      */
-    public FullyQualifiedTable(String introspectedCatalog,
-            String introspectedSchema, String introspectedTableName,
-            String domainObjectName, String alias,
-            boolean ignoreQualifiersAtRuntime, String runtimeCatalog,
-            String runtimeSchema, String runtimeTableName,
-            boolean delimitIdentifiers, DomainObjectRenamingRule domainObjectRenamingRule,
-            Context context) {
+    public FullyQualifiedTable(String introspectedCatalog, String introspectedSchema, String introspectedTableName,
+            String domainObjectName, String alias, boolean ignoreQualifiersAtRuntime, String runtimeCatalog,
+            String runtimeSchema, String runtimeTableName, boolean delimitIdentifiers,
+            DomainObjectRenamingRule domainObjectRenamingRule, Context context) {
         super();
         this.introspectedCatalog = introspectedCatalog;
         this.introspectedSchema = introspectedSchema;
@@ -126,10 +123,8 @@ public class FullyQualifiedTable {
             this.alias = alias.trim();
         }
 
-        beginningDelimiter = delimitIdentifiers ? context
-                .getBeginningDelimiter() : ""; //$NON-NLS-1$
-        endingDelimiter = delimitIdentifiers ? context.getEndingDelimiter()
-                : ""; //$NON-NLS-1$
+        beginningDelimiter = delimitIdentifiers ? context.getBeginningDelimiter() : ""; //$NON-NLS-1$
+        endingDelimiter = delimitIdentifiers ? context.getEndingDelimiter() : ""; //$NON-NLS-1$
     }
 
     /**
@@ -197,9 +192,8 @@ public class FullyQualifiedTable {
         }
         addDelimiters(localTableName);
 
-        return composeFullyQualifiedTableName(localCatalog
-                .toString(), localSchema.toString(), localTableName.toString(),
-                '.');
+        return composeFullyQualifiedTableName(localCatalog.toString(), localSchema.toString(),
+                localTableName.toString(), '.');
     }
 
     /**
@@ -227,17 +221,12 @@ public class FullyQualifiedTable {
      * @return the namespace
      */
     public String getIbatis2SqlMapNamespace() {
-        String localCatalog = stringHasValue(runtimeCatalog) ? runtimeCatalog
-                : introspectedCatalog;
-        String localSchema = stringHasValue(runtimeSchema) ? runtimeSchema
-                : introspectedSchema;
-        String localTable = stringHasValue(runtimeTableName) ? runtimeTableName
-                : introspectedTableName;
+        String localCatalog = stringHasValue(runtimeCatalog) ? runtimeCatalog : introspectedCatalog;
+        String localSchema = stringHasValue(runtimeSchema) ? runtimeSchema : introspectedSchema;
+        String localTable = stringHasValue(runtimeTableName) ? runtimeTableName : introspectedTableName;
 
-        return composeFullyQualifiedTableName(
-                        ignoreQualifiersAtRuntime ? null : localCatalog,
-                        ignoreQualifiersAtRuntime ? null : localSchema,
-                        localTable, '_');
+        return composeFullyQualifiedTableName(ignoreQualifiersAtRuntime ? null : localCatalog,
+                ignoreQualifiersAtRuntime ? null : localSchema, localTable, '_');
     }
 
     /**
@@ -252,9 +241,9 @@ public class FullyQualifiedTable {
 
         String finalDomainObjectName;
         if (stringHasValue(runtimeTableName)) {
-            finalDomainObjectName =  getCamelCaseString(runtimeTableName, true);
+            finalDomainObjectName = getCamelCaseString(runtimeTableName, true);
         } else {
-            finalDomainObjectName =  getCamelCaseString(introspectedTableName, true);
+            finalDomainObjectName = getCamelCaseString(introspectedTableName, true);
         }
 
         if (domainObjectRenamingRule != null) {
@@ -282,12 +271,9 @@ public class FullyQualifiedTable {
 
         FullyQualifiedTable other = (FullyQualifiedTable) obj;
 
-        return areEqual(this.introspectedTableName,
-                other.introspectedTableName)
-                && areEqual(this.introspectedCatalog,
-                        other.introspectedCatalog)
-                && areEqual(this.introspectedSchema,
-                        other.introspectedSchema);
+        return areEqual(this.introspectedTableName, other.introspectedTableName)
+                && areEqual(this.introspectedCatalog, other.introspectedCatalog)
+                && areEqual(this.introspectedSchema, other.introspectedSchema);
     }
 
     /* (non-Javadoc)
@@ -308,9 +294,7 @@ public class FullyQualifiedTable {
      */
     @Override
     public String toString() {
-        return composeFullyQualifiedTableName(
-                introspectedCatalog, introspectedSchema, introspectedTableName,
-                '.');
+        return composeFullyQualifiedTableName(introspectedCatalog, introspectedSchema, introspectedTableName, '.');
     }
 
     /**

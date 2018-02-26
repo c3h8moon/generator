@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -146,8 +146,7 @@ public class Configuration {
         // note that this method will not reconstruct a properties
         // element - that element is only used in XML parsing
 
-        Document document = new Document(
-                XmlConstants.MYBATIS_GENERATOR_CONFIG_PUBLIC_ID,
+        Document document = new Document(XmlConstants.MYBATIS_GENERATOR_CONFIG_PUBLIC_ID,
                 XmlConstants.MYBATIS_GENERATOR_CONFIG_SYSTEM_ID);
         XmlElement rootElement = new XmlElement("generatorConfiguration"); //$NON-NLS-1$
         document.setRootElement(rootElement);

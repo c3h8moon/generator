@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -45,8 +45,7 @@ public class GenericCIDAOTemplate extends AbstractDAOTemplate {
         Method constructor = new Method();
         constructor.setConstructor(true);
         constructor.setVisibility(JavaVisibility.PUBLIC);
-        constructor
-                .addParameter(new Parameter(sqlMapClientType, "sqlMapClient")); //$NON-NLS-1$
+        constructor.addParameter(new Parameter(sqlMapClientType, "sqlMapClient")); //$NON-NLS-1$
         constructor.addBodyLine("super();"); //$NON-NLS-1$
         constructor.addBodyLine("this.sqlMapClient = sqlMapClient;"); //$NON-NLS-1$
         setConstructorTemplate(constructor);

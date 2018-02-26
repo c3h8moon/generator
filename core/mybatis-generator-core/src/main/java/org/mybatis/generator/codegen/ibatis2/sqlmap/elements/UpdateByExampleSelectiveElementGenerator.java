@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2016 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@ import org.mybatis.generator.codegen.ibatis2.Ibatis2FormattingUtilities;
  * @author Jeff Butler
  * 
  */
-public class UpdateByExampleSelectiveElementGenerator extends
-        AbstractXmlElementGenerator {
+public class UpdateByExampleSelectiveElementGenerator extends AbstractXmlElementGenerator {
 
     public UpdateByExampleSelectiveElementGenerator() {
         super();
@@ -37,54 +36,43 @@ public class UpdateByExampleSelectiveElementGenerator extends
     public void addElements(XmlElement parentElement) {
         XmlElement answer = new XmlElement("update"); //$NON-NLS-1$
 
-        answer
-                .addAttribute(new Attribute(
-                        "id", introspectedTable.getUpdateByExampleSelectiveStatementId())); //$NON-NLS-1$
+        answer.addAttribute(new Attribute("id", introspectedTable.getUpdateByExampleSelectiveStatementId())); //$NON-NLS-1$
 
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("update "); //$NON-NLS-1$
-        sb.append(introspectedTable
-                .getAliasedFullyQualifiedTableNameAtRuntime());
+        sb.append(introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
 
         XmlElement dynamicElement = new XmlElement("dynamic"); //$NON-NLS-1$
         dynamicElement.addAttribute(new Attribute("prepend", "set")); //$NON-NLS-1$ //$NON-NLS-2$
         answer.addElement(dynamicElement);
 
-        for (IntrospectedColumn introspectedColumn : introspectedTable
-                .getAllColumns()) {
+        for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
             XmlElement isNotNullElement = new XmlElement("isNotNull"); //$NON-NLS-1$
             isNotNullElement.addAttribute(new Attribute("prepend", ",")); //$NON-NLS-1$ //$NON-NLS-2$
-            isNotNullElement.addAttribute(new Attribute(
-                    "property", introspectedColumn.getJavaProperty("record."))); //$NON-NLS-1$ //$NON-NLS-2$
+            isNotNullElement.addAttribute(new Attribute("property", introspectedColumn.getJavaProperty("record."))); //$NON-NLS-1$ //$NON-NLS-2$
             dynamicElement.addElement(isNotNullElement);
 
             sb.setLength(0);
-            sb.append(Ibatis2FormattingUtilities
-                    .getAliasedEscapedColumnName(introspectedColumn));
+            sb.append(Ibatis2FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
             sb.append(" = "); //$NON-NLS-1$
-            sb.append(Ibatis2FormattingUtilities.getParameterClause(
-                    introspectedColumn, "record.")); //$NON-NLS-1$
+            sb.append(Ibatis2FormattingUtilities.getParameterClause(introspectedColumn, "record.")); //$NON-NLS-1$
 
             isNotNullElement.addElement(new TextElement(sb.toString()));
         }
 
-        XmlElement isParameterPresentElement = new XmlElement(
-                "isParameterPresent"); //$NON-NLS-1$
+        XmlElement isParameterPresentElement = new XmlElement("isParameterPresent"); //$NON-NLS-1$
         answer.addElement(isParameterPresentElement);
 
         XmlElement includeElement = new XmlElement("include"); //$NON-NLS-1$
         includeElement.addAttribute(new Attribute("refid", //$NON-NLS-1$
-                introspectedTable.getIbatis2SqlMapNamespace()
-                        + "." + introspectedTable.getExampleWhereClauseId())); //$NON-NLS-1$
+                introspectedTable.getIbatis2SqlMapNamespace() + "." + introspectedTable.getExampleWhereClauseId())); //$NON-NLS-1$
         isParameterPresentElement.addElement(includeElement);
 
-        if (context.getPlugins()
-                .sqlMapUpdateByExampleSelectiveElementGenerated(answer,
-                        introspectedTable)) {
+        if (context.getPlugins().sqlMapUpdateByExampleSelectiveElementGenerated(answer, introspectedTable)) {
             parentElement.addElement(answer);
         }
     }

@@ -41,8 +41,7 @@ public class IbatorConfigurationParser extends MyBatisGeneratorConfigurationPars
         super(properties);
     }
 
-    public Configuration parseIbatorConfiguration(Element rootNode)
-            throws XMLParserException {
+    public Configuration parseIbatorConfiguration(Element rootNode) throws XMLParserException {
 
         Configuration configuration = new Configuration();
 
@@ -71,12 +70,10 @@ public class IbatorConfigurationParser extends MyBatisGeneratorConfigurationPars
         Properties attributes = parseAttributes(node);
         String defaultModelType = attributes.getProperty("defaultModelType"); //$NON-NLS-1$
         String targetRuntime = attributes.getProperty("targetRuntime"); //$NON-NLS-1$
-        String introspectedColumnImpl = attributes
-                .getProperty("introspectedColumnImpl"); //$NON-NLS-1$
+        String introspectedColumnImpl = attributes.getProperty("introspectedColumnImpl"); //$NON-NLS-1$
         String id = attributes.getProperty("id"); //$NON-NLS-1$
 
-        ModelType mt = defaultModelType == null ? null : ModelType
-                .getModelType(defaultModelType);
+        ModelType mt = defaultModelType == null ? null : ModelType.getModelType(defaultModelType);
 
         Context context = new Context(mt);
         context.setId(id);
@@ -154,14 +151,12 @@ public class IbatorConfigurationParser extends MyBatisGeneratorConfigurationPars
         String type = attributes.getProperty("type"); //$NON-NLS-1$
         String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
         String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
-        String implementationPackage = attributes
-                .getProperty("implementationPackage"); //$NON-NLS-1$
+        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
 
         javaClientGeneratorConfiguration.setConfigurationType(type);
         javaClientGeneratorConfiguration.setTargetPackage(targetPackage);
         javaClientGeneratorConfiguration.setTargetProject(targetProject);
-        javaClientGeneratorConfiguration
-                .setImplementationPackage(implementationPackage);
+        javaClientGeneratorConfiguration.setImplementationPackage(implementationPackage);
 
         NodeList nodeList = node.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
