@@ -285,6 +285,8 @@ public class MyBatisGenerator {
         JavaServiceGenerator.addJavaFacadeImplGenerator(assignmentFacadeImplTemplateEntity());
         JavaServiceGenerator.addJavaFacadeImplTestGenerator(assignmentFacadeImplTestTemplateEntity());
         JavaServiceGenerator.addJavaServiceTestGenerator(assignmentServiceTestTemplateEntity());
+        JavaServiceGenerator.addJavaWebControllerGenerator(assignmentWebControllerTemplateEntity());
+        JavaServiceGenerator.addJavaWebServiceGenerator(assignmentWebServiceTemplateEntity());
         callback.done();
     }
 
@@ -708,6 +710,113 @@ public class MyBatisGenerator {
             }
         }
         return serviceTestTemplateEntities;
+    }
+
+    public List<WebControllerTemplateEntity> assignmentWebControllerTemplateEntity() {
+        List<Context> contexts = configuration.getContexts();
+        List<WebControllerTemplateEntity> webControllerTemplateEntities = new ArrayList<>();
+        for (Context c : contexts) {
+            JavaWebControllerGeneratorConfiguration jgc = c.getJavaWebControllerGeneratorConfiguration();
+
+            JavaWebServiceGeneratorConfiguration service = c.getJavaWebServiceGeneratorConfiguration();
+
+            if (jgc == null) break;
+            List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
+            for (TableConfiguration t : tableConfigurations) {
+                WebControllerTemplateEntity webControllerTemplateEntity = new WebControllerTemplateEntity();
+                webControllerTemplateEntity.setClassName(t.getDomainObjectName() + "Controller");
+                webControllerTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
+                webControllerTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Controller");
+                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                webControllerTemplateEntity.setProjectTargetPackage(projectTargetPackage);
+                webControllerTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
+//                webControllerTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
+//                webControllerTemplateEntity.setMapperName("dao");
+                webControllerTemplateEntity.setBoClazz(t.getDomainObjectName());
+                webControllerTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
+//                webControllerTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                webControllerTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+//                webControllerTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
+//                webControllerTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
+//                webControllerTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+//                webControllerTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
+//                webControllerTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
+//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                webControllerTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
+//                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
+                webControllerTemplateEntity.setServicePackage(service.getTargetPackage());
+                String[] modelNames = jgc.getTargetPackage().split("\\.");
+
+                String model = modelNames[modelNames.length - 2];
+                String urlPrefix = model + "/" + captureName(t.getDomainObjectName());
+                String lastPackageName = "modules";
+                String viewPrefix = model + "/" + captureName(t.getDomainObjectName());
+                String permissionPrefix = model + ":" + captureName(t.getDomainObjectName());
+
+                webControllerTemplateEntity.setUrlPrefix(urlPrefix);
+                webControllerTemplateEntity.setLastPackageName(lastPackageName);
+                webControllerTemplateEntity.setViewPrefix(viewPrefix);
+                webControllerTemplateEntity.setPermissionPrefix(permissionPrefix);
+
+                webControllerTemplateEntities.add(webControllerTemplateEntity);
+
+            }
+        }
+        return webControllerTemplateEntities;
+    }
+
+    public List<WebServiceTemplateEntity> assignmentWebServiceTemplateEntity() {
+        List<Context> contexts = configuration.getContexts();
+        List<WebServiceTemplateEntity> webServiceTemplateEntities = new ArrayList<>();
+        for (Context c : contexts) {
+            JavaWebServiceGeneratorConfiguration jgc = c.getJavaWebServiceGeneratorConfiguration();
+
+            JavaFacadeGeneratorConfiguration facade = c.getJavaFacadeGeneratorConfiguration();
+
+            if (jgc == null) break;
+            List<TableConfiguration> tableConfigurations = c.getTableConfigurations();
+            for (TableConfiguration t : tableConfigurations) {
+                WebServiceTemplateEntity webServiceTemplateEntity = new WebServiceTemplateEntity();
+                webServiceTemplateEntity.setClassName(t.getDomainObjectName() + "Service");
+                webServiceTemplateEntity.setLessClass(t.getDomainObjectName().toLowerCase());
+                webServiceTemplateEntity.setClassNameLess(captureName(t.getDomainObjectName()) + "Service");
+                String projectTargetPackage = jgc.getTargetProject() + "/" + jgc.getTargetPackage().replaceAll("\\.", "/") + "/";
+                webServiceTemplateEntity.setProjectTargetPackage(projectTargetPackage);
+                webServiceTemplateEntity.setTemplatePackage(jgc.getTargetPackage());
+//                webControllerTemplateEntity.setMapperType(t.getDomainObjectName() + "Dao");
+//                webControllerTemplateEntity.setMapperName("dao");
+                webServiceTemplateEntity.setBoClazz(t.getDomainObjectName());
+                webServiceTemplateEntity.setBoClazzLess(captureName(t.getDomainObjectName()));
+//                webControllerTemplateEntity.setMapperPackage(c.getJavaModelGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName());
+                webServiceTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Dto");
+//                webControllerTemplateEntity.setServicePackage(c.getJavaServiceGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Service");
+//                webControllerTemplateEntity.setFacadePackage(c.getJavaFacadeGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Facade");
+//                webControllerTemplateEntity.setConvertPackage(c.getJavaConvertGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName() + "Convert");
+//                webControllerTemplateEntity.setServiceLessClassName(captureName(t.getDomainObjectName()) + "Service");
+//                webControllerTemplateEntity.setServiceClassName(t.getDomainObjectName() + "Service");
+//                facadeTemplateEntity.setBoClassName(t.getDomainObjectName() + "Dao");
+                webServiceTemplateEntity.setBoPackage(c.getJavaBoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase());
+//                facadeTemplateEntity.setDtoPackage(c.getJavaDtoGeneratorConfiguration().getTargetPackage() + "." + t.getDomainObjectName().toLowerCase() + "Dto");;
+                webServiceTemplateEntity.setFacadePackage(facade.getTargetPackage());
+
+                String[] modelNames = jgc.getTargetPackage().split("\\.");
+
+                String model = modelNames[modelNames.length - 2];
+                String urlPrefix = model + "/" + captureName(t.getDomainObjectName());
+                String lastPackageName = "modules";
+                String viewPrefix = model + "/" + captureName(t.getDomainObjectName());
+                String permissionPrefix = model + ":" + captureName(t.getDomainObjectName());
+
+                webServiceTemplateEntity.setUrlPrefix(urlPrefix);
+                webServiceTemplateEntity.setLastPackageName(lastPackageName);
+                webServiceTemplateEntity.setViewPrefix(viewPrefix);
+                webServiceTemplateEntity.setPermissionPrefix(permissionPrefix);
+
+                webServiceTemplateEntities.add(webServiceTemplateEntity);
+
+            }
+        }
+        return webServiceTemplateEntities;
     }
 
     public static String captureName(String name) {

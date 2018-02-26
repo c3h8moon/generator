@@ -15,13 +15,13 @@ import ${dtoPackage};
 import ${boPackage};
 
 /**
-* @Company: 2017-2017 备胎科技
-* @FileName: Test
-* @Desctiption:
-* @Author: chenye
-* @Date: Created by 2017/9/19 17:15
-* @Modified Update By:
-*/
+ * @Company: 2018-2018 哎呦狐狸科技
+ * @FileName: ${className}
+ * @Desctiption:
+ * @Author: chenye
+ * @Date: Created by 2017/9/19 17:15
+ * @Modified Update By:
+ */
 @Service
 public class ${className} extends CrudService<${mapperType}, ${boClazz}>  {
 
@@ -32,14 +32,14 @@ public class ${className} extends CrudService<${mapperType}, ${boClazz}>  {
         return ${boClazzLess};
     }
 
-    @AsynUpdate(primaryFieldValues = {"#${boClazzLess}.id"})
+    @AsynUpdate(primarykey = "#${boClazzLess}.id")
     public ${boClazz} updateByPrimaryKeySelective(${boClazz} ${boClazzLess}) {
         CheckUtil.check(${boClazzLess} == null, ServiceError.ERROR_ENTITY_NULL);
         dao.updateByPrimaryKeySelective(${boClazzLess});
         return ${boClazzLess};
     }
 
-    @AsynUpdate(primaryFieldValues = {"#${boClazzLess}.id"})
+    @AsynUpdate(primarykey = "#${boClazzLess}.id")
     public void deleteByPrimaryKey(${boClazz} ${boClazzLess}) {
         CheckUtil.check(${boClazzLess} == null, ServiceError.ERROR_ENTITY_NULL);
         ${boClazzLess}.setDelFlag(${boClazz}.DEL_FLAG_DELETE);
@@ -50,7 +50,7 @@ public class ${className} extends CrudService<${mapperType}, ${boClazz}>  {
         return dao.findList(dto);
     }
 
-    @AsynSelect(primarykeyValues = {"#id"})
+    @AsynSelect
     public ${boClazz}Dto getByDto(Long id){
         return dao.getByDto(id);
     }

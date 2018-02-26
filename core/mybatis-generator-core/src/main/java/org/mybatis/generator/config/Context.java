@@ -80,6 +80,10 @@ public class Context extends PropertyHolder {
 
     private JavaServiceTestGeneratorConfiguration javaServiceTestGeneratorConfiguration;
 
+    private JavaWebControllerGeneratorConfiguration javaWebControllerGeneratorConfiguration;
+
+    private JavaWebServiceGeneratorConfiguration javaWebServiceGeneratorConfiguration;
+
     private ArrayList<TableConfiguration> tableConfigurations;
 
     private ModelType defaultModelType;
@@ -165,6 +169,22 @@ public class Context extends PropertyHolder {
 
     public void setJavaServiceTestGeneratorConfiguration(JavaServiceTestGeneratorConfiguration javaServiceTestGeneratorConfiguration) {
         this.javaServiceTestGeneratorConfiguration = javaServiceTestGeneratorConfiguration;
+    }
+
+    public JavaWebControllerGeneratorConfiguration getJavaWebControllerGeneratorConfiguration() {
+        return javaWebControllerGeneratorConfiguration;
+    }
+
+    public void setJavaWebControllerGeneratorConfiguration(JavaWebControllerGeneratorConfiguration javaWebControllerGeneratorConfiguration) {
+        this.javaWebControllerGeneratorConfiguration = javaWebControllerGeneratorConfiguration;
+    }
+
+    public JavaWebServiceGeneratorConfiguration getJavaWebServiceGeneratorConfiguration() {
+        return javaWebServiceGeneratorConfiguration;
+    }
+
+    public void setJavaWebServiceGeneratorConfiguration(JavaWebServiceGeneratorConfiguration javaWebServiceGeneratorConfiguration) {
+        this.javaWebServiceGeneratorConfiguration = javaWebServiceGeneratorConfiguration;
     }
 
     public void setJavaConvertGeneratorConfiguration(JavaConvertGeneratorConfiguration javaConvertGeneratorConfiguration) {

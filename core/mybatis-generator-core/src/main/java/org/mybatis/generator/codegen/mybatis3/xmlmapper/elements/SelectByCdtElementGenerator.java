@@ -86,6 +86,8 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
 
     @Override
     public void addElements(XmlElement parentElement) {
+        parentElement.addElement(addElement_query(parentElement));
+        parentElement.addElement(addElement_del(parentElement));
         base(parentElement);
         baseJoins(parentElement);
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
@@ -184,8 +186,6 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
                         introspectedTable)) {
             parentElement.addElement(answer);
             parentElement.addElement(addElement_getByDto(parentElement));
-            parentElement.addElement(addElement_query(parentElement));
-            parentElement.addElement(addElement_del(parentElement));
         }
     }
 
@@ -277,6 +277,13 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
     public XmlElement addElement_query(XmlElement parentElement) {
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 
+        boolean flag = false;
+
+        for (IntrospectedColumn introspectedColumn : introspectedTable.getBaseColumns()) {
+            if ("del_flag".equals(introspectedColumn.getActualColumnName())) {
+                flag = true;
+            }
+        }
         answer.addAttribute(new Attribute(
                 "id", "getQueryCriteria")); //$NON-NLS-1$
         if (introspectedTable.getRules().generateResultMapWithBLOBs()) {
@@ -317,7 +324,11 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
         answer.addElement(new TextElement(sb.toString()));
 
         XmlElement dynamicElement = new XmlElement("where"); //$NON-NLS-1$
-        dynamicElement.addElement(new TextElement("#{queryCriteria}"));
+        if (flag) {
+            dynamicElement.addElement(new TextElement("#{queryCriteria} AND a.del_flag = '0'"));
+        } else {
+            dynamicElement.addElement(new TextElement("#{queryCriteria}"));
+        }
         answer.addElement(dynamicElement);
 
 //        for (IntrospectedColumn introspectedColumn : introspectedTable.getBaseColumns()) {

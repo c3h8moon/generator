@@ -222,6 +222,62 @@ public class JavaServiceGenerator {
 //        }
     }
 
+    public static void addJavaWebControllerGenerator(List<WebControllerTemplateEntity> implTemplateEntitylist) {
+        Configuration cfg = new Configuration();
+        try {
+            for (WebControllerTemplateEntity s : implTemplateEntitylist) {
+                cfg.setDirectoryForTemplateLoading(new File("D:\\work-ayhuli\\workspace\\generator\\core\\mybatis-generator-core\\src\\main\\java\\ftl"));
+                Template t = cfg.getTemplate("WebControllerTemplate.ftl"); //指定模板
+                File f = new File(s.getProjectTargetPackage());
+                System.out.println("【"+f.getAbsoluteFile()+"】");
+                if (!f.mkdirs()) {
+//                    System.out.println("失败" + f.getAbsolutePath());
+                }
+//                System.out.println(System.getProperty("user.dir"));
+                String className = s.getClassName();
+//                className = className.replace("001", "00" + i);
+                FileOutputStream fos = new FileOutputStream(new File(s.getProjectTargetPackage() + className + ".java")); //java文件的生成目录
+                t.process(s, new OutputStreamWriter(fos, "utf-8")); //
+                fos.flush();
+                fos.close();
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+//        }
+    }
+
+    public static void addJavaWebServiceGenerator(List<WebServiceTemplateEntity> implTemplateEntitylist) {
+        Configuration cfg = new Configuration();
+        try {
+            for (WebServiceTemplateEntity s : implTemplateEntitylist) {
+                cfg.setDirectoryForTemplateLoading(new File("D:\\work-ayhuli\\workspace\\generator\\core\\mybatis-generator-core\\src\\main\\java\\ftl"));
+                Template t = cfg.getTemplate("WebServiceTemplate.ftl"); //指定模板
+                File f = new File(s.getProjectTargetPackage());
+                System.out.println("【"+f.getAbsoluteFile()+"】");
+                if (!f.mkdirs()) {
+//                    System.out.println("失败" + f.getAbsolutePath());
+                }
+//                System.out.println(System.getProperty("user.dir"));
+                String className = s.getClassName();
+//                className = className.replace("001", "00" + i);
+                FileOutputStream fos = new FileOutputStream(new File(s.getProjectTargetPackage() + className + ".java")); //java文件的生成目录
+                t.process(s, new OutputStreamWriter(fos, "utf-8")); //
+                fos.flush();
+                fos.close();
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+//        }
+    }
+
     public static void addJavaFacadeImplTestGenerator(List<FacadeImplTestTemplateEntity> implTemplateEntitylist) {
         Configuration cfg = new Configuration();
         try {

@@ -72,7 +72,7 @@ public class StartUp {
 //                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_sys.xml").toURI());
                         break;
                     case 6 :
-                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_user.xml").toURI());
+//                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_user.xml").toURI());
                         break;
                     default:
                         break;

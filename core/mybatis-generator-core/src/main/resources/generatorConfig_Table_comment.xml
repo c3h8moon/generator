@@ -40,6 +40,7 @@
                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-dao\src\main\resources" >
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
+            <property name="isMergeable" value="false"/>
         </sqlMapGenerator>
         <!-- 生成mapxml对应client，也就是接口dao -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.ayhuli.service.comment.dao"
@@ -103,6 +104,21 @@
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeImplTestGenerator>
 
+        <!--pc-->
+        <javaWebControllerGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.web"
+                                     targetProject="D:\work-ayhuli\ayhuli-1.0.0\web-manage\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaWebControllerGenerator>
+        <javaWebServiceGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.service"
+                                    targetProject="D:\work-ayhuli\ayhuli-1.0.0\web-manage\src\main\java">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
+        </javaWebServiceGenerator>
+
+        <!--mobile-->
 
 
         <!-- 配置表信息，这里没生成一张表，这里需要改变一次对应表名 -->

@@ -193,6 +193,10 @@ public class MyBatisGeneratorConfigurationParser {
                 parseJavaFacadeImplTestGenerator(context, childNode);
             } else if ("javaServiceTestGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaServiceTestGenerator(context, childNode);
+            } else if ("javaWebControllerGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                javaWebControllerGenerator(context, childNode);
+            } else if ("javaWebServiceGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                javaWebServiceGenerator(context, childNode);
             } else if ("javaTypeResolver".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseJavaTypeResolver(context, childNode);
             } else if ("sqlMapGenerator".equals(childNode.getNodeName())) { //$NON-NLS-1$
@@ -881,6 +885,66 @@ public class MyBatisGeneratorConfigurationParser {
 
             if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseProperty(javaServiceTestGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void javaWebControllerGenerator(Context context, Node node) {
+        JavaWebControllerGeneratorConfiguration javaWebControllerGeneratorConfiguration = new JavaWebControllerGeneratorConfiguration();
+
+        context.setJavaWebControllerGeneratorConfiguration(javaWebControllerGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+//        javaFacadeImplGeneratorConfiguration.setConfigurationType(type);
+        javaWebControllerGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaWebControllerGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaWebControllerGeneratorConfiguration, childNode);
+            }
+        }
+    }
+
+    protected void javaWebServiceGenerator(Context context, Node node) {
+        JavaWebServiceGeneratorConfiguration javaWebServiceGeneratorConfiguration = new JavaWebServiceGeneratorConfiguration();
+
+        context.setJavaWebServiceGeneratorConfiguration(javaWebServiceGeneratorConfiguration);
+
+        Properties attributes = parseAttributes(node);
+        String type = attributes.getProperty("type"); //$NON-NLS-1$
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+//        String implementationPackage = attributes.getProperty("implementationPackage"); //$NON-NLS-1$
+
+//        javaFacadeImplGeneratorConfiguration.setConfigurationType(type);
+        javaWebServiceGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaWebServiceGeneratorConfiguration.setTargetProject(targetProject);
+//        javaServiceGeneratorConfiguration.setImplementationPackage(implementationPackage);
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node childNode = nodeList.item(i);
+
+            if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            if ("property".equals(childNode.getNodeName())) { //$NON-NLS-1$
+                parseProperty(javaWebServiceGeneratorConfiguration, childNode);
             }
         }
     }

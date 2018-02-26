@@ -12,13 +12,13 @@ import java.util.List;
 import org.junit.Test;
 
 /**
-* @Company: 2017-2017 备胎科技
-* @FileName: SysAreaFacadeImpl
-* @Desctiption:
-* @Author: chenye
-* @Date: Created by 2017/9/23 15:34
-* @Modified Update By:
-*/
+ * @Company: 2018-2018 哎呦狐狸科技
+ * @FileName: ${className}
+ * @Desctiption: facade测试类
+ * @Author: chenye
+ * @Date: Created by 2017/9/23 15:34
+ * @Modified Update By:
+ */
 public class ${className} {
 
     public <T> T getService(Class<T> clazz) {
@@ -41,7 +41,7 @@ public class ${className} {
     @Test
     public void testGetByID_all_100() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = ${facadeLessClassName}.getByID_all_100(1L);
+        ${boClazz}Dto dto = ${facadeLessClassName}.getByID(1L);
         System.out.println(JSON.toJSONString(dto));
     }
 
@@ -49,28 +49,28 @@ public class ${className} {
     public void testInsert_all_200() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
         ${boClazz}Dto dto = new ${boClazz}Dto();
-        ${facadeLessClassName}.insert_all_200(dto);
+        ${facadeLessClassName}.insert(dto);
     }
 
     @Test
     public void testUpdate_all_300() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
         ${boClazz}Dto dto = new ${boClazz}Dto();
-        ${facadeLessClassName}.update_all_300(dto);
+        ${facadeLessClassName}.update(dto);
     }
 
     @Test
     public void testDelete_all_400() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
         ${boClazz}Dto dto = new ${boClazz}Dto();
-        ${facadeLessClassName}.delete_all_400(dto);
+        ${facadeLessClassName}.delete(dto);
     }
 
     @Test
     public void testFindByAll_all_500() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
         ${boClazz}Dto dto = new ${boClazz}Dto();
-        List<${boClazz}Dto> list = ${facadeLessClassName}.findList_all_500(dto);
+        List<${boClazz}Dto> list = ${facadeLessClassName}.findList(dto);
         System.out.println(JSON.toJSONString(list));
     }
 
@@ -79,7 +79,7 @@ public class ${className} {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
         ${boClazz}Dto dto = new ${boClazz}Dto();
         Page<${boClazz}Dto> page = new Page<${boClazz}Dto>();
-        Page<${boClazz}Dto> ${boClazzLess}DtoPage = ${facadeLessClassName}.findPage_all_600(page, dto);
+        Page<${boClazz}Dto> ${boClazzLess}DtoPage = ${facadeLessClassName}.findPage(page, dto);
         System.out.println(JSON.toJSONString(${boClazzLess}DtoPage));
     }
 }

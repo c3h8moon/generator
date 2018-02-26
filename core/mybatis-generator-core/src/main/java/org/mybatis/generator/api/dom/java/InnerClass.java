@@ -496,6 +496,21 @@ public class InnerClass extends JavaElement {
         OutputUtilities.newLine(sb);
         OutputUtilities.javaIndent(sb, indentLevel);
         sb.append("    public void init("+getType().getShortName()+"Dto dto) {");
+        OutputUtilities.newLine(sb);
+        sb.append("        /** 基础字段初始化 **/");
+        OutputUtilities.newLine(sb);
+        sb.append("        if (dto.getId() != null) {");
+        OutputUtilities.newLine(sb);
+        sb.append("            this.id = dto.getId();");
+        OutputUtilities.newLine(sb);
+        sb.append("        }");
+        OutputUtilities.newLine(sb);
+        sb.append("        if (dto.getCurrentUser() != null) {");
+        OutputUtilities.newLine(sb);
+        sb.append("            this.currentUser = dto.getCurrentUser();");
+        OutputUtilities.newLine(sb);
+        sb.append("        }");
+        OutputUtilities.newLine(sb);
         Iterator<Field> fldIter2 = fields.iterator();
         while (fldIter2.hasNext()) {
             OutputUtilities.newLine(sb);

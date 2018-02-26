@@ -13,13 +13,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* @Company: 2017-2017 备胎科技
-* @FileName: Test
-* @Desctiption:
-* @Author: chenye
-* @Date: Created by 2017/9/19 17:15
-* @Modified Update By:
-*/
+ * @Company: 2018-2018 哎呦狐狸科技
+ * @FileName: ${className}
+ * @Desctiption:
+ * @Author: chenye
+ * @Date: Created by 2017/9/19 17:15
+ * @Modified Update By:
+ */
 public class ${className} extends DefaultTest  {
 
     @Autowired
