@@ -105,7 +105,7 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
         baseJoins(parentElement);
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 
-        answer.addAttribute(new Attribute("id", introspectedTable.getSelectByCdtStatementId())); //$NON-NLS-1$
+//        answer.addAttribute(new Attribute("id", introspectedTable.getSelectByCdtStatementId())); //$NON-NLS-1$
         //        if (introspectedTable.getRules().generateResultMapWithBLOBs()) {
         //            answer.addAttribute(new Attribute("resultMap", //$NON-NLS-1$
         //                    introspectedTable.getResultMapWithBLOBsId()));

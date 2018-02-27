@@ -50,7 +50,7 @@ public class SelectByCdtMethodGenerator extends AbstractJavaMapperMethodGenerato
         importedTypes.add(returnType);
         importedTypes.add(parameterType);
 
-        method.setName(introspectedTable.getSelectByCdtStatementId());
+//        method.setName(introspectedTable.getSelectByCdtStatementId());
 
         method.addParameter(new Parameter(parameterType, "record")); //$NON-NLS-1$
 

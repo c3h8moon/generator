@@ -17,9 +17,8 @@
 -->
 package ${templatePackage};
 
-import com.ayhuli.parent.base.page.Page;
 import ${facadePackage};
-import ${dtoPackage};
+import ${boPackage};
 import com.alibaba.fastjson.JSON;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
@@ -29,12 +28,12 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * @Company: 2018-2018 哎呦狐狸科技
- * @FileName: ${className}
- * @Desctiption: facade测试类
- * @Author: chenye
- * @Date: Created by 2017/9/23 15:34
- * @Modified Update By:
+ * @company: 备胎好车
+ * @fileName: ${className}
+ * @desctiption: domain测试类
+ * @author:
+ * @date: Created by ${formatDate}
+ * @modified Update By:
  */
 public class ${className} {
 
@@ -44,11 +43,10 @@ public class ${className} {
 
         // 连接注册中心配置
         RegistryConfig registry = new RegistryConfig();
-        registry.setAddress("zookeeper://59.110.241.105:2185");
+        registry.setAddress("zookeeper://192.168.100.131:2181");
         ReferenceConfig<T> reference = new ReferenceConfig<T>(); // 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能�?�成内存和连接泄�?
         reference.setInterface(clazz);
-        reference.setVersion("1.0.0");
-        reference.setGroup("chenye");
+        reference.setVersion("2.6.9");
         reference.setApplication(application);
         reference.setRegistry(registry);
         reference.setProtocol("dubbo");
@@ -56,47 +54,51 @@ public class ${className} {
     }
 
     @Test
-    public void testGetByID_all_100() {
+    public void test_selectByPrimaryKey() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = ${facadeLessClassName}.getByID(1L);
-        System.out.println(JSON.toJSONString(dto));
+        Integer primaryKey = 1; // 测试数据
+        ${boClazz}Bo bo = ${facadeLessClassName}.selectByPrimaryKey(primaryKey);
+        System.out.println(JSON.toJSONString(bo));
     }
 
     @Test
-    public void testInsert_all_200() {
+    public void test_insert() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = new ${boClazz}Dto();
-        ${facadeLessClassName}.insert(dto);
+        ${boClazz}Bo bo = new ${boClazz}Bo();
+        /**
+        * TODO 添加测试的参数
+        * ex: bo.setXxx();
+        */
+        ${facadeLessClassName}.insert(bo);
     }
 
     @Test
-    public void testUpdate_all_300() {
+    public void test_update() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = new ${boClazz}Dto();
-        ${facadeLessClassName}.update(dto);
+        ${boClazz}Bo bo = new ${boClazz}Bo();
+        /**
+        * TODO 添加测试的参数
+        * ex: bo.setXxx();
+        */
+        ${facadeLessClassName}.update(bo);
     }
 
     @Test
-    public void testDelete_all_400() {
+    public void test_delete() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = new ${boClazz}Dto();
-        ${facadeLessClassName}.delete(dto);
+        Integer primaryKey = 1; // 测试数据
+        ${facadeLessClassName}.delete(primaryKey);
     }
 
     @Test
-    public void testFindByAll_all_500() {
+    public void test_findList() {
         ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = new ${boClazz}Dto();
-        List<${boClazz}Dto> list = ${facadeLessClassName}.findList(dto);
+        ${boClazz}Bo bo = new ${boClazz}Bo();
+        /**
+        * TODO 添加测试的参数
+        * ex: bo.setXxx();
+        */
+        List<${boClazz}Bo> list = ${facadeLessClassName}.findList(bo);
         System.out.println(JSON.toJSONString(list));
-    }
-
-    @Test
-    public void testFindByEntity_all_600() {
-        ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
-        ${boClazz}Dto dto = new ${boClazz}Dto();
-        Page<${boClazz}Dto> page = new Page<${boClazz}Dto>();
-        Page<${boClazz}Dto> ${boClazzLess}DtoPage = ${facadeLessClassName}.findPage(page, dto);
-        System.out.println(JSON.toJSONString(${boClazzLess}DtoPage));
     }
 }

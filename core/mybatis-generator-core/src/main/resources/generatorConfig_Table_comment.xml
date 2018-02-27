@@ -44,8 +44,8 @@
         <!--</plugin>-->
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.ayhuli.service.comment.entity"
-                            targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-dao\src\main\java">
+        <javaModelGenerator targetPackage="com.ayhuli.service.comment.model"
+                            targetProject="D:\study\gen\gen-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -53,15 +53,15 @@
             <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity"/>-->
         </javaModelGenerator>
         <!-- 生成mapxml文件 -->
-        <sqlMapGenerator targetPackage="mybatis"
-                         targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-dao\src\main\resources" >
+        <sqlMapGenerator targetPackage="com.ayhuli.service.comment.mapper"
+                         targetProject="D:\study\gen\gen-service\src\main\java" >
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <property name="isMergeable" value="false"/>
         </sqlMapGenerator>
         <!-- 生成mapxml对应client，也就是接口dao -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ayhuli.service.comment.dao"
-                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-dao\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ayhuli.service.comment.mapper"
+                             targetProject="D:\study\gen\gen-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
@@ -69,102 +69,83 @@
 
         <!--service model-->
         <javaServiceGenerator targetPackage="com.ayhuli.service.comment.service"
-                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-service\src\main\java">
+                             targetProject="D:\study\gen\gen-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaServiceGenerator>
-        <javaServiceTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.service"
-                                   targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-facade\src\test\java">
-            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
-            <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
-        </javaServiceTestGenerator>
+        <!--<javaServiceTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.service"-->
+                                   <!--targetProject="D:\study\gen\gen-test\src\test\java">-->
+            <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
+            <!--<property name="enableSubPackages" value="true" />-->
+            <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
+        <!--</javaServiceTestGenerator>-->
 
-        <!--facade-->
+        <!--interface-->
         <javaBoGenerator type="sys" targetPackage="com.ayhuli.service.comment.api.bo"
-                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-api\src\main\java">
+                          targetProject="D:\study\gen\gen-interface\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaBoGenerator>
-        <javaDtoGenerator type="sys" targetPackage="com.ayhuli.service.comment.api.dto"
-                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-api\src\main\java">
-            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
-            <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
-        </javaDtoGenerator>
-        <javaFacadeGenerator type="sys" targetPackage="com.ayhuli.service.comment.api.facade"
-                          targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-api\src\main\java">
+        <javaFacadeGenerator type="sys" targetPackage="com.ayhuli.service.comment.api.domain"
+                          targetProject="D:\study\gen\gen-interface\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeGenerator>
 
-        <!--facade impl-->
-        <javaConvertGenerator type="sys" targetPackage="com.ayhuli.service.comment.facade.convert"
-                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-facade\src\main\java">
+        <!--domain impl-->
+        <javaConvertGenerator type="sys" targetPackage="com.ayhuli.service.comment.domain"
+                             targetProject="D:\study\gen\gen-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaConvertGenerator>
-        <javaFacadeImplGenerator type="sys" targetPackage="com.ayhuli.service.comment.facade.facade.impl"
-                             targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-facade\src\main\java">
+        <javaFacadeImplGenerator type="sys" targetPackage="com.ayhuli.service.comment.domain"
+                             targetProject="D:\study\gen\gen-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeImplGenerator>
-        <javaFacadeImplTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.facade"
-                                 targetProject="D:\work-ayhuli\ayhuli-1.0.0\service-comment\service-comment-facade\src\test\java">
+        <javaFacadeImplTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.domain"
+                                 targetProject="D:\study\gen\gen-test\src\test\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeImplTestGenerator>
 
-        <!--pc-->
-        <javaWebControllerGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.web"
-                                     targetProject="D:\work-ayhuli\ayhuli-1.0.0\web-manage\src\main\java">
-            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
-            <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
-        </javaWebControllerGenerator>
-        <javaWebServiceGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.service"
-                                    targetProject="D:\work-ayhuli\ayhuli-1.0.0\web-manage\src\main\java">
-            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
-            <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
-        </javaWebServiceGenerator>
+        <!--&lt;!&ndash;pc&ndash;&gt;-->
+        <!--<javaWebControllerGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.web"-->
+                                     <!--targetProject="D:\study\Hello\src\main\java">-->
+            <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
+            <!--<property name="enableSubPackages" value="true" />-->
+            <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
+        <!--</javaWebControllerGenerator>-->
+        <!--<javaWebServiceGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.service"-->
+                                    <!--targetProject="D:\study\Hello\src\main\java">-->
+            <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
+            <!--<property name="enableSubPackages" value="true" />-->
+            <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
+        <!--</javaWebServiceGenerator>-->
 
         <!--mobile-->
 
 
-        <!-- 配置表信息，这里没生成一张表，这里需要改变一次对应表名 -->
-        <table tableName="comment_announce"
-               domainObjectName="CommentAnnounce" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;CommentAnnounce&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;CommentAnnounce&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="comment_info"
-               domainObjectName="CommentInfo" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;CommentInfo&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;CommentInfo&gt;"/>
+        <!--&lt;!&ndash; 配置表信息，这里没生成一张表，这里需要改变一次对应表名 &ndash;&gt;-->
+        <!--<table tableName="comment_announce" domainObjectName="CommentAnnounce">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;CommentAnnounce&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;CommentAnnounce&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+        <table tableName="comment_info" domainObjectName="CommentInfo">
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
             <!--<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />-->
             <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
             <!--<columnOverride column="money" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
         </table>
-        <table tableName="comment_qa"
-               domainObjectName="CommentQa" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;CommentQa&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;CommentQa&gt;"/>
+        <table tableName="comment_qa" domainObjectName="CommentQa">
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
             <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
             <!--<columnOverride column="buy_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->

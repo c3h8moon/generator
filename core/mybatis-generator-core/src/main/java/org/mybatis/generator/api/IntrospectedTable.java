@@ -498,7 +498,7 @@ public abstract class IntrospectedTable {
         setBaseColumnListId("Base_Column_List"); //$NON-NLS-1$
         setBlobColumnListId("Blob_Column_List"); //$NON-NLS-1$
         setMyBatis3UpdateByExampleWhereClauseId("Update_By_Example_Where_Clause"); //$NON-NLS-1$
-        setSelectByCdtStatementId("findList");
+//        setSelectByCdtStatementId("findList");
     }
 
     public void setBlobColumnListId(String s) {
@@ -735,7 +735,7 @@ public abstract class IntrospectedTable {
                 sb.append('.');
             }
             sb.append(fullyQualifiedTable.getDomainObjectName());
-            sb.append("Dao"); //$NON-NLS-1$
+            sb.append("Mapper"); //$NON-NLS-1$
         }
         setMyBatis3JavaMapperType(sb.toString());
 
@@ -838,7 +838,7 @@ public abstract class IntrospectedTable {
             sb.append(".xml"); //$NON-NLS-1$
         } else {
             sb.append(fullyQualifiedTable.getDomainObjectName());
-            sb.append("Dao.xml"); //$NON-NLS-1$
+            sb.append("Mapper.xml"); //$NON-NLS-1$
         }
         return sb.toString();
     }
@@ -1011,13 +1011,13 @@ public abstract class IntrospectedTable {
         internalAttributes.put(InternalAttribute.ATTR_MYBATIS3_JAVA_MAPPER_TYPE, mybatis3JavaMapperType);
     }
 
-    public String getSelectByCdtStatementId() {
-        return internalAttributes.get(InternalAttribute.ATTR_SELECT_BY_CDT_STATEMENT_ID);
-    }
-
-    public void setSelectByCdtStatementId(String selectByCdtStatementId) {
-        internalAttributes.put(InternalAttribute.ATTR_SELECT_BY_CDT_STATEMENT_ID, selectByCdtStatementId);
-    }
+//    public String getSelectByCdtStatementId() {
+//        return internalAttributes.get(InternalAttribute.ATTR_SELECT_BY_CDT_STATEMENT_ID);
+//    }
+//
+//    public void setSelectByCdtStatementId(String selectByCdtStatementId) {
+//        internalAttributes.put(InternalAttribute.ATTR_SELECT_BY_CDT_STATEMENT_ID, selectByCdtStatementId);
+//    }
 
     public String getMyBatis3SqlProviderType() {
         return internalAttributes.get(InternalAttribute.ATTR_MYBATIS3_SQL_PROVIDER_TYPE);

@@ -17,70 +17,75 @@
 -->
 package ${templatePackage};
 
-import com.ayhuli.parent.base.page.Page;
-import com.ayhuli.parent.base.stereotype.AsynTransactional;
-import com.ayhuli.parent.base.utils.CheckUtil;
-import com.ayhuli.service.base.exception.ServiceError;
+import com.btjf.common.utils.BeanUtil;
+
 import ${mapperPackage};
 import ${facadePackage};
 import ${servicePackage};
 import ${dtoPackage};
-import ${convertPackage};
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * @Company: 2018-2018 哎呦狐狸科技
- * @FileName: ${className}
- * @Desctiption:
- * @Author: chenye
- * @Date: Created by 2017/9/23 15:34
- * @Modified Update By:
+ * @company: 备胎好车
+ * @fileName: ${className}
+ * @desctiption:
+ * @author:
+ * @date: Created by ${formatDate}
+ * @modified Update By:
  */
-@Service("${boClazzLess}Facade")
-public class ${className} implements ${boClazz}Facade {
+@Service("${boClazzLess}Domain")
+@Transactional(readOnly = false, rollbackFor = Exception.class)
+public class ${className} implements ${boClazz}Domain {
 
     @Autowired
     private ${serviceClassName} ${serviceLessClassName};
-    @Autowired
-    private ${boClazz}Convert ${boClazzLess}Convert;
 
     @Override
-    public ${boClazz}Dto getByID(Long primaryKey) {
-        CheckUtil.check(primaryKey == null, ServiceError.ERROR_ENTITY_NULL);
-        return ${serviceLessClassName}.getByDto(primaryKey);
+    public ${boClazz}Bo selectByPrimaryKey(Integer primaryKey) {
+        ${boClazz} ${boClazzLess} = ${serviceLessClassName}.selectByPrimaryKey(primaryKey);
+        if (${boClazzLess} != null) {
+            return BeanUtil.convert(${boClazzLess}, ${boClazz}Bo.class);
+        }
+        return null;
     }
 
     @Override
-    @AsynTransactional
-    public void insert(${boClazz}Dto dto) {
-        ${boClazz} ${boClazzLess} = ${boClazzLess}Convert.convertEntity(dto);
-        ${serviceLessClassName}.insertSelective(${boClazzLess});
+    public void insert(${boClazz}Bo ${boClazzLess}Bo) {
+        if (${boClazzLess}Bo != null) {
+            ${boClazzLess}Service.insertSelective(BeanUtil.convert(${boClazzLess}Bo, ${boClazz}.class));
+        }
     }
 
     @Override
-    @AsynTransactional
-    public void update(${boClazz}Dto dto) {
-        ${boClazz} ${boClazzLess} = ${boClazzLess}Convert.convertEntity(dto);
-        ${serviceLessClassName}.updateByPrimaryKeySelective(${boClazzLess});
+    public void update(${boClazz}Bo ${boClazzLess}Bo) {
+        if (${boClazzLess}Bo != null) {
+            ${boClazzLess}Service.updateByPrimaryKeySelective(BeanUtil.convert(${boClazzLess}Bo, ${boClazz}.class));
+        }
     }
 
     @Override
-    @AsynTransactional
-    public void delete(${boClazz}Dto dto) {
-        ${boClazz} ${boClazzLess} = ${boClazzLess}Convert.convertEntity(dto);
-        ${serviceLessClassName}.deleteByPrimaryKey(${boClazzLess});
+    public void delete(Integer primaryKey) {
+        if (primaryKey != null) {
+            ${boClazz} ${boClazzLess} = new ${boClazz}();
+            ${boClazzLess}.setId(primaryKey);
+            ${boClazzLess}Service.deleteByPrimaryKey(${boClazzLess});
+        }
     }
 
     @Override
-    public List<${boClazz}Dto> findList(${boClazz}Dto dto) {
-        return ${serviceLessClassName}.findList(dto);
-    }
-
-    @Override
-    public Page<${boClazz}Dto> findPage(Page<${boClazz}Dto> page, ${boClazz}Dto dto) {
-        return ${boClazzLess}Service.findPage(page, dto);
+    public List<${boClazz}Bo> findList(${boClazz}Bo ${boClazzLess}Bo) {
+        if (${boClazzLess}Bo != null) {
+            List<${boClazz}> list = ${boClazzLess}Service.findList(BeanUtil.convert(${boClazzLess}Bo, ${boClazz}.class));
+            if (list != null && list.size() > 0) {
+                return BeanUtil.convertList(list, ${boClazz}Bo.class);
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
 }

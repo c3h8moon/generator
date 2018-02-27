@@ -20,61 +20,50 @@ package ${templatePackage};
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.ayhuli.parent.base.utils.CheckUtil;
-import com.ayhuli.plugin.asyntransactional.stereotype.AsynInsert;
-import com.ayhuli.plugin.asyntransactional.stereotype.AsynSelect;
-import com.ayhuli.plugin.asyntransactional.stereotype.AsynUpdate;
-import com.ayhuli.service.base.exception.ServiceError;
-import com.ayhuli.service.base.service.CrudService;
-import com.ayhuli.parent.base.page.Page;
 import ${mapperPackage};
 import ${dtoPackage};
 import ${boPackage};
 
+import javax.annotation.Resource;
+
 /**
- * @Company: 2018-2018 哎呦狐狸科技
- * @FileName: ${className}
- * @Desctiption:
- * @Author: chenye
- * @Date: Created by 2017/9/19 17:15
- * @Modified Update By:
+ * @company: 备胎好车
+ * @fileName: ${className}
+ * @desctiption:
+ * @author:
+ * @date: Created by ${formatDate}
+ * @modified Update By:
  */
 @Service
-public class ${className} extends CrudService<${mapperType}, ${boClazz}>  {
+public class ${className} {
 
-    @AsynInsert(primarykeyValues = {"#${boClazzLess}.id"})
-    public ${boClazz} insertSelective(${boClazz} ${boClazzLess}){
-        CheckUtil.check(${boClazzLess} == null, ServiceError.ERROR_ENTITY_NULL);
-        dao.insertSelective(${boClazzLess});
-        return ${boClazzLess};
+    @Resource
+    private ${boClazz}Mapper ${boClazzLess}Mapper;
+
+    public void insertSelective(${boClazz} ${boClazzLess}){
+        ${boClazzLess}Mapper.insertSelective(${boClazzLess});
     }
 
-    @AsynUpdate(primarykey = "#${boClazzLess}.id")
-    public ${boClazz} updateByPrimaryKeySelective(${boClazz} ${boClazzLess}) {
-        CheckUtil.check(${boClazzLess} == null, ServiceError.ERROR_ENTITY_NULL);
-        dao.updateByPrimaryKeySelective(${boClazzLess});
-        return ${boClazzLess};
+    public void updateByPrimaryKeySelective(${boClazz} ${boClazzLess}) {
+        ${boClazzLess}Mapper.updateByPrimaryKeySelective(${boClazzLess});
     }
 
-    @AsynUpdate(primarykey = "#${boClazzLess}.id")
     public void deleteByPrimaryKey(${boClazz} ${boClazzLess}) {
-        CheckUtil.check(${boClazzLess} == null, ServiceError.ERROR_ENTITY_NULL);
-        ${boClazzLess}.setDelFlag(${boClazz}.DEL_FLAG_DELETE);
-        dao.updateByPrimaryKeySelective(${boClazzLess});
+        ${boClazzLess}Mapper.updateByPrimaryKeySelective(${boClazzLess});
     }
 
-    public List<${boClazz}Dto> findList(${boClazz}Dto dto){
-        return dao.findList(dto);
+    public List<${boClazz}> findList(${boClazz} ${boClazzLess}){
+        ${boClazz}Example example = new ${boClazz}Example();
+        ${boClazz}Example.Criteria criteria = example.createCriteria();
+        /**
+        * TODO 添加查询的参数
+        * ex: criteria.addxxx
+        */
+        return ${boClazzLess}Mapper.selectByExample(example);
     }
 
-    @AsynSelect
-    public ${boClazz}Dto getByDto(Long id){
-        return dao.getByDto(id);
+    public ${boClazz} selectByPrimaryKey(Integer primaryKey){
+        return ${boClazzLess}Mapper.selectByPrimaryKey(primaryKey);
     }
 
-    public Page<${boClazz}Dto> findPage(Page<${boClazz}Dto> page,  ${boClazz}Dto dto) {
-        dto.setPage(page);
-        page.setList(dao.findList(dto));
-        return page;
-    }
 }

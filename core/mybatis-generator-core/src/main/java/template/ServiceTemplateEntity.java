@@ -15,6 +15,9 @@
  */
 package template;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @Company: 2017-2017 备胎科技
  * @FileName: ServiceTemplateEntity
@@ -37,6 +40,18 @@ public class ServiceTemplateEntity {
     private String dtoPackage;
     private String dtoClassName;
     private String lessDtoClassName;
+
+    private String formatDate;
+
+    public String getFormatDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+        formatDate = sdf.format(new Date());
+        return formatDate;
+    }
+
+    public void setFormatDate(String formatDate) {
+        this.formatDate = formatDate;
+    }
 
     public String getDtoPackage() {
         return dtoPackage;

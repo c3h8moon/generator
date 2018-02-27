@@ -1,17 +1,17 @@
 /**
- *    Copyright 2006-2018 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2006-2018 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.mybatis.generator.api.dom.java;
 
@@ -23,7 +23,7 @@ import org.mybatis.generator.api.dom.OutputUtilities;
 /**
  * This class encapsulates the idea of an inner class - it has methods that make
  * it easy to generate inner classes.
- * 
+ *
  * @author Jeff Butler
  */
 public class InnerClass extends JavaElement {
@@ -359,10 +359,10 @@ public class InnerClass extends JavaElement {
         addFormattedAnnotations(sb, indentLevel);
 
         OutputUtilities.javaIndent(sb, indentLevel);
-        sb.append("@Setter");
-        OutputUtilities.newLine(sb);
-        sb.append("@Getter");
-        OutputUtilities.newLine(sb);
+//        sb.append("@Setter");
+//        OutputUtilities.newLine(sb);
+//        sb.append("@Getter");
+//        OutputUtilities.newLine(sb);
 
         sb.append(getVisibility().getValue());
 
@@ -455,15 +455,15 @@ public class InnerClass extends JavaElement {
             OutputUtilities.newLine(sb);
         }
 
-        //        Iterator<Method> mtdIter = methods.iterator();
-        //        while (mtdIter.hasNext()) {
-        //            OutputUtilities.newLine(sb);
-        //            Method method = mtdIter.next();
-        //            sb.append(method.getFormattedContent(indentLevel, false, compilationUnit));
-        //            if (mtdIter.hasNext()) {
-        //                OutputUtilities.newLine(sb);
-        //            }
-        //        }
+        Iterator<Method> mtdIter = methods.iterator();
+        while (mtdIter.hasNext()) {
+            OutputUtilities.newLine(sb);
+            Method method = mtdIter.next();
+            sb.append(method.getFormattedContent(indentLevel, false, compilationUnit));
+            if (mtdIter.hasNext()) {
+                OutputUtilities.newLine(sb);
+            }
+        }
 
         if (innerClasses.size() > 0) {
             OutputUtilities.newLine(sb);
@@ -495,37 +495,37 @@ public class InnerClass extends JavaElement {
         indentLevel--;
         OutputUtilities.newLine(sb);
         OutputUtilities.javaIndent(sb, indentLevel);
-        sb.append("    public void init(" + getType().getShortName() + "Dto dto) {");
-        OutputUtilities.newLine(sb);
-        sb.append("        /** 基础字段初始化 **/");
-        OutputUtilities.newLine(sb);
-        sb.append("        if (dto.getId() != null) {");
-        OutputUtilities.newLine(sb);
-        sb.append("            this.id = dto.getId();");
-        OutputUtilities.newLine(sb);
-        sb.append("        }");
-        OutputUtilities.newLine(sb);
-        sb.append("        if (dto.getCurrentUser() != null) {");
-        OutputUtilities.newLine(sb);
-        sb.append("            this.currentUser = dto.getCurrentUser();");
-        OutputUtilities.newLine(sb);
-        sb.append("        }");
-        OutputUtilities.newLine(sb);
-        Iterator<Field> fldIter2 = fields.iterator();
-        while (fldIter2.hasNext()) {
-            OutputUtilities.newLine(sb);
-            Field field = fldIter2.next();
-            String lean = field.getFormattedContent_init(indentLevel, compilationUnit);
-            sb.append(lean);
-            if (fldIter2.hasNext()) {
-                OutputUtilities.newLine(sb);
-            }
-        }
-        //        MyBatisGenerator.lean.put(compilationUnit.getType().getShortName(), shh2.toString());
-
-        OutputUtilities.newLine(sb);
-        OutputUtilities.newLine(sb);
-        sb.append("    }");
+//        sb.append("    public void init(" + getType().getShortName() + "Dto dto) {");
+//        OutputUtilities.newLine(sb);
+//        sb.append("        /** 基础字段初始化 **/");
+//        OutputUtilities.newLine(sb);
+//        sb.append("        if (dto.getId() != null) {");
+//        OutputUtilities.newLine(sb);
+//        sb.append("            this.id = dto.getId();");
+//        OutputUtilities.newLine(sb);
+//        sb.append("        }");
+//        OutputUtilities.newLine(sb);
+//        sb.append("        if (dto.getCurrentUser() != null) {");
+//        OutputUtilities.newLine(sb);
+//        sb.append("            this.currentUser = dto.getCurrentUser();");
+//        OutputUtilities.newLine(sb);
+//        sb.append("        }");
+//        OutputUtilities.newLine(sb);
+//        Iterator<Field> fldIter2 = fields.iterator();
+//        while (fldIter2.hasNext()) {
+//            OutputUtilities.newLine(sb);
+//            Field field = fldIter2.next();
+//            String lean = field.getFormattedContent_init(indentLevel, compilationUnit);
+//            sb.append(lean);
+//            if (fldIter2.hasNext()) {
+//                OutputUtilities.newLine(sb);
+//            }
+//        }
+//        //        MyBatisGenerator.lean.put(compilationUnit.getType().getShortName(), shh2.toString());
+//
+//        OutputUtilities.newLine(sb);
+//        OutputUtilities.newLine(sb);
+//        sb.append("    }");
         OutputUtilities.newLine(sb);
         sb.append('}');
 

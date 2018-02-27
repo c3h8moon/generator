@@ -78,14 +78,14 @@ public class JavaServiceGenerator {
                 cfg.setDirectoryForTemplateLoading(new File("D:\\work-ayhuli\\workspace\\generator\\core\\mybatis-generator-core\\src\\main\\java\\ftl"));
 //                cfg.setClassForTemplateLoading(JavaServiceGenerator.class, "/ftl"); //指定模板所在的classpath目录
                 Template t = cfg.getTemplate("BoTemplate.ftl"); //指定模板
-                File f = new File(s.getProjectTargetPackage()+s.getLessClass());
+                File f = new File(s.getProjectTargetPackage());
                 if (!f.mkdirs()) {
 //                    System.out.println("失败" + f.getAbsolutePath());
                 }
                 System.out.println(System.getProperty("user.dir"));
                 String className = s.getClassName();
 //                className = className.replace("001", "00" + i);
-                FileOutputStream fos = new FileOutputStream(new File(s.getProjectTargetPackage() + s.getLessClass() + "/" + className + ".java")); //java文件的生成目录
+                FileOutputStream fos = new FileOutputStream(new File(s.getProjectTargetPackage() + "/" + className + ".java")); //java文件的生成目录
                 t.process(s, new OutputStreamWriter(fos, "utf-8")); //
                 fos.flush();
                 fos.close();

@@ -99,16 +99,16 @@ public class Interface extends InnerInterface implements CompilationUnit {
             newLine(sb);
         }
 
-        sb.append("import com.ayhuli.plugin.database.mysql.announce.MyBatisDao;");
+//        sb.append("import com.ayhuli.plugin.database.mysql.announce.MyBatisDao;");
 
         newLine(sb);
         String key = this.getType().getShortName();
 
         //        "com.ayhuli.service.comment.dao";
         //        "com.ayhuli.service.comment.api.dto.commentannounce.CommentAnnounceDto"
-        String dtoPackage = this.getType().getPackageName();
+//        String dtoPackage = this.getType().getPackageName();
         //        String packageName = key.replace("Dao", "").toLowerCase();
-        dtoPackage = dtoPackage.replace("dao", "api.dto." + key.replace("Dao", "") + "Dto");
+//        dtoPackage = dtoPackage.replace("dao", "api.dto." + key.replace("Dao", "") + "Dto");
 
         String val = MyBatisGenerator.dtoPackage.get(key);
         System.out.println("key:" + key + "value : " + val);
@@ -117,14 +117,14 @@ public class Interface extends InnerInterface implements CompilationUnit {
             sb.append(importString);
             newLine(sb);
         }
-        sb.append("import " + dtoPackage + ";");
+//        sb.append("import " + dtoPackage + ";");
         newLine(sb);
         newLine(sb);
         if (importStrings.size() > 0) {
             newLine(sb);
         }
 
-        sb.append("@MyBatisDao");
+//        sb.append("@MyBatisDao");
         newLine(sb);
         String call = super.getFormattedContent(0, this);
         //        String regix = "com.ayhuli.service.*.api.dto.";

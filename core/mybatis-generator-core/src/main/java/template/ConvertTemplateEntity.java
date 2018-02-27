@@ -15,6 +15,10 @@
  */
 package template;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @Company: 2017-2017 备胎科技
  * @FileName: ServiceTemplateEntity
@@ -40,6 +44,26 @@ public class ConvertTemplateEntity {
     private String boLessClassName;
     private String boPackage;
     private String dtoPackage;
+    private String facadePackage;
+    private String formatDate;
+
+    public String getFormatDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+        formatDate = sdf.format(new Date());
+        return formatDate;
+    }
+
+    public void setFormatDate(String formatDate) {
+        this.formatDate = formatDate;
+    }
+
+    public String getFacadePackage() {
+        return facadePackage;
+    }
+
+    public void setFacadePackage(String facadePackage) {
+        this.facadePackage = facadePackage;
+    }
 
     public String getDtoPackage() {
         return dtoPackage;

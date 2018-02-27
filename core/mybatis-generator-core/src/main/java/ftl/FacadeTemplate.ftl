@@ -17,19 +17,17 @@
 -->
 package ${templatePackage};
 
-import com.ayhuli.parent.base.page.Page;
-import com.ayhuli.parent.base.stereotype.AsynTransactional;
-import ${mapperPackage};
+import ${boPackage};
 
 import java.util.List;
 
 /**
- * @Company: 2018-2018 哎呦狐狸科技
- * @FileName: ${className}
- * @Desctiption:
- * @Author: chenye
- * @Date: Created by 2017/9/23 15:34
- * @Modified Update By:
+ * @company: 备胎好车
+ * @fileName: ${className}
+ * @desctiption:
+ * @author:
+ * @date: Created by ${formatDate}
+ * @modified Update By:
  */
 public interface ${className} {
 
@@ -39,69 +37,54 @@ public interface ${className} {
      * 功能描述:〈根据主键获取单条数据〉
      * 应用范围:〈ALL〉
      *
-     * @Param primaryKey
-     * @Return ${boClazz}Dto
-     * @Date: 2017/9/23 15:00
-     * @Author:chenye
+     * @param primaryKey
+     * @return ${boClazz}Bo
+     * @date: Created by ${formatDate}
+     * @author:
      */
-    public ${boClazz}Dto getByID(Long primaryKey);
+    public ${boClazz}Bo selectByPrimaryKey(Integer primaryKey);
 
     /**
      * 功能描述:〈保存数据〉
      * 应用范围:〈ALL〉
      *
-     * @Param dto
-     * @Return void
-     * @Date: 2017/9/23 15:01
-     * @Author:chenye
+     * @param ${boClazzLess}Bo
+     * @return void
+     * @date: Created by ${formatDate}
+     * @author:
      */
-    @AsynTransactional
-    public void insert(${boClazz}Dto dto);
+    public void insert(${boClazz}Bo ${boClazzLess}Bo);
 
     /**
      * 功能描述:〈修改数据〉
      * 应用范围:〈ALL〉
      *
-     * @Param dto
-     * @Return void
-     * @Date: 2017/9/23 15:01
-     * @Author:chenye
+     * @param ${boClazzLess}Bo
+     * @return void
+     * @date: Created by ${formatDate}
+     * @author:
      */
-    @AsynTransactional
-    public void update(${boClazz}Dto dto);
+    public void update(${boClazz}Bo ${boClazzLess}Bo);
 
     /**
      * 功能描述:〈删除数据〉
      * 应用范围:〈ALL〉
      *
-     * @Param dto
-     * @Return void
-     * @Date: 2017/9/23 15:01
-     * @Author:chenye
+     * @param primaryKey
+     * @return void
+     * @date: Created by ${formatDate}
+     * @author:
      */
-    @AsynTransactional
-    public void delete(${boClazz}Dto dto);
+    public void delete(Integer primaryKey);
 
     /**
      * 功能描述:〈查询所有数据--默认100条〉
      * 应用范围:〈ALL〉
      *
-     * @Param dto
-     * @Return List<${boClazz}Dto>
-     * @Date: 2017/9/23 15:01
-     * @Author:chenye
+     * @param ${boClazzLess}Bo
+     * @return List<${boClazz}Bo>
+     * @date: Created by ${formatDate}
+     * @author:
      */
-    public List<${boClazz}Dto> findList(${boClazz}Dto dto);
-
-    /**
-    * 功能描述:〈查询分页数据〉
-    * 应用范围:〈ALL〉
-    *
-    * @Param page
-    * @Param dto
-    * @Return Page<${boClazz}Dto>
-    * @Date: 2017/9/23 15:02
-    * @Author:chenye
-    */
-    public Page<${boClazz}Dto> findPage(Page<${boClazz}Dto> page, ${boClazz}Dto dto);
+    public List<${boClazz}Bo> findList(${boClazz}Bo ${boClazzLess}Bo);
 }

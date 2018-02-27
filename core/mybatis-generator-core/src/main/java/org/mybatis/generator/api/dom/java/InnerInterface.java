@@ -1,17 +1,17 @@
 /**
- *    Copyright 2006-2018 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2006-2018 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.mybatis.generator.api.dom.java;
 
@@ -137,49 +137,52 @@ public class InnerInterface extends JavaElement {
             OutputUtilities.newLine(sb);
         }
 
-        //        Iterator<Method> mtdIter = getMethods().iterator();
-        //        while (mtdIter.hasNext()) {
-        //            newLine(sb);
-        //            Method method = mtdIter.next();
-        //            sb.append(method.getFormattedContent(indentLevel, true, compilationUnit));
-        //            if (mtdIter.hasNext()) {
-        //                newLine(sb);
-        //            }
-        //        }
-        //        newLine(sb);
-        //        newLine(sb);
-        //        sb.append("    public List<T> getQueryCriteria(@Param(\"queryCriteria\") String queryCriteria);");
-        newLine(sb);
-        newLine(sb);
-        String key = getType().getShortName();
-        key = key.replace("Dao", "");
+        Iterator<Method> mtdIter = getMethods().iterator();
+        while (mtdIter.hasNext()) {
 
-        sb.append("    /**");
+            newLine(sb);
+            Method method = mtdIter.next();
+            if (!"updateByPrimaryKey".equals(method.getName())) {
+                sb.append(method.getFormattedContent(indentLevel, true, compilationUnit));
+                if (mtdIter.hasNext()) {
+                    newLine(sb);
+                }
+            }
+        }
         newLine(sb);
-        sb.append("     * 查询数据列表，如果需要分页，请设置分页对象，如：entity.setPage(new Page<T>());");
         newLine(sb);
-        sb.append("     * @param entity");
-        newLine(sb);
-        sb.append("     * @return");
-        newLine(sb);
-        sb.append("     */");
-        newLine(sb);
-        sb.append("    public List<" + key + "Dto> findList(" + key + "Dto entity);");
+//                sb.append("    public List<T> getQueryCriteria(@Param(\"queryCriteria\") String queryCriteria);");
+//        newLine(sb);
+//        newLine(sb);
+//        String key = getType().getShortName();
+//        key = key.replace("Dao", "");
 
-        newLine(sb);
-        newLine(sb);
-
-        sb.append("    /**");
-        newLine(sb);
-        sb.append("     * 查询单条数据，数据返回为DTO");
-        newLine(sb);
-        sb.append("     * @param id");
-        newLine(sb);
-        sb.append("     * @return");
-        newLine(sb);
-        sb.append("     */");
-        newLine(sb);
-        sb.append("    public " + key + "Dto getByDto(Long id);");
+//        sb.append("    /**");
+//        newLine(sb);
+//        sb.append("     * 查询数据列表，如果需要分页，请设置分页对象，如：entity.setPage(new Page<T>());");
+//        newLine(sb);
+//        sb.append("     * @param entity");
+//        newLine(sb);
+//        sb.append("     * @return");
+//        newLine(sb);
+//        sb.append("     */");
+//        newLine(sb);
+//        sb.append("    public List<" + key + "Dto> findList(" + key + "Dto entity);");
+//
+//        newLine(sb);
+//        newLine(sb);
+//
+//        sb.append("    /**");
+//        newLine(sb);
+//        sb.append("     * 查询单条数据，数据返回为DTO");
+//        newLine(sb);
+//        sb.append("     * @param id");
+//        newLine(sb);
+//        sb.append("     * @return");
+//        newLine(sb);
+//        sb.append("     */");
+//        newLine(sb);
+//        sb.append("    public " + key + "Dto getByDto(Long id);");
 
         if (innerInterfaces.size() > 0) {
             newLine(sb);

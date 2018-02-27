@@ -319,9 +319,9 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        sb.append(introspectedTable.getFullyQualifiedTable());
 //        field.addJavaDocLine(sb.toString());
 
-        addJavadocTag(field, false);
+//        addJavadocTag(field, false);
 
-        field.addJavaDocLine(" */"); //$NON-NLS-1$
+//        field.addJavaDocLine(" */"); //$NON-NLS-1$
     }
 
     @Override

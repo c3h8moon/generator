@@ -101,16 +101,16 @@ public class TopLevelClass extends InnerClass implements CompilationUnit {
             newLine(sb);
         }
 
-        String packagePath = fullyQualifiedJavaType.getPackageName().replace("entity",
-                "api.dto." + fullyQualifiedJavaType.getShortName() + "Dto");
-
-        sb.append("import " + packagePath + ";");
-        newLine(sb);
-
-        sb.append("import lombok.Getter;");
-        newLine(sb);
-        sb.append("import lombok.Setter;");
-        newLine(sb);
+//        String packagePath = fullyQualifiedJavaType.getPackageName().replace("entity",
+//                "api.dto." + fullyQualifiedJavaType.getShortName() + "Dto");
+//
+//        sb.append("import " + packagePath + ";");
+//        newLine(sb);
+//
+//        sb.append("import lombok.Getter;");
+//        newLine(sb);
+//        sb.append("import lombok.Setter;");
+//        newLine(sb);
 
         if (importStrings.size() > 0) {
             newLine(sb);
