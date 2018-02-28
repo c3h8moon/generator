@@ -17,33 +17,35 @@
 -->
 package ${templatePackage};
 
-import com.ayhuli.parent.base.entity.CurrentUser;
 import lombok.Getter;
 import lombok.Setter;
-import com.ayhuli.parent.base.entity.DataEntity;
+import ${boPackage};
 
 import java.util.Date;
+import java.util.List;
 
 /**
- * @Company: 2018-2018 哎呦狐狸科技
+ * @Company: 备胎好车
  * @FileName: ${className}
  * @Desctiption:
- * @Author: chenye
- * @Date: Created by 2017/9/19 17:15
+ * @Author:
+ * @Date: Created by ${formatDate}
  * @Modified Update By:
  */
 @Getter
 @Setter
-public class ${className} extends DataEntity<${className}>  {
+public class ${className} {
 ${fields}
 
-    public ${className}(){
+    public ${className}() {
         super();
     }
 
-    public ${className}(CurrentUser currentUser){
-        if (currentUser != null) {
-            this.currentUser = currentUser;
-        }
+    public ${className}(${boClazz}Bo ${boClazzLess}Bo){
+
+    }
+
+    public static List<${className}> convertBo(List<${boClazz}Bo> list){
+        return null;
     }
 }

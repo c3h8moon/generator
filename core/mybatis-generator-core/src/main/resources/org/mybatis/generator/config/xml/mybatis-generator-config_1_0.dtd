@@ -51,7 +51,7 @@
   tables.
 -->
 <!ELEMENT context (property*, plugin*, commentGenerator?, (connectionFactory | jdbcConnection), javaTypeResolver?,
-                         javaModelGenerator, sqlMapGenerator?, javaClientGenerator?, javaServiceGenerator?, javaServiceTestGenerator?, javaBoGenerator?, javaDtoGenerator?, javaFacadeGenerator?, javaConvertGenerator?, javaFacadeImplGenerator?, javaFacadeImplTestGenerator?, javaWebControllerGenerator?, javaWebServiceGenerator?, table+)>
+                         javaModelGenerator, sqlMapGenerator?, javaClientGenerator?, javaServiceGenerator?, javaServiceTestGenerator?, javaBoGenerator?, javaFacadeGenerator?, javaConvertGenerator?, javaFacadeImplGenerator?, javaFacadeImplTestGenerator?, javaWebControllerGenerator?, javaDtoGenerator?, javaWebServiceGenerator?, table+)>
 <!ATTLIST context id ID #REQUIRED
   defaultModelType CDATA #IMPLIED
   targetRuntime CDATA #IMPLIED

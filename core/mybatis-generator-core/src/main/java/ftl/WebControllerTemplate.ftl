@@ -17,83 +17,91 @@
 -->
 package ${templatePackage};
 
-import com.ayhuli.parent.base.page.Page;
+import com.btjf.application.util.XaResult;
+import com.btjf.business.common.exception.BusinessException;
 import ${dtoPackage};
-import com.ayhuli.web.manage.common.config.Global;
-import com.ayhuli.web.manage.common.utils.StringUtils;
-import com.ayhuli.web.manage.common.web.BaseController;
-import ${servicePackage}.${boClazz}Service;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import ${boPackage};
+import ${servicePackage}.${boClazz}Domain;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import javax.annotation.Resource;
+import java.util.*;
 
 /**
- * @Company: 2018-2018 哎呦狐狸科技
+ * @Company: 备胎好车
  * @FileName: ${boClazz}Controller
  * @Desctiption:
- * @Author: chenye
- * @Date: Created by 2017/9/19 17:15
+ * @Author:
+ * @Date: Created by ${formatDate}
  * @Modified Update By:
  */
-@Controller
-@RequestMapping(value = "${r"${adminPath}"}/${urlPrefix}")
-public class ${boClazz}Controller extends BaseController {
+@Api(value = "${boClazz}", description = "")
+@RestController("${boClazzLess}Controller")
+@RequestMapping("/m/business/${lessClass}/")
+public class ${boClazz}Controller extends PersonalBaseController {
 
-    @Autowired
-    private ${boClazz}Service ${boClazzLess}Service;
-    
-    @ModelAttribute
-    public ${boClazz}Dto get(@RequestParam(required=false) String id) {
-        ${boClazz}Dto entity = null;
-        if (StringUtils.isNotBlank(id)){
-            entity = ${boClazzLess}Service.get(Long.valueOf(id));
-        }
-        if (entity == null){
-            entity = new ${boClazz}Dto();
-        }
-        return entity;
+    @Resource
+    private ${boClazz}Domain ${boClazzLess}Domain;
+
+    @ApiOperation(value = "20101:查询接口", notes = "根据主键查询单条数据")
+    @RequestMapping(value = "select/key/1_0_0_0", method = RequestMethod.GET)
+    public XaResult<${boClazz}Vo> selectByPrimaryKey(@ApiParam("主键,字段名:primaryKey") Integer primaryKey) throws BusinessException {
+        ${boClazz}Bo ${boClazzLess}Bo = ${boClazzLess}Domain.selectByPrimaryKey(primaryKey);
+        return XaResult.success(new ${boClazz}Vo(${boClazzLess}Bo));
     }
-    
-    @RequiresPermissions("${permissionPrefix}:view")
-    @RequestMapping(value = {"list", ""})
-    public String list (${boClazz}Dto ${boClazzLess}Dto, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Page<${boClazz}Dto> page = ${boClazzLess}Service.findPage(new Page<>(request, response), ${boClazzLess}Dto);
-        model.addAttribute("page", page);
-        return "${lastPackageName}/${viewPrefix}List";
+
+    @ApiOperation(value = "20102:新增接口", notes = "新增记录")
+    @RequestMapping(value = "operation/insert/1_0_0_0", method = RequestMethod.POST)
+    public XaResult<Integer> insert(
+            @ApiParam("主键,字段名:primaryKey") Integer primaryKey
+    ) throws BusinessException {
+        ${boClazz}Bo ${boClazzLess}Bo = new ${boClazz}Bo();
+        /**
+        * TODO 组装新增数据
+        * ex: ${boClazzLess}Bo.setXxx
+        */
+        ${boClazzLess}Domain.insert(${boClazzLess}Bo);
+        return XaResult.success();
     }
-    
-    @RequiresPermissions("${permissionPrefix}:view")
-    @RequestMapping(value = "form")
-    public String form (${boClazz}Dto ${boClazzLess}Dto, Model model) {
-        model.addAttribute("${boClazzLess}Dto", ${boClazzLess}Dto);
-        return "${lastPackageName}/${viewPrefix}Form";
+
+    @ApiOperation(value = "20103:修改接口", notes = "修改记录")
+    @RequestMapping(value = "operation/update/1_0_0_0", method = RequestMethod.POST)
+    public XaResult<Integer> update(
+        @ApiParam("主键,字段名:primaryKey") Integer primaryKey
+    ) throws BusinessException {
+        ${boClazz}Bo ${boClazzLess}Bo = new ${boClazz}Bo();
+        /**
+        * TODO 组装修改数据
+        * ex: ${boClazzLess}Bo.setXxx
+        */
+        ${boClazzLess}Domain.update(${boClazzLess}Bo);
+        return XaResult.success();
     }
-    
-    @RequiresPermissions("${permissionPrefix}:edit")
-    @RequestMapping(value = "save")
-    public String save (${boClazz}Dto ${boClazzLess}Dto, Model model, RedirectAttributes redirectAttributes) {
-        if (!beanValidator(model, ${boClazzLess}Dto)){
-            return form(${boClazzLess}Dto, model);
-        }
-        ${boClazzLess}Service.save(${boClazzLess}Dto);
-        addMessage(redirectAttributes, "保存成功");
-        return "redirect:"+Global.getAdminPath()+"/${viewPrefix}/?repage";
+
+    @ApiOperation(value = "20104:删除接口", notes = "删除记录")
+    @RequestMapping(value = "operation/delete/1_0_0_0", method = RequestMethod.POST)
+    public XaResult<Integer> delete(@ApiParam("主键,字段名:primaryKey") Integer primaryKey) throws BusinessException {
+        ${boClazzLess}Domain.delete(primaryKey);
+        return XaResult.success();
     }
-    
-    @RequiresPermissions("${permissionPrefix}:edit")
-    @RequestMapping(value = "delete")
-    public String delete (${boClazz}Dto ${boClazzLess}Dto, RedirectAttributes redirectAttributes) {
-        ${boClazzLess}Service.delete(${boClazzLess}Dto);
-        addMessage(redirectAttributes, "删除成功");
-        return "redirect:"+Global.getAdminPath()+"/${viewPrefix}/?repage";
+
+    @ApiOperation(value = "20105:查询列表接口", notes = "根据输入条件查询列表数据")
+    @RequestMapping(value = "find/params/1_0_0_0", method = RequestMethod.GET)
+    public XaResult<${boClazz}Vo> selectByPrimaryKey(
+                    @ApiParam("主键,字段名:primaryKey") Integer primaryKey
+    ) throws BusinessException {
+        ${boClazz}Bo ${boClazzLess}Bo = new ${boClazz}Bo();
+        /**
+        * TODO 组装修改数据
+        * ex: ${boClazzLess}Bo.setXxx
+        */
+        List<${boClazz}Bo> list = ${boClazzLess}Domain.findList(${boClazzLess}Bo);
+        return XaResult.success(${boClazz}Vo.convertBo(list));
     }
 }
