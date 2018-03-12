@@ -18,6 +18,7 @@
 package ${templatePackage};
 
 import com.btjf.common.utils.BeanUtil;
+import com.btjf.common.page.Page;
 
 import ${mapperPackage};
 import ${facadePackage};
@@ -71,21 +72,28 @@ public class ${className} implements ${boClazz}Domain {
     public void delete(Integer primaryKey) {
         if (primaryKey != null) {
             ${boClazz} ${boClazzLess} = new ${boClazz}();
-            ${boClazzLess}.setId(primaryKey);
+            ${boClazzLess}.setID(primaryKey);
             ${boClazzLess}Service.deleteByPrimaryKey(${boClazzLess});
         }
     }
 
     @Override
     public List<${boClazz}Bo> findList(${boClazz}Bo ${boClazzLess}Bo) {
-        if (${boClazzLess}Bo != null) {
-            List<${boClazz}> list = ${boClazzLess}Service.findList(BeanUtil.convert(${boClazzLess}Bo, ${boClazz}.class));
-            if (list != null && list.size() > 0) {
-                return BeanUtil.convertList(list, ${boClazz}Bo.class);
-            } else {
-                return null;
-            }
+        List<${boClazz}> list = ${boClazzLess}Service.findList(BeanUtil.convert(${boClazzLess}Bo, ${boClazz}.class));
+        if (list != null && list.size() > 0) {
+            return BeanUtil.convertList(list, ${boClazz}Bo.class);
+        } else {
+            return null;
         }
-        return null;
+    }
+
+    @Override
+    public Page<${boClazz}Bo> findPage(${boClazz}Bo ${boClazzLess}Bo, Integer currentPage, Integer pageSize) {
+        Page<${boClazz}> page = ${boClazzLess}Service.findPage(BeanUtil.convert(${boClazzLess}Bo, ${boClazz}.class), currentPage, pageSize);
+        if (page != null && page.getRows() != null && page.getRows().size() > 0) {
+            return BeanUtil.convertPage(page, ${boClazz}Bo.class);
+        } else {
+            return null;
+        }
     }
 }

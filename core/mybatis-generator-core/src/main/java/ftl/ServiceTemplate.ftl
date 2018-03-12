@@ -19,10 +19,13 @@ package ${templatePackage};
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import com.btjf.common.page.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import ${mapperPackage};
 import ${dtoPackage};
 import ${boPackage};
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -49,7 +52,12 @@ public class ${className} {
     }
 
     public void deleteByPrimaryKey(${boClazz} ${boClazzLess}) {
+        ${boClazzLess}.setIsDeleted(true);
         ${boClazzLess}Mapper.updateByPrimaryKeySelective(${boClazzLess});
+    }
+
+    public ${boClazz} selectByPrimaryKey(Integer primaryKey){
+        return ${boClazzLess}Mapper.selectByPrimaryKey(primaryKey);
     }
 
     public List<${boClazz}> findList(${boClazz} ${boClazzLess}){
@@ -62,8 +70,17 @@ public class ${className} {
         return ${boClazzLess}Mapper.selectByExample(example);
     }
 
-    public ${boClazz} selectByPrimaryKey(Integer primaryKey){
-        return ${boClazzLess}Mapper.selectByPrimaryKey(primaryKey);
+    public Page<${boClazz}> findPage(${boClazz} ${boClazzLess}, Integer currentPage, Integer pageSize){
+        PageHelper.startPage(currentPage, pageSize);
+        ${boClazz}Example example = new ${boClazz}Example();
+        ${boClazz}Example.Criteria criteria = example.createCriteria();
+        /**
+        * TODO 添加查询的参数
+        * ex: criteria.addxxx
+        */
+        example.setOrderByClause("FID desc");
+        List<${boClazz}> list = ${boClazzLess}Mapper.selectByExample(example);
+        PageInfo<${boClazz}> rs = new PageInfo<>(list);
+        return new Page<>(rs);
     }
-
 }

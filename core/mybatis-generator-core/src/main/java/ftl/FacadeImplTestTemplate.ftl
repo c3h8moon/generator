@@ -17,6 +17,7 @@
 -->
 package ${templatePackage};
 
+import com.btjf.common.page.Page;
 import ${facadePackage};
 import ${boPackage};
 import com.alibaba.fastjson.JSON;
@@ -100,5 +101,19 @@ public class ${className} {
         */
         List<${boClazz}Bo> list = ${facadeLessClassName}.findList(bo);
         System.out.println(JSON.toJSONString(list));
+    }
+
+    @Test
+    public void test_findPage() {
+        ${facadeClassName} ${facadeLessClassName} = getService(${facadeClassName}.class);
+        ${boClazz}Bo bo = new ${boClazz}Bo();
+        /**
+        * TODO 添加测试的参数
+        * ex: bo.setXxx();
+        */
+        Page<${boClazz}Bo> page = ${facadeLessClassName}.findPage(bo, 1, 10);
+        if (page != null && page.getRows() != null && page.getRows().size() > 0) {
+            System.out.println(JSON.toJSONString(page.getRows()));
+        }
     }
 }

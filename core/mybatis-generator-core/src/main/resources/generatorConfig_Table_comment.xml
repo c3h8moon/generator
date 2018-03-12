@@ -20,7 +20,7 @@
 <generatorConfiguration>
     <!-- 引入配置文件 -->
     <!-- 指定数据连接驱动jar地址 -->
-    <classPathEntry location="D:\repos\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+    <classPathEntry location="C:\tool\libs\com\microsoft\sqlserver\sqljdbc4\4.4\sqljdbc4-4.4.jar"/>
     <!-- 一个数据库一个context -->
     <context id="mysql" targetRuntime="MyBatis3">
         <!-- 注释 -->
@@ -30,9 +30,9 @@
         </commentGenerator>
 
         <!-- jdbc连接 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/ayhuli?characterEncoding=UTF-8" userId="root"
-                        password="123456" />
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://192.168.100.20:20433;DatabaseName=AK_Data_kf24" userId="AKDev"
+                        password="btjf123!"/>
         <!-- 类型转换 -->
         <javaTypeResolver>
             <!-- 是否使用bigDECIMAL， false可自动转化以下类型（Long, Integer, Short, etc.） -->
@@ -44,8 +44,8 @@
         <!--</plugin>-->
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.ayhuli.service.comment.model"
-                            targetProject="D:\study\gen\gen-service\src\main\java">
+        <javaModelGenerator targetPackage="com.btjf.business.car.assess.model"
+                            targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -53,81 +53,81 @@
             <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity"/>-->
         </javaModelGenerator>
         <!-- 生成mapxml文件 -->
-        <sqlMapGenerator targetPackage="com.ayhuli.service.comment.mapper"
-                         targetProject="D:\study\gen\gen-service\src\main\java" >
+        <sqlMapGenerator targetPackage="com.btjf.business.car.assess.mapper"
+                         targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java" >
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <property name="isMergeable" value="false"/>
         </sqlMapGenerator>
         <!-- 生成mapxml对应client，也就是接口dao -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ayhuli.service.comment.mapper"
-                             targetProject="D:\study\gen\gen-service\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.btjf.business.car.assess.mapper"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaClientGenerator>
 
         <!--service model-->
-        <javaServiceGenerator targetPackage="com.ayhuli.service.comment.service"
-                             targetProject="D:\study\gen\gen-service\src\main\java">
+        <javaServiceGenerator targetPackage="com.btjf.business.car.assess.service"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaServiceGenerator>
         <!--<javaServiceTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.service"-->
-                                   <!--targetProject="D:\study\gen\gen-test\src\test\java">-->
+                                   <!--targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-test\src\test\java">-->
             <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
             <!--<property name="enableSubPackages" value="true" />-->
             <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
         <!--</javaServiceTestGenerator>-->
 
         <!--facade-->
-        <javaBoGenerator type="sys" targetPackage="com.ayhuli.service.comment.api.bo"
-                          targetProject="D:\study\gen\gen-interface\src\main\java">
+        <javaBoGenerator type="sys" targetPackage="com.btjf.business.car.assess.bo"
+                          targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-interface\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaBoGenerator>
-        <javaFacadeGenerator type="sys" targetPackage="com.ayhuli.service.comment.api.domain"
-                          targetProject="D:\study\gen\gen-interface\src\main\java">
+        <javaFacadeGenerator type="sys" targetPackage="com.btjf.business.car.assess.domain"
+                          targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-interface\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeGenerator>
 
         <!--facade impl-->
-        <javaConvertGenerator type="sys" targetPackage="com.ayhuli.service.comment.domain"
-                             targetProject="D:\study\gen\gen-service\src\main\java">
+        <javaConvertGenerator type="sys" targetPackage="com.btjf.business.car.assess.domain"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaConvertGenerator>
-        <javaFacadeImplGenerator type="sys" targetPackage="com.ayhuli.service.comment.domain"
-                             targetProject="D:\study\gen\gen-service\src\main\java">
+        <javaFacadeImplGenerator type="sys" targetPackage="com.btjf.business.car.assess.domain"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeImplGenerator>
-        <javaFacadeImplTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.domain"
-                                 targetProject="D:\study\gen\gen-test\src\test\java">
+        <javaFacadeImplTestGenerator type="sys" targetPackage="car.assess"
+                                 targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-test\src\test\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeImplTestGenerator>
 
-        <!--pc-->
-        <javaWebControllerGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.controller"
-                                     targetProject="D:\study\gen\gen-web\src\main\java">
-            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
-            <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
-        </javaWebControllerGenerator>
-        <javaDtoGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.vo"
-                          targetProject="D:\study\gen\gen-web\src\main\java">
-            <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
-            <property name="enableSubPackages" value="true" />
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
-        </javaDtoGenerator>
+        <!--&lt;!&ndash;pc&ndash;&gt;-->
+        <!--<javaWebControllerGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.controller"-->
+                                     <!--targetProject="D:\study\gen\gen-web\src\main\java">-->
+            <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
+            <!--<property name="enableSubPackages" value="true" />-->
+            <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
+        <!--</javaWebControllerGenerator>-->
+        <!--<javaDtoGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.vo"-->
+                          <!--targetProject="D:\study\gen\gen-web\src\main\java">-->
+            <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
+            <!--<property name="enableSubPackages" value="true" />-->
+            <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
+        <!--</javaDtoGenerator>-->
         <!--<javaWebServiceGenerator type="sys" targetPackage="com.ayhuli.web.manage.modules.comment.service"-->
                                     <!--targetProject="D:\study\Hello\src\main\java">-->
             <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
@@ -138,26 +138,28 @@
         <!--mobile-->
 
 
-        <!--&lt;!&ndash; 配置表信息，这里没生成一张表，这里需要改变一次对应表名 &ndash;&gt;-->
-        <!--<table tableName="comment_announce" domainObjectName="CommentAnnounce">-->
-            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;CommentAnnounce&gt;"/>-->
-            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;CommentAnnounce&gt;"/>-->
-            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
-            <!--<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />-->
-        <!--</table>-->
-        <table tableName="comment_info" domainObjectName="CommentInfo">
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <!--<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />-->
-            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="money" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        <!--t_CarEvaluate-->
+        <table tableName="t_CarEvaluate" domainObjectName="CarEvaluate">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>
+            <columnRenamingRule searchString="^F" replaceString=""/>
+            <columnOverride column="FNewCarPrice" javaType="java.lang.Double" jdbcType="DECIMAL"/>
+            <columnOverride column="FDiscountRate" javaType="java.lang.Double" jdbcType="DECIMAL"/>
+            <columnOverride column="FRestyleFactors" javaType="java.lang.Double" jdbcType="DECIMAL"/>
+            <columnOverride column="FAdjustments" javaType="java.lang.Double" jdbcType="DECIMAL"/>
         </table>
-        <table tableName="comment_qa" domainObjectName="CommentQa">
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="buy_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="buy_num" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        <!--t_CarKeepType-->
+        <table tableName="t_CarKeepType" domainObjectName="CarKeepType">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>
+            <columnRenamingRule searchString="^F" replaceString=""/>
+        </table>
+        <!--t_CarKeepTypeEntry-->
+        <table tableName="t_CarKeepTypeEntry" domainObjectName="CarKeepTypeEntry">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>
+            <columnRenamingRule searchString="^F" replaceString=""/>
+            <columnOverride column="FValueKeepRate" javaType="java.lang.Double" jdbcType="DECIMAL"/>
         </table>
     </context>
 </generatorConfiguration>

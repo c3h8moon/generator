@@ -17,6 +17,7 @@
 -->
 package ${templatePackage};
 
+import com.btjf.common.page.Page;
 import ${boPackage};
 
 import java.util.List;
@@ -87,4 +88,15 @@ public interface ${className} {
      * @author:
      */
     public List<${boClazz}Bo> findList(${boClazz}Bo ${boClazzLess}Bo);
+
+    /**
+    * 功能描述:〈查询分页数据〉
+    * 应用范围:〈ALL〉
+    *
+    * @param ${boClazzLess}Bo
+    * @return Page<${boClazz}Bo>
+    * @date: Created by ${formatDate}
+    * @author:
+    */
+    public Page<${boClazz}Bo> findPage(${boClazz}Bo ${boClazzLess}Bo, Integer currentPage, Integer pageSize);
 }

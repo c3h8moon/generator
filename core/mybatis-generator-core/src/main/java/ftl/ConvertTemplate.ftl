@@ -20,6 +20,7 @@ package ${templatePackage};
 import ${facadePackage};
 import ${boPackage};
 import org.springframework.stereotype.Service;
+import com.btjf.common.page.Page;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -61,5 +62,10 @@ public class ${className} implements ${boClazz}Domain  {
     @Override
     public List<${boClazz}Bo> findList(${boClazz}Bo ${boClazzLess}Bo) {
         return ${boClazzLess}NativeDomain.findList(${boClazzLess}Bo);
+    }
+
+    @Override
+    public Page<${boClazz}Bo> findPage(${boClazz}Bo ${boClazzLess}Bo, Integer currentPage, Integer pageSize) {
+        return ${boClazzLess}NativeDomain.findPage(${boClazzLess}Bo, currentPage, pageSize);
     }
 }
