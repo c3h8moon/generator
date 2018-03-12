@@ -325,9 +325,9 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
 
         XmlElement dynamicElement = new XmlElement("where"); //$NON-NLS-1$
         if (flag) {
-            dynamicElement.addElement(new TextElement("#{queryCriteria} AND a.del_flag = '0'"));
+            dynamicElement.addElement(new TextElement("${queryCriteria}"));
         } else {
-            dynamicElement.addElement(new TextElement("#{queryCriteria}"));
+            dynamicElement.addElement(new TextElement("${queryCriteria}"));
         }
         answer.addElement(dynamicElement);
 
@@ -402,7 +402,7 @@ public class SelectByCdtElementGenerator extends AbstractXmlElementGenerator {
         answer.addElement(new TextElement(sb.toString()));
 
         XmlElement dynamicElement = new XmlElement("where"); //$NON-NLS-1$
-        dynamicElement.addElement(new TextElement("#{queryCriteria}"));
+        dynamicElement.addElement(new TextElement("${queryCriteria}"));
         answer.addElement(dynamicElement);
 
 //        for (IntrospectedColumn introspectedColumn : introspectedTable.getBaseColumns()) {

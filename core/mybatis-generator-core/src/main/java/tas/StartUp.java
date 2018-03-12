@@ -54,10 +54,10 @@ public class StartUp {
                 File configFile = null;
                 switch (i) {
                     case 0 :
-                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_account.xml").toURI());
+                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_wallet.xml").toURI());
                         break;
                     case 1 :
-                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_balance.xml").toURI());
+//                        configFile = new File(StartUp.class.getResource("/generatorConfig_Table_balance.xml").toURI());
                         break;
                     case 2 :
                         configFile = new File(StartUp.class.getResource("/generatorConfig_Table_comment.xml").toURI());
