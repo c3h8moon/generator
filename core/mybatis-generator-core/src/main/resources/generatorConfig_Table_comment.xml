@@ -44,8 +44,8 @@
         <!--</plugin>-->
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.btjf.business.car.assess.model"
-                            targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
+        <javaModelGenerator targetPackage="com.btjf.business.cust.model"
+                            targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -53,63 +53,63 @@
             <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity"/>-->
         </javaModelGenerator>
         <!-- 生成mapxml文件 -->
-        <sqlMapGenerator targetPackage="com.btjf.business.car.assess.mapper"
-                         targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java" >
+        <sqlMapGenerator targetPackage="com.btjf.business.cust.mapper"
+                         targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-service\src\main\java" >
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <property name="isMergeable" value="false"/>
         </sqlMapGenerator>
         <!-- 生成mapxml对应client，也就是接口dao -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.btjf.business.car.assess.mapper"
-                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.btjf.business.cust.mapper"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaClientGenerator>
 
         <!--service model-->
-        <javaServiceGenerator targetPackage="com.btjf.business.car.assess.service"
-                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
+        <javaServiceGenerator targetPackage="com.btjf.business.cust.service"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaServiceGenerator>
         <!--<javaServiceTestGenerator type="sys" targetPackage="com.ayhuli.comment.test.service"-->
-                                   <!--targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-test\src\test\java">-->
+                                   <!--targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-test\src\test\java">-->
             <!--&lt;!&ndash; 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] &ndash;&gt;-->
             <!--<property name="enableSubPackages" value="true" />-->
             <!--&lt;!&ndash;<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>&ndash;&gt;-->
         <!--</javaServiceTestGenerator>-->
 
         <!--facade-->
-        <javaBoGenerator type="sys" targetPackage="com.btjf.business.car.assess.bo"
-                          targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-interface\src\main\java">
+        <javaBoGenerator type="sys" targetPackage="com.btjf.business.cust.bo"
+                          targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-interface\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaBoGenerator>
-        <javaFacadeGenerator type="sys" targetPackage="com.btjf.business.car.assess.domain"
-                          targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-interface\src\main\java">
+        <javaFacadeGenerator type="sys" targetPackage="com.btjf.business.cust.domain"
+                          targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-interface\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeGenerator>
 
         <!--facade impl-->
-        <javaConvertGenerator type="sys" targetPackage="com.btjf.business.car.assess.domain"
-                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
+        <javaConvertGenerator type="sys" targetPackage="com.btjf.business.cust.domain"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaConvertGenerator>
-        <javaFacadeImplGenerator type="sys" targetPackage="com.btjf.business.car.assess.domain"
-                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-service\src\main\java">
+        <javaFacadeImplGenerator type="sys" targetPackage="com.btjf.business.cust.domain"
+                             targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-service\src\main\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
         </javaFacadeImplGenerator>
-        <javaFacadeImplTestGenerator type="sys" targetPackage="car.assess"
-                                 targetProject="D:\work-btjf\workspase\bt-business\bt-business-car\bt-business-car-test\src\test\java">
+        <javaFacadeImplTestGenerator type="sys" targetPackage="com.btjf.business.cust.domain"
+                                 targetProject="D:\work-btjf\workspase\bt-business\bt-business-cust\bt-business-cust-test\src\test\java">
             <!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
             <property name="enableSubPackages" value="true" />
             <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao"/>-->
@@ -139,27 +139,27 @@
 
 
         <!--t_CarEvaluate-->
-        <table tableName="t_CarEvaluate" domainObjectName="CarEvaluate">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>
-            <columnRenamingRule searchString="^F" replaceString=""/>
-            <columnOverride column="FNewCarPrice" javaType="java.lang.Double" jdbcType="DECIMAL"/>
-            <columnOverride column="FDiscountRate" javaType="java.lang.Double" jdbcType="DECIMAL"/>
-            <columnOverride column="FRestyleFactors" javaType="java.lang.Double" jdbcType="DECIMAL"/>
-            <columnOverride column="FAdjustments" javaType="java.lang.Double" jdbcType="DECIMAL"/>
-        </table>
+        <!--<table tableName="t_CarEvaluate" domainObjectName="CarEvaluate">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>-->
+            <!--<columnRenamingRule searchString="^F" replaceString=""/>-->
+            <!--<columnOverride column="FNewCarPrice" javaType="java.lang.Double" jdbcType="DECIMAL"/>-->
+            <!--<columnOverride column="FDiscountRate" javaType="java.lang.Double" jdbcType="DECIMAL"/>-->
+            <!--<columnOverride column="FRestyleFactors" javaType="java.lang.Double" jdbcType="DECIMAL"/>-->
+            <!--<columnOverride column="FAdjustments" javaType="java.lang.Double" jdbcType="DECIMAL"/>-->
+        <!--</table>-->
         <!--t_CarKeepType-->
-        <table tableName="t_CarKeepType" domainObjectName="CarKeepType">
+        <table tableName="t_CustManagerChange" domainObjectName="CustManagerChange">
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>
             <columnRenamingRule searchString="^F" replaceString=""/>
         </table>
         <!--t_CarKeepTypeEntry-->
-        <table tableName="t_CarKeepTypeEntry" domainObjectName="CarKeepTypeEntry">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>
-            <columnRenamingRule searchString="^F" replaceString=""/>
-            <columnOverride column="FValueKeepRate" javaType="java.lang.Double" jdbcType="DECIMAL"/>
-        </table>
+        <!--<table tableName="t_CarKeepTypeEntry" domainObjectName="CarKeepTypeEntry">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="FID" sqlStatement="SqlServer" identity="true"/>-->
+            <!--<columnRenamingRule searchString="^F" replaceString=""/>-->
+            <!--<columnOverride column="FValueKeepRate" javaType="java.lang.Double" jdbcType="DECIMAL"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>
