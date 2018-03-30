@@ -118,86 +118,86 @@
         </javaWebServiceGenerator>
 
 
-        <!-- 配置表信息，这里没生成一张表，这里需要改变一次对应表名 -->
-        <table tableName="wallet_cash_log"
-               domainObjectName="WalletCashLog" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletCashLog&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletCashLog&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <columnOverride column="cash" javaType="java.lang.Double" jdbcType="DECIMAL" />
-        </table>
-        <table tableName="wallet_info"
-               domainObjectName="WalletInfo" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletInfo&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletInfo&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <!--<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />-->
-            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <!--<columnOverride column="money" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-        </table>
-        <table tableName="wallet_log"
-               domainObjectName="WalletLog" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletLog&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletLog&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <columnOverride column="oldamount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <columnOverride column="newamount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <!--<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-        </table>
-        <table tableName="wallet_rate"
-               domainObjectName="WalletRate" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRate&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRate&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <columnOverride column="rate" javaType="java.lang.Double" jdbcType="DECIMAL" />
+        <!--&lt;!&ndash; 配置表信息，这里没生成一张表，这里需要改变一次对应表名 &ndash;&gt;-->
+        <!--<table tableName="wallet_cash_log"-->
+               <!--domainObjectName="WalletCashLog" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletCashLog&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletCashLog&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--<columnOverride column="cash" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        <!--</table>-->
+        <!--<table tableName="wallet_info"-->
+               <!--domainObjectName="WalletInfo" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletInfo&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletInfo&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />&ndash;&gt;-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+            <!--&lt;!&ndash;<columnOverride column="money" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="wallet_log"-->
+               <!--domainObjectName="WalletLog" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletLog&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletLog&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--<columnOverride column="oldamount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
             <!--<columnOverride column="newamount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
             <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-        </table>
-        <table tableName="wallet_rate_user"
-               domainObjectName="WalletRateUser" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRateUser&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRateUser&gt;"/>
-        </table>
-        <table tableName="wallet_rate_user_log"
-               domainObjectName="WalletRateUserLog" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRateUserLog&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRateUserLog&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <columnOverride column="rate" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-        </table>
-        <table tableName="wallet_refunds_log"
-               domainObjectName="WalletRefundsLog" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRefundsLog&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRefundsLog&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--&lt;!&ndash;<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="wallet_rate"-->
+               <!--domainObjectName="WalletRate" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRate&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRate&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
             <!--<columnOverride column="rate" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
+            <!--&lt;!&ndash;<columnOverride column="newamount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="wallet_rate_user"-->
+               <!--domainObjectName="WalletRateUser" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRateUser&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRateUser&gt;"/>-->
+        <!--</table>-->
+        <!--<table tableName="wallet_rate_user_log"-->
+               <!--domainObjectName="WalletRateUserLog" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRateUserLog&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRateUserLog&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--<columnOverride column="rate" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
             <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-            <!--<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
-        </table>
+            <!--&lt;!&ndash;<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="wallet_refunds_log"-->
+               <!--domainObjectName="WalletRefundsLog" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletRefundsLog&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletRefundsLog&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="rate" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+            <!--&lt;!&ndash;<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="send_num" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="pro_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />&ndash;&gt;-->
+        <!--</table>-->
 
         <table tableName="wallet_reconciliation"
                domainObjectName="WalletReconciliation" enableCountByExample="false"
@@ -208,16 +208,16 @@
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
             <!--<columnOverride column="cash" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
         </table>
-        <table tableName="wallet_balance_info"
-               domainObjectName="WalletBalanceInfo" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletBalanceInfo&gt;"/>
-            <property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletBalanceInfo&gt;"/>
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <!--<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />-->
-            <columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-            <columnOverride column="abnormal_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />
-        </table>
+        <!--<table tableName="wallet_balance_info"-->
+               <!--domainObjectName="WalletBalanceInfo" enableCountByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<property name="rootClass" value="com.ayhuli.parent.base.entity.DataEntity&lt;WalletBalanceInfo&gt;"/>-->
+            <!--<property name="rootInterface" value="com.ayhuli.service.base.persistence.CrudDao&lt;WalletBalanceInfo&gt;"/>-->
+            <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<columnOverride column="des" javaType="java.lang.String" jdbcType="TEXT" />&ndash;&gt;-->
+            <!--<columnOverride column="amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+            <!--<columnOverride column="abnormal_amount" javaType="java.lang.Double" jdbcType="DECIMAL" />-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

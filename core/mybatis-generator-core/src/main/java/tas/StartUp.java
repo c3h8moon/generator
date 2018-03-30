@@ -34,12 +34,12 @@ import java.util.List;
  */
 public class StartUp {
 
-    public static final boolean isFlag = false; //是否单条s
+    public static final boolean isFlag = true; //是否单条s
 
     public static void main(String[] args) throws Exception {
         if (isFlag) {
             List<String> warnings = new ArrayList<String>();
-            File configFile = new File(StartUp.class.getResource("/generatorConfig_Table_comment.xml").toURI());
+            File configFile = new File(StartUp.class.getResource("/generatorConfig_Table_pro.xml").toURI());
             if (configFile != null) {
                 ConfigurationParser cp = new ConfigurationParser(warnings);
                 Configuration config = cp.parseConfiguration(configFile);
